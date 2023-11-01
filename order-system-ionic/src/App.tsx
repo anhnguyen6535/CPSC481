@@ -10,13 +10,22 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+<<<<<<< Updated upstream
+import { barbell, call, cash, ellipse, helpBuoy, helpCircle, home, paperPlane, square, train, triangle } from 'ionicons/icons';
+=======
+import { ellipse, square, triangle, home, paperPlane, cash, help } from 'ionicons/icons';
+>>>>>>> Stashed changes
 import Welcome from './pages/Welcome';
 import Home from './pages/Home';
 import Order from './pages/Order';
 import Pay from './pages/Pay';
 import Help from './pages/Help';
+import Details from './pages/Details';
 
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -58,22 +67,29 @@ const App: React.FC = () => (
           <Route exact path="/">
             <Redirect to="/welcome" />
           </Route>
+          <Route exact path="/details">
+            <Details />
+          </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
-            <IonIcon aria-hidden="true" icon={triangle} />
+            <IonIcon aria-hidden="true" icon={home} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
           <IonTabButton tab="order" href="/order">
-            <IonIcon aria-hidden="true" icon={ellipse} />
+            <IonIcon aria-hidden="true" icon={paperPlane} />
             <IonLabel>Order</IonLabel>
           </IonTabButton>
           <IonTabButton tab="pay" href="/pay">
-            <IonIcon aria-hidden="true" icon={square} />
+            <IonIcon aria-hidden="true" icon={cash} />
             <IonLabel>Pay</IonLabel>
           </IonTabButton>
           <IonTabButton tab="assistance" href="/help">
-            <IonIcon aria-hidden="true" icon={square} />
+<<<<<<< Updated upstream
+            <IonIcon aria-hidden="true" icon={call} />
+=======
+            <IonIcon aria-hidden="true" icon={help} />
+>>>>>>> Stashed changes
             <IonLabel>Assistance</IonLabel>
           </IonTabButton>
         </IonTabBar>
