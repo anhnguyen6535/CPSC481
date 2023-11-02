@@ -1,0 +1,59 @@
+.scan-QR-code {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.scan-QR-code .visor-container-wrapper {
+    height: 812px;
+    width: 375px;
+}
+
+.scan-QR-code .visor-container {
+    background-image: url(./dark-mask-shape-fill.svg);
+    background-size: 100% 100%;
+    height: 812px;
+    position: relative;
+}
+
+.scan-QR-code .action-close {
+    height: 46px;
+    left: 14px;
+    position: absolute;
+    top: 35px;
+    width: 46px;
+}
+
+.scan-QR-code .vector-stroke {
+    height: 45px;
+    left: 286px;
+    position: absolute;
+    top: 270px;
+    width: 45px;
+}
+
+.scan-QR-code .img {
+    height: 45px;
+    left: 44px;
+    position: absolute;
+    top: 270px;
+    width: 45px;
+}
+
+.scan-QR-code .vector-stroke-2 {
+    height: 45px;
+    left: 286px;
+    position: absolute;
+    top: 496px;
+    width: 45px;
+}
+
+.scan-QR-code .vector-stroke-3 {
+    height: 45px;
+    left: 44px;
+    position: absolute;
+    top: 496px;
+    width: 45px;
+}
