@@ -7,17 +7,18 @@
 2. Install Node.JS using NVM (`nvm install 20.9.0` followed by `nvm use 20.9.0`)
 3. Clone the repo
 4. Change directory to the repo (`cd CPSC481`)
-5. Make a clean install of the packages using `npm ci`
 
 ## Running order-system-ionic
 
-1. Make sure you're in the repo directory (`cd CPSC481` if you aren't)
+1. Change directory to the Ionic app (`cd order-system-ionic`)
 2. Install Ionic with `npm install -g @ionic/cli @capacitor/assets`
-3. Serve the webpage using `ionic serve`
-4. Visit it by going to http://localhost:8100
+3. Make a clean install of the rest of the packages using `npm ci` (if this doesn't work, use `npm install`)
+4. Serve the webpage using `ionic serve`
+5. Visit it by going to http://localhost:8100
 
 ## Running order-system
 
-1. Make sure you're in the repo directory (`cd CPSC481` if you aren't)
-2. Serve the webpage using `npm run dev`
-3. Visit it by going to http://localhost:3000
+1. Change directory to the React.JS app (`cd order-system`)
+2. Make a clean install of the rest of the packages using `npm ci` (if this doesn't work, use `npm install`)
+3. Serve the webpage using `npm run dev`
+4. Visit it by going to http://localhost:3000
