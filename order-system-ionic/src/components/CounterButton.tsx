@@ -1,32 +1,38 @@
 import { IonButton, IonIcon, IonText } from "@ionic/react";
-import { remove, add } from "ionicons/icons";
+import { remove, add, trash } from "ionicons/icons";
 import { useState } from "react";
 
 interface CounterButtonProps {
     amount: number;
+    showTrashIcon: boolean;
 };
 
-const CounterButton: React.FC<CounterButtonProps> = ({ amount }) => {
+const CounterButton: React.FC<CounterButtonProps> = ({ amount, showTrashIcon }) => {
     const [values, setValues] = useState({
         count: amount,
-        showAdd: true,
+        showTrash: showTrashIcon,
+        showAdd: amount === 0, // If the amount is 0, then show the add button
     });
+
+    const resetAmount = () => {
+        setValues({ count: 0, showAdd: true, showTrash: false });
+    }
 
     const decrement = () => {
         if (values['count'] > 1) {
-            setValues({ count: values['count'] - 1, showAdd: values['showAdd'] });
-        }
-        if (values['count'] === 1) {
-            setValues({ count: values['count'] - 1, showAdd: true });
+            setValues({ count: values['count'] - 1, showAdd: values['showAdd'], showTrash: values['showTrash'] });
+        } else if (values['count'] === 1) {
+            setValues({ count: 0, showAdd: true, showTrash: false });
         }
     };
 
     const increment = () => {
-        setValues({ count: values['count'] + 1, showAdd: false });
+        setValues({ count: values['count'] + 1, showAdd: false, showTrash: true });
     };
 
     return (
         <div>
+            <IonIcon icon={trash} onClick={() => resetAmount()} style={{ visibility: values['showTrash'] ? 'visible' : 'hidden', position: 'absolute', top: 0, right: 0, padding: '1rem' }} />
             <IonButton color="primary" shape="round" fill="outline" size="small" onClick={increment} style={{ visibility: values['showAdd'] ? 'visible' : 'hidden', position: 'absolute', bottom: 0, right: 0, padding: '1rem', width: '35%', textTransform: 'none' }}>Add</IonButton>
             <div>
                 <IonButton disabled={true} color="medium" shape="round" fill="solid" size="small" style={{ visibility: values['showAdd'] ? 'hidden' : 'visible', position: 'absolute', bottom: 0, right: 0, padding: '1rem', width: '35%', textTransform: 'none' }}></IonButton>
