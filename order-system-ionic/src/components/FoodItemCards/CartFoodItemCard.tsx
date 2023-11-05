@@ -26,7 +26,7 @@ const CartFoodItemCard: React.FC<CartFoodCardProps> = ({ name, imagePath, price,
                     <IonCardTitle>{name}</IonCardTitle>
                     <IonCardSubtitle>{formatPrice(price)}</IonCardSubtitle>
                 </IonCardHeader>
-                <CounterButton amount={amount} showTrashIcon={true}></CounterButton>
+                <CounterButton amount={amount} enableTrash={true}></CounterButton>
             </div>
         </IonCard>
     );

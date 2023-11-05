@@ -4,30 +4,31 @@ import { useState } from "react";
 
 interface CounterButtonProps {
     amount: number;
-    showTrashIcon: boolean;
+    enableTrash?: boolean | false;
+    showTrashIcon?: boolean | false;
 };
 
-const CounterButton: React.FC<CounterButtonProps> = ({ amount, showTrashIcon }) => {
+const CounterButton: React.FC<CounterButtonProps> = ({ amount, enableTrash }) => {
     const [values, setValues] = useState({
         count: amount,
-        showTrash: showTrashIcon,
+        showTrash: amount !== 0 && enableTrash,
         showAdd: amount === 0, // If the amount is 0, then show the add button
     });
 
     const resetAmount = () => {
-        setValues({ count: 0, showAdd: true, showTrash: false });
+        setValues({ count: 0, showAdd: true, showTrash: false && enableTrash });
     }
 
     const decrement = () => {
         if (values['count'] > 1) {
-            setValues({ count: values['count'] - 1, showAdd: values['showAdd'], showTrash: values['showTrash'] });
+            setValues({ count: values['count'] - 1, showAdd: values['showAdd'], showTrash: values['showTrash'] && enableTrash });
         } else if (values['count'] === 1) {
-            setValues({ count: 0, showAdd: true, showTrash: false });
+            setValues({ count: 0, showAdd: true, showTrash: false && enableTrash });
         }
     };
 
     const increment = () => {
-        setValues({ count: values['count'] + 1, showAdd: false, showTrash: true });
+        setValues({ count: values['count'] + 1, showAdd: false, showTrash: true && enableTrash });
     };
 
     return (
