@@ -21,4 +21,9 @@ ion-card-subtitle {
 ion-icon {
     font-size: 1rem;
     margin-right: 0.1rem;
+}
+
+ion-button {
+    --shape: round;
+    --border-radius: 2.0rem;
 } */
