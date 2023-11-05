@@ -19,4 +19,3 @@ const DietIcons: React.FC<DietProps> = ({ vegan, vegetarian, glutenFree }) => {
 
 export default DietIcons;
 export type { DietProps };
-export { DietIcons };
