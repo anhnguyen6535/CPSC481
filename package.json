@@ -1,6 +1,0 @@
-{
-  "devDependencies": {
-    "@types/node": "^20.9.0",
-    "sass": "^1.69.5"
-  }
-}
