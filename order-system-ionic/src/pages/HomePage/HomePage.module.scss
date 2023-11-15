@@ -1,0 +1,64 @@
+.pageContent {
+  padding: 1rem;
+}
+
+.searchBar {
+  margin: 1rem 0;
+}
+
+.filterButton {
+  color: white;
+  background-color: black;
+}
+
+.categoryBar {
+  display: flex;
+  overflow-x: auto;
+  ion-chip {
+    white-space: normal;
+    min-width: max-content;
+  }
+  .categoryItemSelected {
+    background-color: black;
+    color: white;
+  }
+}
+
+.viewCartButton {
+  position: fixed;
+  bottom: 8px;
+  border-radius: 5px;
+  text-transform: none;
+
+  @media only screen and (max-width: 576px) {
+    right: 10%;
+    left: 10%;
+  }
+
+  @media only screen and (min-width: 577px) and (max-width: 1200px) {
+    right: 15%;
+    left: 15%;
+  }
+
+  @media only screen and (min-width: 1201px) {
+    right: 20%;
+    left: 20%;
+  }
+
+  &Inner {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 3% 5px 3%;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cartCount {
+    font-size: 14px;
+    margin-right: 10px;
+    border-radius: 10px;
+    color: var(--ion-color-primary);
+    padding: 4px 8px 4px 8px;
+  }
+}

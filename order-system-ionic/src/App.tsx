@@ -12,7 +12,6 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { home, cartOutline, cash } from 'ionicons/icons';
 import Welcome from './pages/Welcome';
-import Home from './pages/Home';
 import Order from './pages/Order';
 import Pay from './pages/Pay';
 import Help from './pages/Help';

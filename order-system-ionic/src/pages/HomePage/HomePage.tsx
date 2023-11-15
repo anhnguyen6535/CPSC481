@@ -13,13 +13,15 @@ import {
   IonAlert,
 } from "@ionic/react";
 import { MenuFoodItemCard } from "../../components/FoodItemCards";
-import "./HomePage.scss";
 // @ts-ignore
 import HelpDeskIcon from "../../../assets/HelpIcon.svg";
 import foodData from "../../../data/menuItems/data.json";
 import { getFoodImageUri } from "../../../data/menuItems/utils";
-import { cart, options } from "ionicons/icons";
-import CallWaiterModal from "../../components/WaiterCallModal/CallWaiterModal";
+import { options } from "ionicons/icons";
+import Dialog, { ButtonProps } from "../../components/Dialog/Dialog";
+import styles from "./HomePage.module.scss";
+
+
 
 const categories = ["All", "Entrees", "Desserts", "Main Course", "Beverages"];
 
@@ -32,6 +34,7 @@ const HomePage: React.FC = () => {
   const [showWaiterCallAlert, setShowWaiterCallAlert] = useState(false);
   const [showConfirmationAlert, setShowConfirmationAlert] = useState(false);
 
+
   const handleAddToCart = (price: number) => {
     setFoodCartCount((prevCount) => prevCount + 1);
     setTotalCost((prevTotal) => prevTotal + price);
@@ -42,14 +45,33 @@ const HomePage: React.FC = () => {
     setTotalCost((prevTotal) => prevTotal - price);
   };
 
-//   const handleCallWaiter = () => {
-//     setShowWaiterCallAlert(false);
-//     setShowConfirmationAlert(true);
-//   };
+  const callWaiterDialogButtons: ButtonProps[] = [
+    {
+      text: "Call Waiter",
+      primary: true,
+      onClick: () => {
+        setShowWaiterCallAlert(false);
+        setShowConfirmationAlert(true);
+      },
+    },
+    {
+      text: "Cancel",
+      primary: false,
+      onClick: () => {
+        setShowWaiterCallAlert(false);
+      },
+    },
+  ];
 
-//   const handleCancel = () => {
-//     setShowWaiterCallAlert(false);
-//   };
+  const waiterConfirmationButtons: ButtonProps[] = [
+    {
+      text: "Okay",
+      primary: false,
+      onClick: () => {
+        setShowConfirmationAlert(false);
+      },
+    },
+  ];
 
   return (
     <IonPage>
@@ -69,10 +91,14 @@ const HomePage: React.FC = () => {
         </IonToolbar>
         <IonToolbar color="light">
           <IonSearchbar
+             style={{
+              '--background': '#efeff0',  
+              '--border-radius': '15px'
+            }}
             value={searchText}
             onIonChange={(e) => setSearchText(e.detail.value!)}
           />
-          <IonButton fill="clear" slot="end" color="primary">
+          <IonButton fill="solid" slot="end" color="secondary">
             <IonIcon slot="start" icon={options} />
             Filter
           </IonButton>
@@ -80,12 +106,12 @@ const HomePage: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonToolbar>
-          <div className="category-bar">
+          <div className={styles.categoryBar}>
             {categories.map((category, idx) => (
               <IonChip
                 onClick={() => setSelectedCategory(category)}
                 className={
-                  category === selectedCategory ? "category-item-selected" : ""
+                  category === selectedCategory ? styles.categoryItemSelected : ""
                 }
                 key={idx}
               >
@@ -108,10 +134,10 @@ const HomePage: React.FC = () => {
           ))}
         </IonContent>
         {foodCartCount > 0 && (
-          <IonButton className="view-cart-button">
-            <div className="view-cart-button-inner">
+          <IonButton className={styles.viewCartButton}>
+            <div className={styles.viewCartButtonInner}>
               <div style={{ display: "flex", alignItems: "center" }}>
-                <IonBadge color="light" className="cart-count">
+                <IonBadge color="light" className={styles.cartCount}>
                   {foodCartCount}
                 </IonBadge>
                 {`Total: $${totalCost}`}
@@ -121,41 +147,23 @@ const HomePage: React.FC = () => {
           </IonButton>
         )}
       </IonContent>
-      {/* <CallWaiterModal
-        isOpen={showWaiterCallAlert}
-        handleCallWaiter={handleCallWaiter}
-        handleDismiss={handleCancel}
-      /> */}
 
-      <IonAlert
+      <Dialog
+        title="Are you sure you want to call a waiter?"
+        content="This will notify a waiter to come to your table."
+        buttons={callWaiterDialogButtons}
         isOpen={showWaiterCallAlert}
-        onDidDismiss={() => setShowWaiterCallAlert(false)}
-        header={"Are you sure you want to call a waiter?"}
-        message={"This will notify a waiter to come to your table."}
-        cssClass="my-alert"
-        buttons={[
-          {
-            text: "Cancel",
-            role: "cancel",
-            cssClass: "secondary",
-          },
-          {
-            text: "Call Waiter",
-            handler: () => {
-              setShowConfirmationAlert(true);
-            },
-          },
-        ]}
+        onDismiss={() => setShowWaiterCallAlert(false)}
       />
 
-      <IonAlert
+      <Dialog
+        title="Waiter called!"
+        content="A waiter has been notified and will be with you shortly."
+        buttons={waiterConfirmationButtons}
         isOpen={showConfirmationAlert}
-        onDidDismiss={() => setShowConfirmationAlert(false)}
-        header={"Waiter called!"}
-        message={"A waiter has been notified and will be with you shortly."}
-        cssClass="my-alert"
-        buttons={["OK"]}
+        onDismiss={() => setShowConfirmationAlert(false)}
       />
+
     </IonPage>
   );
 };

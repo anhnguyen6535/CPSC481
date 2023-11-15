@@ -44,9 +44,11 @@ const CounterButton: React.FC<CounterButtonProps> = ({ amount, enableTrash, onAd
             <div>
                 <IonButton disabled={true} color="clear" shape="round" fill="solid" size="small" style={{ visibility: values['showAdd'] ? 'visible' : 'hidden', position: 'absolute', bottom: 0, right: 0, padding: '1rem', width: '35%', textTransform: 'none' }}></IonButton>
                 <div style={{ visibility: values['showAdd'] ? 'hidden' : 'visible', position: 'absolute', bottom: 0, right: 0, paddingBottom: '1.3rem', paddingRight: '2.0rem', textTransform: 'none'}}>
+                    <div style={{borderRadius: 10, backgroundColor: "#DADADA", padding: '0px 10px 0px 10px'}}>
                     <IonIcon color="dark" icon={remove} onClick={decrement} style={{ marginRight: '0.5rem' }} />
-                    <IonText color="primary" style={{ fontSize: '1.25rem', fontWeight: 'bold', margin: '0.5rem' }}>{values['count']}</IonText>
+                    <IonText color="primary" style={{ fontSize: '1.15rem', fontWeight: 'bold', margin: '0.5rem' }}>{values['count']}</IonText>
                     <IonIcon color="dark" icon={add} onClick={increment} style={{ marginLeft: '0.5rem' }} />
+                    </div>
                 </div>
             </div>
         </div>
