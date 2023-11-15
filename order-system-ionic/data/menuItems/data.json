@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Cheese Pizza",
+    "imagePath": "cheese-pizza.png",
+    "price": 15.0,
+    "labels": ["Entree"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 2,
+    "name": "Caesar Salad",
+    "imagePath": "caesar-salad.jpg",
+    "price": 10.0,
+    "labels": ["Entree", "Dessert"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 3,
+    "name": "Chocolate Cake",
+    "imagePath": "chocolate-cake.jpg",
+    "price": 12.0,
+    "labels": ["Dessert"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 4,
+    "name": "Iced Coffee",
+    "imagePath": "iced-coffee.jpg",
+    "price": 4.0,
+    "labels": ["Beverage"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 5,
+    "name": "Caprese Wrap",
+    "imagePath": "caprese-wrap.jpeg",
+    "price": 9.0,
+    "labels": ["Entree", "Lunch"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 6,
+    "name": "Green Tea",
+    "imagePath": "green-tea.jpg",
+    "price": 3.5,
+    "labels": ["Beverage"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 7,
+    "name": "Pepperoni Pizza",
+    "imagePath": "pepperoni-pizza.jpg",
+    "price": 16.0,
+    "labels": ["Entree"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": false,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 8,
+    "name": "Mango Smoothie",
+    "imagePath": "mango-smoothie.jpg",
+    "price": 6.0,
+    "labels": ["Beverage", "Snack"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 9,
+    "name": "Tiramisu",
+    "imagePath": "tiramisu.jpg",
+    "price": 14.0,
+    "labels": ["Dessert"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 10,
+    "name": "Vegetarian Pizza",
+    "imagePath": "vegetarian-pizza.jpg",
+    "price": 15.0,
+    "labels": ["Entree"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  }
+]

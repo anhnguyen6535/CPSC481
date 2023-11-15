@@ -1,0 +1,27 @@
+/* ion-content, toolbar-container {
+    --padding-start: 1%;
+    --padding-end: 1%;
+} */
+
+.my-alert .alert-button-group {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    align-items: center;
+}
+
+.my-alert .alert-button {
+    width: 100% !important;
+    justify-content: center !important;
+}
+
+.my-alert .alert-button-secondary {
+    --background: transparent !important;
+    --border-width: 1px !important;
+    --border-color: var(--ion-color-primary) !important;
+    --color: var(--ion-color-primary) !important;
+}
+
+.my-alert .alert-button-primary {
+    --background: var(--ion-color-primary) !important;
+    --color: white !important;
+}

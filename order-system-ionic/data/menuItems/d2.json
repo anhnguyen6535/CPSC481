@@ -1,0 +1,242 @@
+[
+  {
+    "id": 11,
+    "name": "Cappuccino",
+    "imagePath": "https://example.com/images/cappuccino.jpg",
+    "price": 5.0,
+    "labels": ["Beverage"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 12,
+    "name": "Lemon Sorbet",
+    "imagePath": "https://example.com/images/lemon-sorbet.jpg",
+    "price": 8.0,
+    "labels": ["Dessert"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 13,
+    "name": "Hawaiian Pizza",
+    "imagePath": "https://example.com/images/hawaiian-pizza.jpg",
+    "price": 17.0,
+    "labels": ["Entree"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": false,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 14,
+    "name": "Orange Juice",
+    "imagePath": "https://example.com/images/orange-juice.jpg",
+    "price": 3.0,
+    "labels": ["Beverage", "Breakfast"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 15,
+    "name": "Mango Cheesecake",
+    "imagePath": "https://example.com/images/mango-cheesecake.jpg",
+    "price": 12.0,
+    "labels": ["Dessert"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 16,
+    "name": "BBQ Chicken Pizza",
+    "imagePath": "https://example.com/images/bbq-chicken-pizza.jpg",
+    "price": 18.0,
+    "labels": ["Entree"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": false,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 17,
+    "name": "Iced Tea",
+    "imagePath": "https://example.com/images/iced-tea.jpg",
+    "price": 3.5,
+    "labels": ["Beverage", "Lunch"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 18,
+    "name": "Pumpkin Pie",
+    "imagePath": "https://example.com/images/pumpkin-pie.jpg",
+    "price": 14.0,
+    "labels": ["Dessert"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 19,
+    "name": "Sushi Platter",
+    "imagePath": "https://example.com/images/sushi-platter.jpg",
+    "price": 20.0,
+    "labels": ["Entree", "Dinner"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": false,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 20,
+    "name": "Berry Parfait",
+    "imagePath": "https://example.com/images/berry-parfait.jpg",
+    "price": 9.0,
+    "labels": ["Dessert", "Breakfast"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 21,
+    "name": "Mocha Latte",
+    "imagePath": "https://example.com/images/mocha-latte.jpg",
+    "price": 5.5,
+    "labels": ["Beverage"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 22,
+    "name": "Fruit Smoothie",
+    "imagePath": "https://example.com/images/fruit-smoothie.jpg",
+    "price": 6.5,
+    "labels": ["Beverage", "Snack"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 23,
+    "name": "Caramel Macchiato",
+    "imagePath": "https://example.com/images/caramel-macchiato.jpg",
+    "price": 6.0,
+    "labels": ["Beverage"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 24,
+    "name": "Vegetable Smoothie",
+    "imagePath": "https://example.com/images/vegetable-smoothie.jpg",
+    "price": 7.0,
+    "labels": ["Beverage", "Lunch"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 25,
+    "name": "Cheese and Fruit Platter",
+    "imagePath": "https://example.com/images/cheese-fruit-platter.jpg",
+    "price": 12.0,
+    "labels": ["Entree", "Appetizer"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 26,
+    "name": "Hot Chocolate",
+    "imagePath": "https://example.com/images/hot-chocolate.jpg",
+    "price": 4.5,
+    "labels": ["Beverage", "Dessert"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 27,
+    "name": "Iced Fruit Tea",
+    "imagePath": "https://example.com/images/iced-fruit-tea.jpg",
+    "price": 3.5,
+    "labels": ["Beverage", "Lunch"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 28,
+    "name": "Chai Latte",
+    "imagePath": "https://example.com/images/chai-latte.jpg",
+    "price": 5.0,
+    "labels": ["Beverage"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": true,
+      "glutenFree": false
+    }
+  },
+  {
+    "id": 29,
+    "name": "Sparkling Lemonade",
+    "imagePath": "https://example.com/images/sparkling-lemonade.jpg",
+    "price": 3.0,
+    "labels": ["Beverage", "Refreshment"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  },
+  {
+    "id": 30,
+    "name": "Matcha Latte",
+    "imagePath": "https://example.com/images/matcha-latte.jpg",
+    "price": 6.0,
+    "labels": ["Beverage"],
+    "diets": {
+      "vegan": true,
+      "vegetarian": true,
+      "glutenFree": true
+    }
+  }
+]

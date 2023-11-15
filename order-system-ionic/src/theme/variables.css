@@ -10,9 +10,9 @@ http://ionicframework.com/docs/theming/ */
 	--ion-color-primary-shade: #007b7b;
 	--ion-color-primary-tint: #1a9898;
 
-	--ion-color-secondary: #008566;
+	--ion-color-secondary: #efeff0;
 	--ion-color-secondary-rgb: 0,133,102;
-	--ion-color-secondary-contrast: #ffffff;
+	--ion-color-secondary-contrast: #000000;
 	--ion-color-secondary-contrast-rgb: 255,255,255;
 	--ion-color-secondary-shade: #00755a;
 	--ion-color-secondary-tint: #1a9175;
@@ -61,7 +61,7 @@ http://ionicframework.com/docs/theming/ */
 }
 
 /** TODO: Dark Mode colors **/
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   /*
    * Dark Colors
    * -------------------------------------------
