@@ -14,10 +14,8 @@ import { home, cartOutline, cash } from 'ionicons/icons';
 import Welcome from './pages/Welcome';
 import Order from './pages/Order';
 import Pay from './pages/Pay';
-import Help from './pages/Help';
 import Details from './pages/Details';
 import HomePage from './pages/HomePage/HomePage';
-import './App.css'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
