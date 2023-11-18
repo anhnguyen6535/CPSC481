@@ -35,48 +35,40 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import NavBar from './components/NavBar';
+import routes from './route-config';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/welcome">
-            <Welcome />
-          </Route>
-          <Route exact path="/home">
-            <HomePage />
-          </Route>
-          <Route exact path="/order">
-            <Order />
-          </Route>
-          <Route exact path="/pay">
-            <Pay />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/welcome" />
-          </Route>
-          <Route exact path="/details">
-            <Details />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/home">
-            <IonIcon aria-hidden="true" icon={home} />
-            <IonLabel>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="order" href="/order">
-            <IonIcon aria-hidden="true" icon={cartOutline} />
-            <IonLabel>Cart</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="pay" href="/pay">
-            <IonIcon aria-hidden="true" icon={cash} />
-            <IonLabel>Pay</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+      <NavBar/>
+      <div>
+        <IonTabs>
+          <IonRouterOutlet>
+            {routes.map(route =>
+              <Route key={route.path} path={route.path} exact={route.exact}>
+                <route.component/>
+              </Route>)}
+            
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="home" href="/home">
+              <IonIcon aria-hidden="true" icon={home} />
+              <IonLabel>Home</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="order" href="/order">
+              <IonIcon aria-hidden="true" icon={cartOutline} />
+              <IonLabel>Cart</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="pay" href="/pay">
+              <IonIcon aria-hidden="true" icon={cash} />
+              <IonLabel>Pay</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </div>
     </IonReactRouter>
   </IonApp>
 );
