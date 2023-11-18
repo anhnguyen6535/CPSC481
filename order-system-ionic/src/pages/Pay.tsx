@@ -7,7 +7,7 @@ import Layout from '../components/Layout';
 
 const Pay: React.FC = () => {
   return (
-    <Layout>
+    <Layout pageTitle='Your Order' backButton={true}>
         {foodData.map((foodItem) => (
                 <OrderFoodItemCard
                   key={foodItem.id}

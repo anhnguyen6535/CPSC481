@@ -43,15 +43,12 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <NavBar/>
-      <div>
         <IonTabs>
           <IonRouterOutlet>
             {routes.map(route =>
               <Route key={route.path} path={route.path} exact={route.exact}>
                 <route.component/>
               </Route>)}
-            
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
             <IonTabButton tab="home" href="/home">
@@ -68,7 +65,6 @@ const App: React.FC = () => (
             </IonTabButton>
           </IonTabBar>
         </IonTabs>
-      </div>
     </IonReactRouter>
   </IonApp>
 );

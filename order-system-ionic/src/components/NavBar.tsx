@@ -4,7 +4,7 @@ import { useState } from "react";
 import Dialog, { ButtonProps } from "./Dialog/Dialog";
 
 
-export default function NavBar() {
+export default function NavBar(props: NavBarProps) {
     const [showWaiterCallAlert, setShowWaiterCallAlert] = useState(false);
     const [showConfirmationAlert, setShowConfirmationAlert] = useState(false);
 
@@ -39,7 +39,7 @@ export default function NavBar() {
     return(
         <div>
             <IonToolbar>
-              <IonTitle className="ion-text-left">Flavour of Calgary</IonTitle>
+              <IonTitle className="ion-text-left">{props.pageTitle}</IonTitle>
               <IonButton
                 onClick={() => setShowWaiterCallAlert(true)}
                 fill="solid"
@@ -69,4 +69,8 @@ export default function NavBar() {
           />
         </div>
     )
+}
+
+interface NavBarProps{
+  pageTitle?: string;
 }
