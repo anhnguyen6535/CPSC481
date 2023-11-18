@@ -3,7 +3,7 @@ import HelpDeskIcon from "../../assets/HelpIcon.svg";
 import { useState } from "react";
 import Dialog, { ButtonProps } from "./Dialog/Dialog";
 
-
+// includes page title & call waiter button
 export default function NavBar(props: NavBarProps) {
     const [showWaiterCallAlert, setShowWaiterCallAlert] = useState(false);
     const [showConfirmationAlert, setShowConfirmationAlert] = useState(false);

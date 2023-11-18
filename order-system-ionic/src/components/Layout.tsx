@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import { arrowBackCircle } from "ionicons/icons";
 import { useHistory } from "react-router";
 
+// use this component for each page instead of IonPage 
 export default function Layout(props: LayoutProps) {
     const history = useHistory();
 
@@ -36,6 +37,6 @@ export default function Layout(props: LayoutProps) {
 
 interface LayoutProps{
     pageTitle: string;
-    backButton?: boolean;
+    backButton?: boolean;   
     children: any;
 }

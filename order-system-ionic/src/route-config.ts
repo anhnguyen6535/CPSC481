@@ -4,6 +4,8 @@ import Order from "./pages/Order";
 import Pay from "./pages/Pay";
 import Welcome from "./pages/Welcome";
 
+// add new routes here 
+// routes will be mapped automatically in App.tsx
 const routes = [
     {path: '/', component: Welcome, exact: true},
     {path: '/welcome', component: Welcome, exact: true},
