@@ -1,0 +1,8 @@
+.ionItem{
+    font-size: 20px;
+}
+
+.ionItem ion-note{
+    font-size: 20px;
+    color: var(--ion-color-danger);
+}
