@@ -1,4 +1,4 @@
-import { IonCard, IonCardContent} from '@ionic/react';
+import { IonButton, IonCard, IonCardContent} from '@ionic/react';
 // import './Pay.css';
 import { OrderFoodItemCard } from '../components/FoodItemCards';
 import foodData from "../../data/cartItems/data.json";      // fake data for testing
@@ -39,6 +39,11 @@ const Pay: React.FC = () => {
               <TextCard lines='none' label='Total' note={`${subtotal*(1+taxRate)}`} />
             </IonCardContent>
           </IonCard>
+          
+          <div className="ion-text-center">
+            <IonButton slot='start'>One Bill</IonButton>
+            <IonButton slot='end'>Split Bill</IonButton>
+          </div>
         
     </Layout>
   );
