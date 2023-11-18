@@ -1,24 +1,22 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonContent} from '@ionic/react';
 import './Pay.css';
+import { OrderFoodItemCard } from '../components/FoodItemCards';
+import foodData from "../../data/cartItems/data.json";
+import { getFoodImageUri } from "../../data/menuItems/utils";
+import Layout from '../components/Layout';
 
 const Pay: React.FC = () => {
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Pay</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Pay</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Pay" />
-      </IonContent>
-    </IonPage>
+    <Layout>
+        {foodData.map((foodItem) => (
+                <OrderFoodItemCard
+                  key={foodItem.id}
+                  name={foodItem.name}
+                  imagePath={getFoodImageUri(foodItem.imagePath)}
+                  price={foodItem.price} 
+                  amount={1}              />
+              ))}
+    </Layout>
   );
 };
 
