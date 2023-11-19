@@ -16,34 +16,24 @@ import { MenuFoodItemCard } from "../../components/FoodItemCards";
 // @ts-ignore
 import HelpDeskIcon from "../../../assets/HelpIcon.svg";
 import foodData from "../../../data/menuItems/data.json";
-import { getFoodImageUri } from "../../../data/menuItems/utils";
 import { options } from "ionicons/icons";
 import Dialog, { ButtonProps } from "../../components/Dialog/Dialog";
 import styles from "./HomePage.module.scss";
+import { useTypedSelector } from "../../hooks/reduxHooks";
+import { selectCartData } from "../../redux/selectors/cartSelectors";
 
 
 
 const categories = ["All", "Entrees", "Desserts", "Main Course", "Beverages"];
 
 const HomePage: React.FC = () => {
+  const cartData = useTypedSelector(selectCartData);
   const [searchText, setSearchText] = useState("");
-  const [foodCartCount, setFoodCartCount] = useState(0);
-  const [totalCost, setTotalCost] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const [showWaiterCallAlert, setShowWaiterCallAlert] = useState(false);
   const [showConfirmationAlert, setShowConfirmationAlert] = useState(false);
 
-
-  const handleAddToCart = (price: number) => {
-    setFoodCartCount((prevCount) => prevCount + 1);
-    setTotalCost((prevTotal) => prevTotal + price);
-  };
-
-  const handleRemoveFromCart = (price: number) => {
-    setFoodCartCount((prevCount) => prevCount - 1);
-    setTotalCost((prevTotal) => prevTotal - price);
-  };
 
   const callWaiterDialogButtons: ButtonProps[] = [
     {
@@ -122,25 +112,17 @@ const HomePage: React.FC = () => {
         </IonToolbar>
         <IonContent>
           {foodData.map((foodItem) => (
-            <MenuFoodItemCard
-              key={foodItem.id}
-              name={foodItem.name}
-              imagePath={getFoodImageUri(foodItem.imagePath)}
-              price={foodItem.price}
-              diets={foodItem.diets}
-              onAddToCart={handleAddToCart}
-              onRemoveFromCart={handleRemoveFromCart}
-            />
+            <MenuFoodItemCard key={foodItem.id} item={foodItem}/>
           ))}
         </IonContent>
-        {foodCartCount > 0 && (
+        {cartData.totalQuantity > 0 && (
           <IonButton className={styles.viewCartButton}>
             <div className={styles.viewCartButtonInner}>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <IonBadge color="light" className={styles.cartCount}>
-                  {foodCartCount}
+                  {cartData.totalQuantity}
                 </IonBadge>
-                {`Total: $${totalCost}`}
+                {`Total: $${cartData.totalPrice}`}
               </div>
               <div>VIEW CART</div>
             </div>

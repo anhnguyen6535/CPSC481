@@ -40,10 +40,10 @@ const CounterButton: React.FC<CounterButtonProps> = ({ amount, enableTrash, onAd
     return (
         <div>
             <IonIcon icon={trash} onClick={() => resetAmount()} style={{ visibility: values['showTrash'] ? 'visible' : 'hidden', position: 'absolute', top: 0, right: 0, padding: '1rem' }} />
-            <IonButton color="primary" shape="round" fill="outline" size="small" onClick={increment} style={{ visibility: values['showAdd'] ? 'visible' : 'hidden', position: 'absolute', bottom: 0, right: 0, padding: '1rem', width: '35%', textTransform: 'none' }}>Add</IonButton>
+            <IonButton color="primary" shape="round" fill="outline" size="small" onClick={increment} style={{ visibility: values['showAdd'] ? 'visible' : 'hidden', position: 'absolute', bottom: 0, right: 0, width: '20%', textTransform: 'none' }}>Add</IonButton>
             <div>
-                <IonButton disabled={true} color="clear" shape="round" fill="solid" size="small" style={{ visibility: values['showAdd'] ? 'visible' : 'hidden', position: 'absolute', bottom: 0, right: 0, padding: '1rem', width: '35%', textTransform: 'none' }}></IonButton>
-                <div style={{ visibility: values['showAdd'] ? 'hidden' : 'visible', position: 'absolute', bottom: 0, right: 0, paddingBottom: '1.3rem', paddingRight: '2.0rem', textTransform: 'none'}}>
+                {/* <IonButton disabled={true} color="clear" shape="round" fill="solid" size="small" style={{ visibility: values['showAdd'] ? 'visible' : 'hidden', position: 'absolute', bottom: 0, right: 0, padding: '1rem', width: '35%', textTransform: 'none' }}></IonButton> */}
+                <div style={{ visibility: values['showAdd'] ? 'hidden' : 'visible', position: 'absolute', bottom: 0, right: 0, paddingBottom: '1.3rem', paddingRight: '1.0rem', textTransform: 'none'}}>
                     <div style={{borderRadius: 10, backgroundColor: "#DADADA", padding: '0px 10px 0px 10px'}}>
                     <IonIcon color="dark" icon={remove} onClick={decrement} style={{ marginRight: '0.5rem' }} />
                     <IonText color="primary" style={{ fontSize: '1.15rem', fontWeight: 'bold', margin: '0.5rem' }}>{values['count']}</IonText>
