@@ -8,7 +8,8 @@ import {
 } from "@ionic/react";
 import { bookmark } from "ionicons/icons";
 import CounterButton from "../CounterButton";
-import DietIcons, { DietProps } from "../DietIcons";
+import DietIcons from "../DietIcons";
+import { useHistory } from "react-router-dom";
 import { MenuItem } from "../../../types";
 import { useTypedDispatch } from "../../../hooks/reduxHooks";
 import { addToCart, removeFromCart } from "../../../redux/actions/cartActions";
@@ -17,6 +18,7 @@ import styles from "./MenuFoodItemCard.module.scss";
 
 interface MenuFoodCardProps {
   item: MenuItem;
+  amount: number;
 }
 
 const formatPrice = (price: number) => {
@@ -24,10 +26,10 @@ const formatPrice = (price: number) => {
   return `$${priceStr}`;
 };
 
-const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({ item }) => {
+const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({ item, amount }) => {
+  const history = useHistory();
   const dispatch = useTypedDispatch();
   const [pinned, setPinned] = useState(false);
-  const [amount, setAmount] = useState(0);
 
   const addFoodToCart = () => {
     dispatch(addToCart(item));
@@ -37,16 +39,22 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({ item }) => {
     dispatch(removeFromCart(item.id));
   };
 
+  const navigateToDetails = () => {
+    history.push(`/details/${item.id}`);
+  }
+
   return (
     <IonCard className={styles.menuFoodCard} color="secondary">
-      <div className={styles.cardContent}>
+      <div className={styles.cardContent} onClick={navigateToDetails}>
         <img
           src={getFoodImageUri(item.imagePath)}
           alt={item.name}
           className={styles.cardImage}
         />
         <IonCardHeader>
-          <IonCardTitle style={{ fontSize: "1.2rem" }}>{item.name}</IonCardTitle>
+          <IonCardTitle style={{ fontSize: "1.2rem" }}>
+            {item.name}
+          </IonCardTitle>
           <IonCardSubtitle>{formatPrice(item.price)}</IonCardSubtitle>
           <DietIcons
             vegan={item.diets.vegan}
