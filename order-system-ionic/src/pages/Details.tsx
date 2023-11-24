@@ -2,6 +2,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButt
 import ExploreContainer from '../components/ExploreContainer';
 import './Details.css';
 import { arrowBack, arrowBackCircle, backspace } from 'ionicons/icons';
+import Layout from '../components/Layout';
 
 
 function clickReadMore() {
@@ -38,20 +39,7 @@ function clickReadMore2() {
 
 const Details: React.FC = () => {
   return (
-    <IonPage>
-
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Home</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        
-      <div className="backButton">
-        <IonButton shape='round' size='large' fill='clear'>
-            <IonIcon slot="icon-only" icon={arrowBackCircle}></IonIcon>
-        </IonButton>
-      </div>  
+    <Layout pageTitle='Detail' backButton={true}>
     
       <img src="https://www.thespruceeats.com/thmb/e-lll-PpJ5F-MF4C57LYag3IAB8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/easy-vegan-black-bean-veggie-burgers-3377008-hero-05-f7c0f0d9865e48b6be52a4c76ee22438.jpg"></img>
 
@@ -101,9 +89,7 @@ const Details: React.FC = () => {
     </div>
     
 
-
-      </IonContent>
-    </IonPage>
+    </Layout>
   );
 };
 
