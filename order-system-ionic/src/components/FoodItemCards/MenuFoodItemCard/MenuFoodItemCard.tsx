@@ -7,12 +7,13 @@ import {
   IonIcon,
 } from "@ionic/react";
 import { bookmark } from "ionicons/icons";
-import CounterButton from "./CounterButton";
-import DietIcons, { DietProps } from "./DietIcons";
-import { MenuItem } from "../../types";
-import { useTypedDispatch } from "../../hooks/reduxHooks";
-import { addToCart, removeFromCart } from "../../redux/actions/cartActions";
-import { getFoodImageUri } from "../../../data/menuItems/utils";
+import CounterButton from "../CounterButton";
+import DietIcons, { DietProps } from "../DietIcons";
+import { MenuItem } from "../../../types";
+import { useTypedDispatch } from "../../../hooks/reduxHooks";
+import { addToCart, removeFromCart } from "../../../redux/actions/cartActions";
+import { getFoodImageUri } from "../../../../data/menuItems/utils";
+import styles from "./MenuFoodItemCard.module.scss";
 
 interface MenuFoodCardProps {
   item: MenuItem;
@@ -37,18 +38,12 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({ item }) => {
   };
 
   return (
-    <IonCard style={{ borderRadius: "1rem" }} color="secondary">
-      <div style={{ display: "flex", flexDirection: "row" }}>
+    <IonCard className={styles.menuFoodCard} color="secondary">
+      <div className={styles.cardContent}>
         <img
           src={getFoodImageUri(item.imagePath)}
           alt={item.name}
-          style={{
-            width: "7.5rem",
-            height: "7.5rem",
-            objectFit: "cover",
-            padding: "1rem",
-            borderRadius: "25%",
-          }}
+          className={styles.cardImage}
         />
         <IonCardHeader>
           <IonCardTitle style={{ fontSize: "1.2rem" }}>{item.name}</IonCardTitle>
@@ -62,7 +57,7 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({ item }) => {
         <IonIcon
           icon={bookmark}
           color={pinned ? "primary" : "medium"}
-          style={{ position: "absolute", top: 0, right: 0, padding: "1rem" }}
+          className={styles.bookmarkIcon}
         />
         <CounterButton
           amount={amount}
