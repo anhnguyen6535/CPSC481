@@ -1,4 +1,4 @@
-import Details from "./pages/Details";
+import Details from "./pages/Details/Details";
 import HomePage from "./pages/HomePage/HomePage";
 import Order from "./pages/Order";
 import Pay from "./pages/Pay";
