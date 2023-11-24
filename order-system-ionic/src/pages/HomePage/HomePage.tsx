@@ -22,8 +22,6 @@ import styles from "./HomePage.module.scss";
 import { useTypedSelector } from "../../hooks/reduxHooks";
 import { selectCartData } from "../../redux/selectors/cartSelectors";
 
-
-
 const categories = ["All", "Entrees", "Desserts", "Main Course", "Beverages"];
 
 const HomePage: React.FC = () => {
@@ -33,7 +31,6 @@ const HomePage: React.FC = () => {
 
   const [showWaiterCallAlert, setShowWaiterCallAlert] = useState(false);
   const [showConfirmationAlert, setShowConfirmationAlert] = useState(false);
-
 
   const callWaiterDialogButtons: ButtonProps[] = [
     {
@@ -63,6 +60,21 @@ const HomePage: React.FC = () => {
     },
   ];
 
+  const getFoodItems = () => {
+    const newFoodData = foodData.map((foodItem) => {
+      const currentCartItem = cartData.items.find(
+        (cartItem) => cartItem.item.id === foodItem.id
+      );
+
+      return {
+        item: foodItem,
+        quantity: currentCartItem ? currentCartItem.quantity : 0,
+      };
+    });
+
+    return newFoodData;
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -81,9 +93,9 @@ const HomePage: React.FC = () => {
         </IonToolbar>
         <IonToolbar color="light">
           <IonSearchbar
-             style={{
-              '--background': '#efeff0',  
-              '--border-radius': '15px'
+            style={{
+              "--background": "#efeff0",
+              "--border-radius": "15px",
             }}
             value={searchText}
             onIonChange={(e) => setSearchText(e.detail.value!)}
@@ -101,7 +113,9 @@ const HomePage: React.FC = () => {
               <IonChip
                 onClick={() => setSelectedCategory(category)}
                 className={
-                  category === selectedCategory ? styles.categoryItemSelected : ""
+                  category === selectedCategory
+                    ? styles.categoryItemSelected
+                    : ""
                 }
                 key={idx}
               >
@@ -111,8 +125,12 @@ const HomePage: React.FC = () => {
           </div>
         </IonToolbar>
         <IonContent>
-          {foodData.map((foodItem) => (
-            <MenuFoodItemCard key={foodItem.id} item={foodItem}/>
+          {getFoodItems().map((foodItem) => (
+            <MenuFoodItemCard
+              key={foodItem.item.id}
+              item={foodItem.item}
+              amount={foodItem.quantity}
+            />
           ))}
         </IonContent>
         {cartData.totalQuantity > 0 && (
@@ -145,7 +163,6 @@ const HomePage: React.FC = () => {
         isOpen={showConfirmationAlert}
         onDismiss={() => setShowConfirmationAlert(false)}
       />
-
     </IonPage>
   );
 };
