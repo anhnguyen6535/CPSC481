@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   IonButton,
   IonSearchbar,
@@ -22,10 +23,9 @@ import NavBar from "../../components/NavBar";
 import { useTypedSelector } from "../../hooks/reduxHooks";
 import { selectCartData } from "../../redux/selectors/cartSelectors";
 
-
 import FilterComponent from "../../components/Filter/FilterComponent";
-import { Diets } from "../../types";
 import restaurantImage from "../../../assets/restaurant.png";
+import NavBar from "../../components/NavBar";
 
 const categories = ["All", "Entrees", "Desserts", "Main Course", "Beverages"];
 
@@ -64,10 +64,12 @@ const filterCategories = [
 
 const HomePage: React.FC = () => {
   const cartData = useTypedSelector(selectCartData);
+  const history = useHistory();
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+
   const [filters, setFilters] = useState(filterCategories);
-  const [filterPrice, setFilterPrice] = useState<number>(0);
+  const [filterPrice, setFilterPrice] = useState<number | null>(null);
 
   const getFoodItems = () => {
     const newFoodData = foodData.map((foodItem) => {
@@ -84,41 +86,40 @@ const HomePage: React.FC = () => {
     return newFoodData;
   };
 
-  const isDietProperty = (prop: string): prop is keyof Diets => {
-    return prop === "vegan" || prop === "vegetarian" || prop === "glutenFree";
+  const popover = useRef<HTMLIonPopoverElement>(null);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+
+  const openPopover = (e: any) => {
+    popover.current!.event = e;
+    setPopoverOpen(true);
   };
 
-  const filteredFoodData = foodData.filter(
+  const filteredFoodData = getFoodItems().filter(
     (foodItem) =>
-      (foodItem.name.toLowerCase().includes(searchText.toLowerCase()) &&
-        (selectedCategory === "All" ||
-          foodItem.labels.includes(selectedCategory))) ||
-      (foodItem.labels.includes(selectedCategory.slice(0, -1)) &&
-        filters.every(
-          (filter) =>
-            !filter.checked ||
-            (isDietProperty(filter.name) && foodItem.diets[filter.name])
-        ))
+      foodItem.item.name.toLowerCase().includes(searchText.toLowerCase()) &&
+      (selectedCategory === "All" ||
+        foodItem.item.labels.includes(selectedCategory.slice(0, -1))) &&
+      filters.every(
+        (filter) =>
+          !filter.checked ||
+          // @ts-ignore
+          foodItem.item.diets[filter.name]
+      ) 
+      &&
+      (filterPrice == null || foodItem.item.price <= filterPrice)
   );
 
-  const handleFilterChange = (index: number, newCheckedValue: boolean) => {
-    setFilters(
-      filters.map((filter, filterIndex) =>
-        filterIndex === index ? { ...filter, checked: newCheckedValue } : filter
-      )
-    );
-  };
-
   const handleSearchChange = (ev: Event) => {
-    let query = '';
+    let query = "";
     const target = ev.target as HTMLIonSearchbarElement;
     if (target) query = target.value!.toLowerCase();
 
     setSearchText(query);
   };
 
-
-  const handleFilterPriceChange = (e: CustomEvent) => {};
+  const handleFilterPriceChange = (value: number | null) => {
+    setFilterPrice(value);
+  };
 
   return (
     <IonPage>
@@ -131,7 +132,7 @@ const HomePage: React.FC = () => {
               "--border-radius": "15px",
             }}
             value={searchText}
-            debounce={700} 
+            debounce={700}
             onIonInput={(ev) => handleSearchChange(ev)}
             onIonChange={(e) => setSearchText(e.detail.value!)}
           />
@@ -140,16 +141,23 @@ const HomePage: React.FC = () => {
             fill="solid"
             slot="end"
             color="secondary"
+            onClick={openPopover}
           >
             <IonIcon slot="start" icon={options} />
             Filter
           </IonButton>
-          <IonPopover trigger="filter-trigger" triggerAction="click">
+          <IonPopover
+            ref={popover}
+            isOpen={popoverOpen}
+            onDidDismiss={() => setPopoverOpen(false)}
+          >
             <FilterComponent
               filters={filters}
               setFilters={setFilters}
               price={filterPrice}
               handlePrice={handleFilterPriceChange}
+              isOpen={popoverOpen}
+              setIsOpen={setPopoverOpen}
             />
           </IonPopover>
         </IonToolbar>
@@ -175,21 +183,27 @@ const HomePage: React.FC = () => {
         <IonContent>
           {filteredFoodData.length > 0 ? (
             filteredFoodData.map((foodItem) => (
-              <MenuFoodItemCard key={foodItem.id} item={foodItem} amount={0}/>
+              <MenuFoodItemCard
+                key={foodItem.item.id}
+                item={foodItem.item}
+                amount={foodItem.quantity}
+              />
             ))
           ) : (
-            <div style={{ textAlign: "center" }}>
-              <img
-                src={restaurantImage}
-                alt="No results found"
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-              <p>We could not find any results that match your search.</p>
+            <div className={styles.noSearchResults}>
+              <div>
+                <img
+                  src={restaurantImage}
+                  alt="No results found"
+                  style={{ maxWidth: "100%", height: "auto" }}
+                />
+              </div>
+              <p>We Could Not Find Any Results That Match Your Search</p>
             </div>
           )}
         </IonContent>
         {cartData.totalQuantity > 0 && (
-          <IonButton className={styles.viewCartButton}>
+          <IonButton onClick={() => history.push("/cart")} className={styles.viewCartButton}>
             <div className={styles.viewCartButtonInner}>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <IonBadge color="light" className={styles.cartCount}>

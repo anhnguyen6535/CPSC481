@@ -10,11 +10,11 @@ import { bookmark } from "ionicons/icons";
 import CounterButton from "../CounterButton";
 import DietIcons from "../DietIcons";
 import { useHistory } from "react-router-dom";
-import { MenuItem } from "../../../types";
 import { useTypedDispatch } from "../../../hooks/reduxHooks";
 import { addToCart, removeFromCart } from "../../../redux/actions/cartActions";
 import { getFoodImageUri } from "../../../../data/menuItems/utils";
 import styles from "./MenuFoodItemCard.module.scss";
+import { MenuItem } from "../../../types";
 
 interface MenuFoodCardProps {
   item: MenuItem;

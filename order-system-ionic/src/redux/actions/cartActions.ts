@@ -1,5 +1,5 @@
 import { CartActionTypes } from '../actionTypes';
-import { CartItem, MenuItem } from '../../types';
+import { MenuItem } from '../../types';
 
 export const addToCart = (item: MenuItem) => ({
   type: CartActionTypes.ADD_TO_CART,
