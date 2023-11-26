@@ -14,10 +14,12 @@ const OrderFoodItemCard: React.FC<CardProps> = ({ name, imagePath, price, amount
         <IonCard style={{ borderRadius: '1rem', background: '0%', boxShadow: 'none' }}>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <img src={imagePath} alt={name} style={{ width: '7.5rem', height: '7.5rem', objectFit: 'cover', padding: '1rem', borderRadius: '25%' }} />
-                <IonCardHeader>
-                    <IonCardTitle>{name} x{amount}</IonCardTitle>
-                </IonCardHeader>
-                <IonCardTitle style={{ position: 'absolute', top: 0, right: 0, padding: '1rem' }}>{formatPrice(price * amount)}</IonCardTitle>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <IonCardHeader style={{ flexWrap: 'wrap' }}>
+                        <IonCardTitle>{name} x{amount}</IonCardTitle>
+                    </IonCardHeader>
+                    <IonCardTitle style={{ padding: '1rem' }}>{formatPrice(price * amount)}</IonCardTitle>
+                </div>
             </div>
         </IonCard>
     );

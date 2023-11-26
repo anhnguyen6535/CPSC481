@@ -15,8 +15,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./redux/store";
 import { home, cartOutline, cash } from "ionicons/icons";
 import Welcome from "./pages/Welcome";
-import Order from "./pages/Order";
-import Pay from "./pages/Pay";
+import Cart from "./pages/Cart/Cart";
+import Pay from "./pages/Payment/Pay";
 import Details from "./pages/Details/Details";
 import HomePage from "./pages/HomePage/HomePage";
 
