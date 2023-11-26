@@ -37,12 +37,19 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 /* Theme variables */
+<<<<<<< HEAD
 import "./theme/variables.css";
 import routes from "./route-config";
+=======
+import './theme/variables.css';
+import NavBar from './components/NavBar';
+import routes from './route-config';
+>>>>>>> f630f90 (onclick and persisit reduc state)
 
 setupIonicReact();
 
 const App: React.FC = () => (
+<<<<<<< HEAD
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <IonApp>
@@ -74,6 +81,38 @@ const App: React.FC = () => (
       </IonApp>
     </PersistGate>
   </Provider>
+=======
+  <IonApp>
+    <IonReactRouter>
+      <NavBar/>
+      <div>
+        <IonTabs>
+          <IonRouterOutlet>
+            {routes.map(route =>
+              <Route key={route.path} path={route.path} exact={route.exact}>
+                <route.component/>
+              </Route>)}
+            
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="home" href="/home">
+              <IonIcon aria-hidden="true" icon={home} />
+              <IonLabel>Home</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="order" href="/order">
+              <IonIcon aria-hidden="true" icon={cartOutline} />
+              <IonLabel>Cart</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="pay" href="/pay">
+              <IonIcon aria-hidden="true" icon={cash} />
+              <IonLabel>Pay</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </div>
+    </IonReactRouter>
+  </IonApp>
+>>>>>>> f630f90 (onclick and persisit reduc state)
 );
 
 export default App;

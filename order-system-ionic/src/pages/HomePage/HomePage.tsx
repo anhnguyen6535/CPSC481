@@ -44,7 +44,10 @@ const HomePage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
+<<<<<<< HEAD
         <NavBar pageTitle="Flavour of Calgary" />
+=======
+>>>>>>> f630f90 (onclick and persisit reduc state)
         <IonToolbar color="light">
           <IonSearchbar
             style={{

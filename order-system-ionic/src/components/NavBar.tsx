@@ -3,8 +3,13 @@ import HelpDeskIcon from "../../assets/HelpIcon.svg";
 import { useState } from "react";
 import Dialog, { ButtonProps } from "./Dialog/Dialog";
 
+<<<<<<< HEAD
 // includes page title & call waiter button
 export default function NavBar(props: NavBarProps) {
+=======
+
+export default function NavBar() {
+>>>>>>> f630f90 (onclick and persisit reduc state)
     const [showWaiterCallAlert, setShowWaiterCallAlert] = useState(false);
     const [showConfirmationAlert, setShowConfirmationAlert] = useState(false);
 
@@ -39,7 +44,11 @@ export default function NavBar(props: NavBarProps) {
     return(
         <div>
             <IonToolbar>
+<<<<<<< HEAD
               <IonTitle className="ion-text-left">{props.pageTitle}</IonTitle>
+=======
+              <IonTitle className="ion-text-left">Flavour of Calgary</IonTitle>
+>>>>>>> f630f90 (onclick and persisit reduc state)
               <IonButton
                 onClick={() => setShowWaiterCallAlert(true)}
                 fill="solid"
@@ -69,8 +78,11 @@ export default function NavBar(props: NavBarProps) {
           />
         </div>
     )
+<<<<<<< HEAD
 }
 
 interface NavBarProps{
   pageTitle?: string;
+=======
+>>>>>>> f630f90 (onclick and persisit reduc state)
 }
