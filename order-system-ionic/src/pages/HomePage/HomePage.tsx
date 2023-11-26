@@ -25,7 +25,6 @@ import { selectCartData } from "../../redux/selectors/cartSelectors";
 
 import FilterComponent from "../../components/Filter/FilterComponent";
 import restaurantImage from "../../../assets/restaurant.png";
-import NavBar from "../../components/NavBar";
 
 const categories = ["All", "Entrees", "Desserts", "Main Course", "Beverages"];
 
