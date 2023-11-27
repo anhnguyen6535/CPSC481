@@ -14,11 +14,6 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./redux/store";
 import { home, cartOutline, cash } from "ionicons/icons";
-import Welcome from "./pages/Welcome";
-import Order from "./pages/Order";
-import Pay from "./pages/Pay";
-import Details from "./pages/Details/Details";
-import HomePage from "./pages/HomePage/HomePage";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";

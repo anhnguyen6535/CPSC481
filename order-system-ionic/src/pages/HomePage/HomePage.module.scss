@@ -24,6 +24,14 @@
   }
 }
 
+.noSearchResults {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .viewCartButton {
   position: fixed;
   bottom: 8px;
