@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Dialog.module.scss';
 import { IonButton } from '@ionic/react';
-import { Portal } from 'react-portal';
 
 
 export interface ButtonProps {

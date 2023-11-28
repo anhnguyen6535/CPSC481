@@ -1,95 +1,115 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonIcon, IonImg } from '@ionic/react';
-import ExploreContainer from '../../components/ExploreContainer';
-import './Details.css';
-import { arrowBack, arrowBackCircle, backspace } from 'ionicons/icons';
-import Layout from '../../components/Layout';
-
-
-function clickReadMore() {
-  var dots = document.getElementById("dots")!;
-  var moreText = document.getElementById("moreDesc")!;
-  var btnText = document.getElementById("readMore")!;
-
-  if (dots.style.display === "none") {
-    dots.style.display = "inline";
-    btnText.innerHTML = "Read more";
-    moreText.style.display = "none";
-  } else {
-    dots.style.display = "none";
-    btnText.innerHTML = "Read less";
-    moreText.style.display = "inline";
-  }
-}
-
-function clickReadMore2() {
-  var dots = document.getElementById("dots2")!;
-  var moreText = document.getElementById("moreIng")!;
-  var btnText = document.getElementById("readMore2")!;
-
-  if (dots.style.display === "none") {
-    dots.style.display = "inline";
-    btnText.innerHTML = "Read more";
-    moreText.style.display = "none";
-  } else {
-    dots.style.display = "none";
-    btnText.innerHTML = "Read less";
-    moreText.style.display = "inline";
-  }
-}
+import React, { useState } from "react";
+import {
+  IonButton,
+  IonIcon,
+  IonInput,
+  IonPage,
+  IonTextarea,
+} from "@ionic/react";
+import styles from "./Details.module.scss";
+import { getFoodImageUri } from "../../../data/menuItems/utils";
+import foodData from "../../../data/menuItems/data.json";
+import { useParams } from "react-router-dom";
+import Layout from "../../components/Layout";
+import ReadMore from "../../components/ReadMore/ReadMore";
+import CounterButton from "../../components/FoodItemCards/CounterButton/CounterButton";
+import { ellipse } from "ionicons/icons";
 
 const Details: React.FC = () => {
+  const { itemid } = useParams<{ itemid: string }>();
+  const itemIdNumber = parseInt(itemid, 10);
+
+  const [amount, setAmount] = useState(1);
+
+  const item = foodData.find((item) => item.id === itemIdNumber);
+
+  const addFoodToCart = () => {
+    setAmount((amount) => amount + 1);
+  };
+
+  const removeFoodFromCart = () => {
+    setAmount((amount) => amount - 1);
+  };
+
   return (
-    <Layout pageTitle='Detail' backButton={true}>
-    
-      <img src="https://www.thespruceeats.com/thmb/e-lll-PpJ5F-MF4C57LYag3IAB8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/easy-vegan-black-bean-veggie-burgers-3377008-hero-05-f7c0f0d9865e48b6be52a4c76ee22438.jpg"></img>
+    <IonPage>
+      <Layout pageTitle="Detail" backButton={true}>
+        {item ? (
+          <div className={styles.foodItemContainer}>
+            <img
+              src={getFoodImageUri(item.imagePath)}
+              alt={item.name}
+              className={styles.foodItemImage}
+            />
+            <div className={styles.foodItemDetails}>
+              <div className={styles.itemNameAndPrice}>
+                <h2>{item.name}</h2>
+                <span className={styles.price}>{`$${item.price.toFixed(
+                  2
+                )}`}</span>
+              </div>
+              <div className={styles.section}>
+                <div className={styles.sectionTitle}>Description</div>
+                <div className={styles.sectionContent}>
+                  <ReadMore content={item.description} maxLength={100} />
+                </div>
+              </div>
+              <div className={styles.section}>
+                <div className={styles.sectionTitle}>Ingredients</div>
+                <div className={styles.sectionContent}>
+                  <ReadMore
+                    content={item.ingredients.join(", ")}
+                    maxLength={100}
+                  />
+                </div>
+              </div>
+              <div className={styles.section}>
+                <div className={styles.sectionTitle}>
+                  Special Instructions/Customizations
+                </div>
+                <div className={styles.specialInstructionsBox}>
+                  <IonTextarea
+                  rows={4}
+                    fill="solid"
+                    placeholder=" Enter instructions here..."
+                    style={{ "--background": "#E7E7E7" }}
+                    className={styles.myCustomTextarea}
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "20px 0px",
+              }}
+            >
+              <CounterButton
+                amount={amount}
+                showTrashIcon={false}
+                onAdd={addFoodToCart}
+                onRemove={removeFoodFromCart}
+                enableAdd={false}
+              />
+            </div>
 
-    <div>
-
-      <div className="rightcol">
-        <h2>Vegan Mushroom Bean Burger</h2>
-      </div>
-
-      <div className="leftcol">
-        <h3> $13.99 </h3>
-      </div>
-
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <h4>Description</h4>
-
-        <h5>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          <span id='dots'>...</span>
-          <span id='moreDesc'> Modi illum aperiam eaque molestias et! Voluptatibus, porro illo. Eius minima consectetur repellendus eligendi, dignissimos velit atque fuga. Ullam nobis dolore soluta.</span>
-          </h5>
-
-          <button id='readMore' onClick={()=>clickReadMore()}>Read More</button>
-
-        <h4>Ingredients</h4>
-        <h5>Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-          <span id='dots2'>...</span>
-          <span id='moreIng'> Modi illum aperiam eaque molestias et! Voluptatibus, porro illo. Eius minima consectetur repellendus eligendi, dignissimos velit atque fuga. Ullam nobis dolore soluta.,</span>
-          </h5>
-
-          <button id='readMore2' onClick={()=>clickReadMore2()}>Read More</button>
-
-        <br></br>
-        <h2>Special Instructions</h2>
-
-        <div className="input">
-            <IonInput aria-label="Email" placeholder=" Enter instructions here..."></IonInput> 
-        </div>
-
-        <div className='Button'>
-            <IonButton expand="block">Add to Order</IonButton>
-        </div>
-    
-    </div>
-    
-
-    </Layout>
+            <IonButton>
+              Add {amount} to cart&nbsp;&nbsp;
+              <IonIcon
+                icon={ellipse}
+                style={{
+                  fontSize: "0.5rem",
+                  verticalAlign: "middle",
+                  margin: "0 0.1rem",
+                }}
+              />
+              &nbsp;&nbsp;${amount * item.price}
+            </IonButton>
+          </div>
+        ) : null}
+      </Layout>
+    </IonPage>
   );
 };
 

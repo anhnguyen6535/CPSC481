@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import {
   IonCard,
-  IonCardHeader,
   IonCardTitle,
   IonCardSubtitle,
   IonIcon,
 } from "@ionic/react";
 import { bookmark } from "ionicons/icons";
-import CounterButton from "../CounterButton";
+import CounterButton from "../CounterButton/CounterButton";
 import DietIcons from "../DietIcons";
 import { useHistory } from "react-router-dom";
 import { useTypedDispatch } from "../../../hooks/reduxHooks";
@@ -41,38 +40,46 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({ item, amount }) => {
 
   const navigateToDetails = () => {
     history.push(`/details/${item.id}`);
-  }
+  };
 
   return (
     <IonCard className={styles.menuFoodCard} color="secondary">
       <div className={styles.cardContent} onClick={navigateToDetails}>
-        <img
-          src={getFoodImageUri(item.imagePath)}
-          alt={item.name}
-          className={styles.cardImage}
-        />
-        <IonCardHeader>
-          <IonCardTitle style={{ fontSize: "1.2rem" }}>
-            {item.name}
-          </IonCardTitle>
-          <IonCardSubtitle>{formatPrice(item.price)}</IonCardSubtitle>
-          <DietIcons
-            vegan={item.diets.vegan}
-            vegetarian={item.diets.vegetarian}
-            glutenFree={item.diets.glutenFree}
+        <div className={styles.imageContainer}>
+          <img
+            src={getFoodImageUri(item.imagePath)}
+            alt={item.name}
+            className={styles.cardImage}
           />
-        </IonCardHeader>
-        <IonIcon
-          icon={bookmark}
-          color={pinned ? "primary" : "medium"}
-          className={styles.bookmarkIcon}
-        />
-        <CounterButton
-          amount={amount}
-          showTrashIcon={false}
-          onAdd={addFoodToCart}
-          onRemove={removeFoodFromCart}
-        ></CounterButton>
+        </div>
+        <div className={styles.contentContainer}>
+          <div className={styles.headerContainer}>
+            <div className={styles.titleContainer}>
+              <IonCardTitle className={styles.cardTitle}>
+                {item.name}
+              </IonCardTitle>
+              <IonCardSubtitle>{formatPrice(item.price)}</IonCardSubtitle>
+              <DietIcons
+                diets={item.diets}
+              />
+            </div>
+            <IonIcon
+              icon={bookmark}
+              size="small"
+              color={pinned ? "primary" : "medium"}
+              className={styles.bookmarkIcon}
+            />
+          </div>
+          <div className={styles.counterButton}>
+            <CounterButton
+              amount={amount}
+              enableTrash={false}
+              onAdd={addFoodToCart}
+              onRemove={removeFoodFromCart}
+              enableAdd
+            />
+          </div>
+        </div>
       </div>
     </IonCard>
   );

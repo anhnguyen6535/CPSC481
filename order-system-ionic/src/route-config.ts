@@ -12,7 +12,7 @@ const routes = [
     {path: '/home', component: HomePage, exact: true},
     {path: '/order', component: Order, exact: true},
     {path: '/pay', component: Pay, exact: true},
-    {path: '/details', component: Details, exact: true},
+    {path: '/details/:itemid', component: Details, exact: true},
 ]
 
 export default routes;
