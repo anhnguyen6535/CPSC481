@@ -124,7 +124,7 @@
       "vegan": false,
       "vegetarian": false,
       "glutenFree": false,
-      "halal": false,
+      "halal": true,
       "pescatarian": false,
       "nutFree": true
     }

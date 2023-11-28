@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   IonButton,
@@ -119,6 +119,7 @@ const HomePage: React.FC = () => {
   const handleFilterPriceChange = (value: number | null) => {
     setFilterPrice(value);
   };
+
 
   return (
     <IonPage>

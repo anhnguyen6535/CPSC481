@@ -9,23 +9,30 @@ import {
 import styles from "./Details.module.scss";
 import { getFoodImageUri } from "../../../data/menuItems/utils";
 import foodData from "../../../data/menuItems/data.json";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Layout from "../../components/Layout";
 import ReadMore from "../../components/ReadMore/ReadMore";
 import CounterButton from "../../components/FoodItemCards/CounterButton/CounterButton";
 import { ellipse } from "ionicons/icons";
 import DietIcons from "../../components/FoodItemCards/DietIcons";
-import { useTypedSelector } from "../../hooks/reduxHooks";
+import { useTypedDispatch, useTypedSelector } from "../../hooks/reduxHooks";
 import { selectCartData } from "../../redux/selectors/cartSelectors";
+import { updateQuantity } from "../../redux/actions/cartActions";
 
 const Details: React.FC = () => {
+  const history = useHistory();
+  const dispatch = useTypedDispatch();
   const { itemid } = useParams<{ itemid: string }>();
   const itemIdNumber = parseInt(itemid, 10);
   const cartData = useTypedSelector(selectCartData);
 
-  const existingItem = cartData.items.find((item) => item.item.id === itemIdNumber);
+  const existingItem = cartData.items.find(
+    (item) => item.item.id === itemIdNumber
+  );
 
-  const [amount, setAmount] = useState(existingItem? existingItem.quantity : 1);
+  const [amount, setAmount] = useState(
+    existingItem ? existingItem.quantity : 1
+  );
 
   const item = foodData.find((item) => item.id === itemIdNumber);
 
@@ -37,6 +44,11 @@ const Details: React.FC = () => {
     if (amount > 1) {
       setAmount((amount) => amount - 1);
     }
+  };
+
+  const handleButtonClick = () => {
+    item && dispatch(updateQuantity(item, amount));
+    history.goBack();
   };
 
   return (
@@ -105,7 +117,7 @@ const Details: React.FC = () => {
               />
             </div>
 
-            <IonButton>
+            <IonButton onClick={handleButtonClick}>
               Add {amount} to cart&nbsp;&nbsp;
               <IonIcon
                 icon={ellipse}

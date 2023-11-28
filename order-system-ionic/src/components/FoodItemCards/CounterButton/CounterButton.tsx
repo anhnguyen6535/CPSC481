@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IonButton, IonIcon, IonText } from "@ionic/react";
 import { remove, add, trash } from "ionicons/icons";
 import styles from "./CounterButton.module.scss";
@@ -60,6 +60,11 @@ const CounterButton: React.FC<CounterButtonProps> = ({
     onAdd && onAdd();
     event.stopPropagation();
   };
+
+  useEffect(() => {
+    setCount(amount);
+    setShowAdd(enableAdd && amount === 0);
+  }, [amount]);
 
   return (
     <div className={styles.counterButtonContainer}>
