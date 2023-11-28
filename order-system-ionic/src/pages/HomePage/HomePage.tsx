@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   IonButton,
@@ -120,6 +120,7 @@ const HomePage: React.FC = () => {
     setFilterPrice(value);
   };
 
+
   return (
     <IonPage>
       <IonHeader>
@@ -161,7 +162,7 @@ const HomePage: React.FC = () => {
           </IonPopover>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen scrollY>
         <IonToolbar>
           <div className={styles.categoryBar}>
             {categories.map((category, idx) => (
@@ -179,7 +180,7 @@ const HomePage: React.FC = () => {
             ))}
           </div>
         </IonToolbar>
-        <IonContent>
+        <div style={{marginBottom: 70}}>
           {filteredFoodData.length > 0 ? (
             filteredFoodData.map((foodItem) => (
               <MenuFoodItemCard
@@ -200,7 +201,7 @@ const HomePage: React.FC = () => {
               <p>We Could Not Find Any Results That Match Your Search</p>
             </div>
           )}
-        </IonContent>
+        </div>
         {cartData.totalQuantity > 0 && (
           <IonButton onClick={() => history.push("/cart")} className={styles.viewCartButton}>
             <div className={styles.viewCartButtonInner}>

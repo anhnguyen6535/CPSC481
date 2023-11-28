@@ -2,121 +2,195 @@
   {
     "id": 1,
     "name": "Cheese Pizza",
+    "description": "A classic favorite featuring a delicious blend of melted cheese on a crispy crust. Perfect for pizza enthusiasts!",
+    "ingredients": ["Dough", "Tomato Sauce", "Cheese"],
     "imagePath": "cheese-pizza.png",
     "price": 15.0,
     "labels": ["Entree"],
     "diets": {
       "vegan": false,
       "vegetarian": true,
-      "glutenFree": false
+      "glutenFree": false,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": true
     }
   },
   {
     "id": 2,
     "name": "Caesar Salad",
+    "description": "A refreshing salad with crisp romaine lettuce, savory Caesar dressing, croutons, and Parmesan cheese. A delightful choice for a light and satisfying meal.",
+    "ingredients": [
+      "Romaine Lettuce",
+      "Caesar Dressing",
+      "Croutons",
+      "Parmesan Cheese"
+    ],
     "imagePath": "caesar-salad.jpg",
     "price": 10.0,
-    "labels": ["Entree", "Dessert"],
+    "labels": ["Entree"],
     "diets": {
       "vegan": false,
       "vegetarian": true,
-      "glutenFree": false
+      "glutenFree": false,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": true
     }
   },
   {
     "id": 3,
     "name": "Chocolate Cake",
+    "description": "Indulge your sweet tooth with our decadent chocolate cake. Moist layers of chocolate goodness that will satisfy any dessert craving.",
+    "ingredients": ["Flour", "Sugar", "Cocoa Powder", "Eggs", "Butter"],
     "imagePath": "chocolate-cake.jpg",
     "price": 12.0,
     "labels": ["Dessert"],
     "diets": {
       "vegan": false,
       "vegetarian": true,
-      "glutenFree": false
+      "glutenFree": false,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": false
     }
   },
   {
     "id": 4,
     "name": "Iced Coffee",
+    "description": "A cool and refreshing beverage to perk up your day. Made with the finest coffee beans and served over ice. Vegan, vegetarian, and gluten-free for all to enjoy.",
+    "ingredients": ["Coffee", "Ice", "Sweetener (Optional)"],
     "imagePath": "iced-coffee.jpg",
     "price": 4.0,
     "labels": ["Beverage"],
     "diets": {
       "vegan": true,
       "vegetarian": true,
-      "glutenFree": true
+      "glutenFree": true,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": true
     }
   },
   {
     "id": 5,
     "name": "Caprese Wrap",
+    "description": "A delicious wrap filled with fresh tomatoes, mozzarella cheese, basil, and balsamic glaze. A flavorful choice for a wholesome lunch.",
+    "ingredients": [
+      "Tomatoes",
+      "Mozzarella Cheese",
+      "Basil",
+      "Balsamic Glaze",
+      "Wrap"
+    ],
     "imagePath": "caprese-wrap.jpeg",
     "price": 9.0,
     "labels": ["Entree", "Lunch"],
     "diets": {
       "vegan": false,
       "vegetarian": true,
-      "glutenFree": false
+      "glutenFree": false,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": true
     }
   },
   {
     "id": 6,
     "name": "Green Tea",
+    "description": "Rejuvenate with our soothing green tea. A delightful blend that's not only refreshing but also vegan, vegetarian, and gluten-free.",
+    "ingredients": ["Green Tea Leaves", "Hot Water"],
     "imagePath": "green-tea.jpg",
     "price": 3.5,
     "labels": ["Beverage"],
     "diets": {
       "vegan": true,
       "vegetarian": true,
-      "glutenFree": true
+      "glutenFree": true,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": true
     }
   },
   {
     "id": 7,
     "name": "Pepperoni Pizza",
+    "description": "A classic pizza with the bold flavor of pepperoni. Satisfy your pizza cravings with this savory choice.",
+    "ingredients": ["Dough", "Tomato Sauce", "Cheese", "Pepperoni"],
     "imagePath": "pepperoni-pizza.jpg",
     "price": 16.0,
     "labels": ["Entree"],
     "diets": {
       "vegan": false,
       "vegetarian": false,
-      "glutenFree": false
+      "glutenFree": false,
+      "halal": true,
+      "pescatarian": false,
+      "nutFree": true
     }
   },
   {
     "id": 8,
     "name": "Mango Smoothie",
+    "description": "Tropical delight in a glass! Our mango smoothie is a refreshing blend of ripe mangoes, perfect as a beverage or snack.",
+    "ingredients": ["Mango", "Yogurt", "Ice", "Sweetener (Optional)"],
     "imagePath": "mango-smoothie.jpg",
     "price": 6.0,
     "labels": ["Beverage", "Snack"],
     "diets": {
       "vegan": true,
       "vegetarian": true,
-      "glutenFree": true
+      "glutenFree": true,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": true
     }
   },
   {
     "id": 9,
     "name": "Tiramisu",
+    "description": "Indulge in the classic Italian dessert, Tiramisu. Layers of coffee-soaked ladyfingers and mascarpone cheese, topped with cocoa powder.",
+    "ingredients": [
+      "Ladyfingers",
+      "Coffee",
+      "Mascarpone Cheese",
+      "Cocoa Powder"
+    ],
     "imagePath": "tiramisu.jpg",
     "price": 14.0,
     "labels": ["Dessert"],
     "diets": {
       "vegan": false,
       "vegetarian": true,
-      "glutenFree": false
+      "glutenFree": false,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": true
     }
   },
   {
     "id": 10,
     "name": "Vegetarian Pizza",
+    "description": "A delightful vegetarian option with a variety of fresh vegetables on a crispy crust. Perfect for those who love a veggie-packed pizza.",
+    "ingredients": [
+      "Dough",
+      "Tomato Sauce",
+      "Cheese",
+      "Bell Peppers",
+      "Mushrooms",
+      "Onions",
+      "Olives"
+    ],
     "imagePath": "vegetarian-pizza.jpg",
     "price": 15.0,
     "labels": ["Entree"],
     "diets": {
       "vegan": false,
       "vegetarian": true,
-      "glutenFree": false
+      "glutenFree": false,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": true
     }
   }
 ]

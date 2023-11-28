@@ -1,0 +1,43 @@
+.foodItemContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.foodItemImage {
+  width: 100vw;
+  max-height: 50vh;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.foodItemDetails {
+  margin-top: 10px;
+}
+
+.itemNameAndPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-weight: bold;
+  color: #666666;
+}
+
+.section {
+  margin-top: 16px;
+}
+
+.sectionTitle {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.sectionContent {
+  margin-top: 8px;
+}
+
+.specialInstructionsBox {
+  margin-top: 10px;
+}

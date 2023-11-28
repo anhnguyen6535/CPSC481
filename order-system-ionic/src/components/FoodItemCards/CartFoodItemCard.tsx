@@ -1,5 +1,5 @@
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle } from "@ionic/react";
-import CounterButton from "./CounterButton";
+import CounterButton from "./CounterButton/CounterButton";
 import DietIcons from "./DietIcons";
 
 
@@ -26,7 +26,7 @@ const CartFoodItemCard: React.FC<CartFoodCardProps> = ({ name, imagePath, price,
                     <IonCardTitle>{name}</IonCardTitle>
                     <IonCardSubtitle>{formatPrice(price)}</IonCardSubtitle>
                 </IonCardHeader>
-                <CounterButton amount={amount} enableTrash={true}></CounterButton>
+                <CounterButton amount={amount} enableTrash={true} enableAdd={false}></CounterButton>
             </div>
         </IonCard>
     );

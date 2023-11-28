@@ -1,0 +1,32 @@
+.counterButtonContainer {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 8px;
+  visibility: hidden;
+}
+
+.button {
+  text-transform: none;
+  visibility: visible;
+}
+
+.counterDisplay {
+  padding-left: 8px;
+}
+
+.count {
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin: 0.5rem;
+}
+
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}

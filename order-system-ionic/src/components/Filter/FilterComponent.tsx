@@ -82,7 +82,7 @@ const FilterComponent: React.FC<FilterProps> = ({
           <IonTitle>Filter</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent className="ion-padding">
         <IonList>
           {localFilters.map((filter, index) => (
             <IonItem lines="none" key={filter.name}>
@@ -96,23 +96,21 @@ const FilterComponent: React.FC<FilterProps> = ({
               </IonCheckbox>
             </IonItem>
           ))}
-          <IonText>
-            <h2>Price</h2>
-          </IonText>
+          {/* <IonText style={{marginBottom: -100}}> */}
+          <h4 style={{ marginBottom: -30 }}>Price</h4>
+          {/* </IonText> */}
 
-          <IonItem lines="none">
-            <IonRange
-              min={0}
-              max={100}
-              value={localPrice ? localPrice : 0}
-              pin={true}
-              onIonChange={(e: CustomEvent) => setLocalPrice(e.detail.value)}
-            >
-              <IonIcon slot="start" size="small" icon={nutritionOutline} />
-              <IonText slot="end">${price}</IonText>
-            </IonRange>
-          </IonItem>
-          {price && (
+          <IonRange
+            min={0}
+            max={100}
+            value={localPrice ? localPrice : 0}
+            pin={true}
+            onIonChange={(e: CustomEvent) => setLocalPrice(e.detail.value)}
+          >
+            <IonIcon slot="start" size="small" icon={nutritionOutline} />
+            <IonText slot="end">${price}</IonText>
+          </IonRange>
+          {localPrice && localPrice != 0 && (
             <IonItem lines="none" style={{ marginTop: "-10px" }}>
               <IonText style={{ fontSize: "small" }}>
                 Maximum: ${localPrice}

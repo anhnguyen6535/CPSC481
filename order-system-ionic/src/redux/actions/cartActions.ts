@@ -1,5 +1,10 @@
-import { CartActionTypes } from '../actionTypes';
-import { MenuItem } from '../../types';
+import { CartActionTypes } from "../actionTypes";
+import { MenuItem } from "../../types";
+
+interface UpdateQuantityPayload {
+  item: MenuItem;
+  quantity: number;
+}
 
 export const addToCart = (item: MenuItem) => ({
   type: CartActionTypes.ADD_TO_CART,
@@ -14,4 +19,9 @@ export const removeFromCart = (itemId: number) => ({
 export const deleteFromCart = (itemId: number) => ({
   type: CartActionTypes.DELETE_FROM_CART,
   payload: itemId,
+});
+
+export const updateQuantity = (item: MenuItem, quantity: number) => ({
+  type: CartActionTypes.UPDATE_QUANTITY,
+  payload: { item, quantity } as UpdateQuantityPayload,
 });
