@@ -179,7 +179,7 @@ const HomePage: React.FC = () => {
             ))}
           </div>
         </IonToolbar>
-        <div>
+        <div style={{marginBottom: 70}}>
           {filteredFoodData.length > 0 ? (
             filteredFoodData.map((foodItem) => (
               <MenuFoodItemCard

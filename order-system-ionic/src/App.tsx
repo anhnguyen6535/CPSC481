@@ -56,7 +56,7 @@ const App: React.FC = () => (
                 <IonIcon aria-hidden="true" icon={home} />
                 <IonLabel>Home</IonLabel>
               </IonTabButton>
-              <IonTabButton tab="order" href="/order">
+              <IonTabButton tab="order" href="/cart">
                 <IonIcon aria-hidden="true" icon={cartOutline} />
                 <IonLabel>Cart</IonLabel>
               </IonTabButton>

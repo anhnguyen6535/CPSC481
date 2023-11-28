@@ -28,7 +28,7 @@
     ],
     "imagePath": "caesar-salad.jpg",
     "price": 10.0,
-    "labels": ["Entree", "Dessert"],
+    "labels": ["Entree"],
     "diets": {
       "vegan": false,
       "vegetarian": true,

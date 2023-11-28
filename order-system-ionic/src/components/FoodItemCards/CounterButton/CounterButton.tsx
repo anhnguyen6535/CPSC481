@@ -19,18 +19,14 @@ const CounterButton: React.FC<CounterButtonProps> = ({
   onRemove,
   enableAdd,
 }) => {
-  const [values, setValues] = useState({
-    count: amount,
-    showTrash: amount !== 0 && enableTrash,
-    showAdd: enableAdd && amount === 0,
-  });
+  const [count, setCount] = useState(amount);
+  const [showTrash, setShowTrash] = useState(amount !== 0 && enableTrash);
+  const [showAdd, setShowAdd] = useState(enableAdd && amount === 0);
 
   const resetAmount = () => {
-    setValues({
-      count: 0,
-      showAdd: enableAdd,
-      showTrash: false && enableTrash,
-    });
+    setCount(0);
+    setShowAdd(enableAdd);
+    setShowTrash(false && enableTrash);
   };
 
   const decrement = (
@@ -38,18 +34,14 @@ const CounterButton: React.FC<CounterButtonProps> = ({
       | React.MouseEvent<HTMLIonIconElement, MouseEvent>
       | React.MouseEvent<HTMLElement, MouseEvent>
   ) => {
-    if (values["count"] > 1) {
-      setValues({
-        count: values["count"] - 1,
-        showAdd: values["showAdd"],
-        showTrash: values["showTrash"] && enableTrash,
-      });
-    } else if (values["count"] === 1) {
-      setValues({
-        count: 0,
-        showAdd: enableAdd,
-        showTrash: false && enableTrash,
-      });
+    if (count > 1) {
+      setCount(count - 1);
+      setShowAdd(showAdd);
+      setShowTrash(showTrash && enableTrash);
+    } else if (count === 1) {
+      setCount(enableAdd ? 0 : 1);
+      setShowAdd(enableAdd);
+      setShowTrash(false && enableTrash);
     }
 
     onRemove && onRemove();
@@ -61,11 +53,9 @@ const CounterButton: React.FC<CounterButtonProps> = ({
       | React.MouseEvent<HTMLIonIconElement, MouseEvent>
       | React.MouseEvent<HTMLElement, MouseEvent>
   ) => {
-    setValues({
-      count: values["count"] + 1,
-      showAdd: false,
-      showTrash: true && enableTrash,
-    });
+    setCount(count + 1);
+    setShowAdd(false);
+    setShowTrash(true && enableTrash);
 
     onAdd && onAdd();
     event.stopPropagation();
@@ -77,7 +67,7 @@ const CounterButton: React.FC<CounterButtonProps> = ({
         icon={trash}
         onClick={() => resetAmount()}
         className={`${styles.icon} ${
-          values["showTrash"] ? styles.visible : styles.hidden
+          showTrash ? styles.visible : styles.hidden
         }`}
       />
       <IonButton
@@ -87,14 +77,14 @@ const CounterButton: React.FC<CounterButtonProps> = ({
         size="small"
         onClick={(event) => increment(event)}
         className={`${styles.button} ${
-          values["showAdd"] ? styles.visible : styles.hidden
+          showAdd ? styles.visible : styles.hidden
         }`}
       >
         Add
       </IonButton>
       <div
         className={`${styles.counterDisplay} ${
-          values["showAdd"] ? styles.hidden : styles.visible
+          showAdd ? styles.hidden : styles.visible
         }`}
       >
         <div
@@ -105,13 +95,20 @@ const CounterButton: React.FC<CounterButtonProps> = ({
           }}
         >
           <IonIcon
-            color="dark"
+            color={(!enableAdd && count > 1) || enableAdd ? "dark" : "medium"}
             icon={remove}
             onClick={(event) => decrement(event)}
-            style={{ marginRight: "0.5rem" }}
+            style={{
+              marginRight: "0.5rem",
+              opacity: (!enableAdd && count > 1) || enableAdd ? 1 : 0.5,
+              cursor:
+                (!enableAdd && count > 1) || enableAdd
+                  ? "pointer"
+                  : "not-allowed",
+            }}
           />
           <IonText color="primary" className={styles.count}>
-            {values["count"]}
+            {count}
           </IonText>
           <IonIcon
             color="dark"
