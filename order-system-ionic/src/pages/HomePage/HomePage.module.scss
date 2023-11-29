@@ -25,12 +25,24 @@
 }
 
 .noSearchResults {
-  text-align: center;
-  height: 100%;
+  height: calc(100vh - 300px);
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
+
+.noSearchResults img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.clearButton {
+  margin-top: 30px;
+}
+
 
 .viewCartButton {
   position: fixed;

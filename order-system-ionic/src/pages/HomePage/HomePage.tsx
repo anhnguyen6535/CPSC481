@@ -10,8 +10,6 @@ import {
   IonIcon,
   IonChip,
   IonBadge,
-  IonAlert,
-  IonModal,
   IonPopover,
 } from "@ionic/react";
 import { MenuFoodItemCard } from "../../components/FoodItemCards";
@@ -26,7 +24,14 @@ import { selectCartData } from "../../redux/selectors/cartSelectors";
 import FilterComponent from "../../components/Filter/FilterComponent";
 import restaurantImage from "../../../assets/restaurant.png";
 
-const categories = ["All", "Entrees", "Desserts", "Main Courses", "Beverages", "Alcoholic Beverages"];
+const categories = [
+  "All",
+  "Entrees",
+  "Desserts",
+  "Main Courses",
+  "Beverages",
+  "Alcoholic Beverages",
+];
 
 const filterCategories = [
   {
@@ -61,6 +66,12 @@ const filterCategories = [
   },
 ];
 
+enum LastNoResultsAction {
+  SEARCH = "search",
+  CATEGORY = "category",
+  FILTERS = "filters",
+}
+
 const HomePage: React.FC = () => {
   const cartData = useTypedSelector(selectCartData);
   const history = useHistory();
@@ -69,6 +80,9 @@ const HomePage: React.FC = () => {
 
   const [filters, setFilters] = useState(filterCategories);
   const [filterPrice, setFilterPrice] = useState<number | null>(null);
+
+  const [lastNoResultsAction, setLastNoResultsAction] =
+    useState<LastNoResultsAction | null>(null);
 
   const getFoodItems = () => {
     const newFoodData = foodData.map((foodItem) => {
@@ -103,8 +117,7 @@ const HomePage: React.FC = () => {
           !filter.checked ||
           // @ts-ignore
           foodItem.item.diets[filter.name]
-      ) 
-      &&
+      ) &&
       (filterPrice == null || foodItem.item.price <= filterPrice)
   );
 
@@ -114,12 +127,35 @@ const HomePage: React.FC = () => {
     if (target) query = target.value!.toLowerCase();
 
     setSearchText(query);
+    setLastNoResultsAction(LastNoResultsAction.SEARCH);
   };
 
   const handleFilterPriceChange = (value: number | null) => {
     setFilterPrice(value);
+    setLastNoResultsAction(LastNoResultsAction.FILTERS);
   };
 
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+    setLastNoResultsAction(LastNoResultsAction.CATEGORY);
+  };
+
+  const handleClearSearch = () => {
+    setSearchText("");
+  };
+
+  const handleClearCategory = () => {
+    setSelectedCategory("All");
+  };
+
+  const handleClearFilters = () => {
+    setFilters(filterCategories);
+    setFilterPrice(null);
+  };
+
+  useEffect(() => {
+    setLastNoResultsAction(LastNoResultsAction.FILTERS);
+  }, [filters]);
 
   return (
     <IonPage>
@@ -167,7 +203,7 @@ const HomePage: React.FC = () => {
           <div className={styles.categoryBar}>
             {categories.map((category, idx) => (
               <IonChip
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => handleCategoryClick(category)}
                 className={
                   category === selectedCategory
                     ? styles.categoryItemSelected
@@ -180,7 +216,7 @@ const HomePage: React.FC = () => {
             ))}
           </div>
         </IonToolbar>
-        <div style={{marginBottom: 70}}>
+        <div style={{ marginBottom: 70 }}>
           {filteredFoodData.length > 0 ? (
             filteredFoodData.map((foodItem) => (
               <MenuFoodItemCard
@@ -199,11 +235,38 @@ const HomePage: React.FC = () => {
                 />
               </div>
               <p>We Could Not Find Any Results That Match Your Search</p>
+              {lastNoResultsAction === LastNoResultsAction.SEARCH && (
+                <IonButton
+                  onClick={handleClearSearch}
+                  className={styles.clearButton}
+                >
+                  Clear Search
+                </IonButton>
+              )}
+              {lastNoResultsAction === LastNoResultsAction.CATEGORY && (
+                <IonButton
+                  onClick={handleClearCategory}
+                  className={styles.clearButton}
+                >
+                  Clear Category
+                </IonButton>
+              )}
+              {lastNoResultsAction === LastNoResultsAction.FILTERS && (
+                <IonButton
+                  onClick={handleClearFilters}
+                  className={styles.clearButton}
+                >
+                  Clear Filters
+                </IonButton>
+              )}
             </div>
           )}
         </div>
         {cartData.totalQuantity > 0 && (
-          <IonButton onClick={() => history.push("/cart")} className={styles.viewCartButton}>
+          <IonButton
+            onClick={() => history.push("/cart")}
+            className={styles.viewCartButton}
+          >
             <div className={styles.viewCartButtonInner}>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <IonBadge color="light" className={styles.cartCount}>
