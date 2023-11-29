@@ -16,7 +16,7 @@ export interface MenuItem {
   price: number;
   labels: string[];
   diets: Diet;
-  isAlcoholic?: boolean;
+  alcoholic: boolean;
 }
 
 export interface CartItem {

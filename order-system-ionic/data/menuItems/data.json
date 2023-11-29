@@ -14,7 +14,8 @@
       "halal": false,
       "pescatarian": false,
       "nutFree": true
-    }
+    },
+    "alcoholic": false
   },
   {
     "id": 2,
@@ -36,7 +37,8 @@
       "halal": false,
       "pescatarian": false,
       "nutFree": true
-    }
+    },
+    "alcoholic": false
   },
   {
     "id": 3,
@@ -53,7 +55,8 @@
       "halal": false,
       "pescatarian": false,
       "nutFree": false
-    }
+    },
+    "alcoholic": false
   },
   {
     "id": 4,
@@ -70,7 +73,8 @@
       "halal": false,
       "pescatarian": false,
       "nutFree": true
-    }
+    },
+    "alcoholic": false
   },
   {
     "id": 5,
@@ -93,7 +97,8 @@
       "halal": false,
       "pescatarian": false,
       "nutFree": true
-    }
+    },
+    "alcoholic": false
   },
   {
     "id": 6,
@@ -110,7 +115,8 @@
       "halal": false,
       "pescatarian": false,
       "nutFree": true
-    }
+    },
+    "alcoholic": false
   },
   {
     "id": 7,
@@ -127,7 +133,8 @@
       "halal": true,
       "pescatarian": false,
       "nutFree": true
-    }
+    },
+    "alcoholic": false
   },
   {
     "id": 8,
@@ -144,7 +151,8 @@
       "halal": false,
       "pescatarian": false,
       "nutFree": true
-    }
+    },
+    "alcoholic": false
   },
   {
     "id": 9,
@@ -166,7 +174,8 @@
       "halal": false,
       "pescatarian": false,
       "nutFree": true
-    }
+    },
+    "alcoholic": false
   },
   {
     "id": 10,
@@ -191,6 +200,79 @@
       "halal": false,
       "pescatarian": false,
       "nutFree": true
-    }
+    },
+    "alcoholic": false
+  },
+  {
+    "id": 11,
+    "name": "Margarita",
+    "description": "A classic cocktail featuring tequila, triple sec, and lime juice. Served in a salt-rimmed glass for the perfect balance of flavors.",
+    "ingredients": ["Tequila", "Triple Sec", "Lime Juice", "Salt"],
+    "imagePath": "margarita.jpg",
+    "price": 10.0,
+    "labels": ["Alcoholic Beverage"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": false,
+      "glutenFree": true,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": true
+    },
+    "alcoholic": true
+  },
+  {
+    "id": 12,
+    "name": "Whiskey Sour",
+    "description": "A classic whiskey cocktail with a perfect blend of bourbon, lemon juice, and simple syrup. Garnished with a cherry for added delight.",
+    "ingredients": ["Bourbon", "Lemon Juice", "Simple Syrup", "Cherry"],
+    "imagePath": "whiskey-sour.jpg",
+    "price": 12.0,
+    "labels": ["Alcoholic Beverage"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": false,
+      "glutenFree": true,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": true
+    },
+    "alcoholic": true
+  },
+  {
+    "id": 13,
+    "name": "Grilled Salmon",
+    "description": "A succulent grilled salmon fillet seasoned to perfection. Served with a side of roasted vegetables for a wholesome main course.",
+    "ingredients": ["Salmon Fillet", "Seasoning", "Roasted Vegetables"],
+    "imagePath": "grilled-salmon.jpg",
+    "price": 18.0,
+    "labels": ["Main Course", "Seafood"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": false,
+      "glutenFree": true,
+      "halal": false,
+      "pescatarian": true,
+      "nutFree": true
+    },
+    "alcoholic": false
+  },
+  {
+    "id": 14,
+    "name": "Chicken Alfredo Pasta",
+    "description": "Creamy Alfredo sauce with tender chicken served over perfectly cooked pasta. A classic and satisfying main course.",
+    "ingredients": ["Chicken", "Alfredo Sauce", "Pasta"],
+    "imagePath": "chicken-alfredo-pasta.jpg",
+    "price": 16.0,
+    "labels": ["Main Course", "Pasta"],
+    "diets": {
+      "vegan": false,
+      "vegetarian": false,
+      "glutenFree": false,
+      "halal": false,
+      "pescatarian": false,
+      "nutFree": true
+    },
+    "alcoholic": false
   }
 ]
