@@ -1,6 +1,5 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton} from '@ionic/react';
 import './Welcome.css';
-import { arrowBack, arrowBackCircle, backspace } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
 
 const Welcome: React.FC = () => {
@@ -9,7 +8,7 @@ const Welcome: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Welcome</IonTitle>
+          <IonTitle>Flavour of Calgary</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

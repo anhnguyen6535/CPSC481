@@ -35,6 +35,7 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import NavBar from "./components/NavBar";
 import routes from "./route-config";
+import QRScanRedirect from "./components/QRScanRedirect";
 
 setupIonicReact();
 
@@ -43,29 +44,31 @@ const App: React.FC = () => (
     <PersistGate loading={null} persistor={persistor}>
       <IonApp>
         <IonReactRouter>
-          <IonTabs>
-            <IonRouterOutlet>
-              {routes.map((route) => (
-                <Route key={route.path} path={route.path} exact={route.exact}>
-                  <route.component />
-                </Route>
-              ))}
-            </IonRouterOutlet>
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="home" href="/home">
-                <IonIcon aria-hidden="true" icon={home} />
-                <IonLabel>Home</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="order" href="/cart">
-                <IonIcon aria-hidden="true" icon={cartOutline} />
-                <IonLabel>Cart</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="pay" href="/pay">
-                <IonIcon aria-hidden="true" icon={cash} />
-                <IonLabel>Pay</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
+          <QRScanRedirect>
+            <IonTabs>
+              <IonRouterOutlet>
+                {routes.map((route) => (
+                  <Route key={route.path} path={route.path} exact={route.exact}>
+                    <route.component />
+                  </Route>
+                ))}
+              </IonRouterOutlet>
+              <IonTabBar slot="bottom">
+                <IonTabButton tab="home" href="/home">
+                  <IonIcon aria-hidden="true" icon={home} />
+                  <IonLabel>Home</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="order" href="/cart">
+                  <IonIcon aria-hidden="true" icon={cartOutline} />
+                  <IonLabel>Cart</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="pay" href="/pay">
+                  <IonIcon aria-hidden="true" icon={cash} />
+                  <IonLabel>Pay</IonLabel>
+                </IonTabButton>
+              </IonTabBar>
+            </IonTabs>
+          </QRScanRedirect>
         </IonReactRouter>
       </IonApp>
     </PersistGate>
