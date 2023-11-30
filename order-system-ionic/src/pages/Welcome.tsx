@@ -1,10 +1,10 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton} from '@ionic/react';
 import './Welcome.css';
-
-function scancode(){
-}
+import { arrowBack, arrowBackCircle, backspace } from 'ionicons/icons';
+import { useHistory } from 'react-router-dom';
 
 const Welcome: React.FC = () => {
+  const history = useHistory();
   return (
     <IonPage>
       <IonHeader>
@@ -23,18 +23,9 @@ const Welcome: React.FC = () => {
 		<br></br>
 		<br></br>
 		<br></br>
-		<br></br>
-		<br></br>
-		<br></br>
-		<br></br>
-		<br></br>
-		<br></br>
-		<br></br>
-		<br></br>
-		<br></br>
 		<h1>Welcome. Please scan the QR code on your table.</h1>
 		<div id="QRButton">
-			<IonButton onClick={()=>scancode()}>Scan QR Code</IonButton>
+			<IonButton onClick={(event)=> {history.push("/QRcode")}}>Scan QR Code</IonButton>
 		</div>
 	  </IonContent>
     </IonPage>

@@ -1,59 +1,30 @@
-.scan-QR-code {
-    background-color: transparent;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-}
+@import url('https://fonts.googleapis.com/css?family=Source Sans Pro');
 
-.scan-QR-code .visor-container-wrapper {
+.box {
     height: 812px;
     width: 375px;
 }
 
-.scan-QR-code .visor-container {
-    background-image: url(./dark-mask-shape-fill.svg);
-    background-size: 100% 100%;
+.BG-visor {
+    background-color: #00000d;
     height: 812px;
-    position: relative;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 375px;
 }
 
-.scan-QR-code .action-close {
-    height: 46px;
-    left: 14px;
-    position: absolute;
-    top: 35px;
-    width: 46px;
+.delfino {
+	color: #ff0000;
+	position: relative;
+	z-index: 500;
+    text-align: center;
+    margin: 20px;
+    font-family: 'Source Sans Pro';
 }
 
-.scan-QR-code .vector-stroke {
-    height: 45px;
-    left: 286px;
-    position: absolute;
-    top: 270px;
-    width: 45px;
-}
-
-.scan-QR-code .img {
-    height: 45px;
-    left: 44px;
-    position: absolute;
-    top: 270px;
-    width: 45px;
-}
-
-.scan-QR-code .vector-stroke-2 {
-    height: 45px;
-    left: 286px;
-    position: absolute;
-    top: 496px;
-    width: 45px;
-}
-
-.scan-QR-code .vector-stroke-3 {
-    height: 45px;
-    left: 44px;
-    position: absolute;
-    top: 496px;
-    width: 45px;
+.XButton {
+	position: relative;
+	z-index: 700;
+	--color: red;
 }

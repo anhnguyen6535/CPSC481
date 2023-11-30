@@ -1,33 +1,43 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonIcon, IonImg } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './QRcode.css';
+import { arrowBack, arrowBackCircle, backspace, close } from 'ionicons/icons';
+import { useHistory } from 'react-router-dom';
 
-const Welcome: React.FC = () => {
+const QRcode: React.FC = () => {
+  const history = useHistory();
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Welcome</IonTitle>
-        </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Welcome</IonTitle>
-          </IonToolbar>
         </IonHeader>
-		<div className="scan-QR-code">
-            <div className="visor-container-wrapper">
-                <div className="visor-container">
-                    <img className="action-close" alt="Action close" src="action-close.svg" />
-                    <img className="vector-stroke" alt="Vector stroke" src="vector-6-stroke.svg" />
-                    <img className="img" alt="Vector stroke" src="vector-9-stroke.svg" />
-                    <img className="vector-stroke-2" alt="Vector stroke" src="vector-7-stroke.svg" />
-                    <img className="vector-stroke-3" alt="Vector stroke" src="vector-8-stroke.svg" />
-                </div>
-            </div>
-        </div>
+		<h1 className="delfino">welcome to the sun-drenched tropical paradise of isle delfino!
+		<br />
+		we're so pleased to welcome you to our beautiful home!
+		<br />
+		genebenebenepoopoo
+		<br />
+		come and enjoy a natural wonderland, to which we've added the world's finnest resort facilities, a spectacular amusement park, and... succulent seafood!
+		<br />
+		all this and more await you on isle delfino!
+		<br />
+		come relax and let us refresh your body and spirit.
+		<br />
+		genebenebenepoopoo
+		</h1>
+		<div className="XButton">
+        <IonButton shape='round' size='large' fill='clear' color='light' onClick={(event)=> {history.push("/welcome")}}>
+            <IonIcon slot="icon-only" icon={close}></IonIcon>
+        </IonButton>
+		</div>  
+		<div className="box">
+			<div className="BG-visor" />
+		</div>
       </IonContent>
     </IonPage>
   );
 };
+
+export default QRcode;
