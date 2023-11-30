@@ -1,0 +1,112 @@
+.welcome-page {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.welcome-page .overlap-group-wrapper {
+    height: 812px;
+    overflow: hidden;
+    width: 375px;
+}
+
+.welcome-page .overlap-group {
+    height: 812px;
+    left: -6px;
+    position: relative;
+    width: 381px;
+}
+
+.welcome-page .iphone-x-pro {
+    height: 44px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 375px;
+}
+
+.welcome-page .right-side {
+    height: 11px;
+    left: 294px;
+    position: absolute;
+    top: 17px;
+    width: 67px;
+}
+
+.welcome-page .battery {
+    height: 11px;
+    left: 42px;
+    position: absolute;
+    top: 0;
+    width: 24px;
+}
+
+.welcome-page .wifi {
+    height: 11px;
+    left: 22px;
+    position: absolute;
+    top: 0;
+    width: 15px;
+}
+
+.welcome-page .mobile-signal {
+    height: 11px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 17px;
+}
+
+.welcome-page .left-side {
+    height: 11px;
+    left: 33px;
+    position: absolute;
+    top: 17px;
+    width: 28px;
+}
+
+.welcome-page .frame {
+    background-color: #ffffff;
+    height: 812px;
+    left: 6px;
+    position: absolute;
+    top: 0;
+    width: 375px;
+}
+
+.welcome-page .component-115 {
+    left: 62px !important;
+    position: absolute !important;
+    top: 518px !important;
+}
+
+.welcome-page .welcome-to-flavour {
+    color: #000000;
+    font-family: "Public Sans-Bold", Helvetica;
+    font-size: 20px;
+    font-weight: 700;
+    height: 90px;
+    left: 42px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    text-align: center;
+    top: 315px;
+    width: 306px;
+}
+
+.welcome-page .text-wrapper {
+    color: #000000;
+    font-family: "Public Sans-Bold", Helvetica;
+    font-size: 20px;
+    font-weight: 700;
+    height: 25px;
+    left: 97px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 43px;
+    width: 181px;
+}
