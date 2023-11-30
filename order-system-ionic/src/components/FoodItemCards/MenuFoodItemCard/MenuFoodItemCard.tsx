@@ -9,13 +9,13 @@ import { bookmark } from "ionicons/icons";
 import CounterButton from "../CounterButton/CounterButton";
 import DietIcons from "../DietIcons";
 import { useHistory } from "react-router-dom";
-import { useTypedDispatch } from "../../../hooks/reduxHooks";
+import { useTypedDispatch, useTypedSelector } from "../../../hooks/reduxHooks";
 import { addToCart, removeFromCart } from "../../../redux/actions/cartActions";
 import { getFoodImageUri } from "../../../../data/menuItems/utils";
 import styles from "./MenuFoodItemCard.module.scss";
 import { MenuItem } from "../../../types";
-import useAlcoholConfirmation from "../../../hooks/useAlcoholConfirmation";
-import AlcoholConfirmationDialog from "../../AlcoholConfirmationDialog/AlcoholConfirmationDialog";
+import { selectIsIdVerified } from "../../../redux/selectors/alcoholDialogSelectors";
+import { openAlcoholDialog } from "../../../redux/actions/alcoholDialogActions";
 
 interface MenuFoodCardProps {
   item: MenuItem;
@@ -29,13 +29,14 @@ const formatPrice = (price: number) => {
 
 const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({ item, amount }) => {
   const history = useHistory();
+  const isAlcoholIdVerified = useTypedSelector(selectIsIdVerified);
   const dispatch = useTypedDispatch();
   const [pinned, setPinned] = useState(false);
-  const { isAlcoholConfirmationOpen, openAlcoholConfirmation, closeAlcoholConfirmation } = useAlcoholConfirmation();
+
 
   const addFoodToCart = () => {
-    if(item.alcoholic && amount == 0) {
-      openAlcoholConfirmation();
+    if(item.alcoholic && amount == 0 && !isAlcoholIdVerified) {
+      dispatch(openAlcoholDialog());
     }
 
     dispatch(addToCart(item));
@@ -90,7 +91,6 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({ item, amount }) => {
         </div>
       </div>
     </IonCard>
-    <AlcoholConfirmationDialog isOpen={isAlcoholConfirmationOpen} onClose={closeAlcoholConfirmation} />
     </>
   );
 };
