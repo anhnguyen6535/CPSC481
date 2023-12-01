@@ -28,3 +28,8 @@
 	z-index: 700;
 	--color: red;
 }
+
+.tost {
+	position: relative;
+	z-index: 800;
+}

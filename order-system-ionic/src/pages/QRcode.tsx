@@ -3,9 +3,25 @@ import ExploreContainer from '../components/ExploreContainer';
 import './QRcode.css';
 import { arrowBack, arrowBackCircle, backspace, close } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
 
 const QRcode: React.FC = () => {
   const history = useHistory();
+  function test(){
+  	useEffect(() => {
+	    const video = document.querySelector('video')
+	console.log(video);
+	if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  // Use video without audio
+  const constraints = { 
+    video: true,
+    audio: false
+  }
+  // Start video stream
+   navigator.mediaDevices.getUserMedia(constraints).then(stream => video.srcObject = stream);
+	}
+	},[]);
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -31,7 +47,9 @@ const QRcode: React.FC = () => {
         <IonButton shape='round' size='large' fill='clear' color='light' onClick={(event)=> {history.push("/welcome")}}>
             <IonIcon slot="icon-only" icon={close}></IonIcon>
         </IonButton>
-		</div>  
+		</div>
+		<video id="video" className = "tost" width="100" height="100" autoPlay></video>
+		{test()}
 		<div className="box">
 			<div className="BG-visor" />
 		</div>

@@ -32,7 +32,7 @@ const Welcome: React.FC = () => {
           <div className={styles.QRButton}>
             <IonButton
               onClick={() => {
-                history.push("/home");
+                history.push("/scan");
               }}
             >
               Scan QR Code
