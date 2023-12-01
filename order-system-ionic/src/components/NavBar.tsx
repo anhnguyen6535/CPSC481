@@ -10,6 +10,10 @@ import { useState } from "react";
 import Dialog, { ButtonProps } from "./Dialog/Dialog";
 import { arrowBackCircle } from "ionicons/icons";
 import { useHistory } from "react-router-dom";
+import AlcoholConfirmationDialog from "./AlcoholConfirmationDialog/AlcoholConfirmationDialog";
+import { useTypedDispatch, useTypedSelector } from "../hooks/reduxHooks";
+import { selectIsAlcoholDialogOpen } from "../redux/selectors/alcoholDialogSelectors";
+import { closeAlcoholDialog } from "../redux/actions/alcoholDialogActions";
 
 interface NavBarProps {
   pageTitle?: string;
@@ -19,12 +23,13 @@ interface NavBarProps {
 // includes page title & call waiter button
 export default function NavBar(props: NavBarProps) {
   const history = useHistory();
+  const dispatch = useTypedDispatch();
+  const isAlcoholDialogOpen = useTypedSelector(selectIsAlcoholDialogOpen);
   const [showWaiterCallAlert, setShowWaiterCallAlert] = useState(false);
   const [showConfirmationAlert, setShowConfirmationAlert] = useState(false);
 
   const handleBackButtonClick = () => {
     history.goBack(); // go back
-    // history.push("/home"); // go to homepage
   };
 
   const callWaiterDialogButtons: ButtonProps[] = [
@@ -97,6 +102,8 @@ export default function NavBar(props: NavBarProps) {
         isOpen={showConfirmationAlert}
         onDismiss={() => setShowConfirmationAlert(false)}
       />
+
+      <AlcoholConfirmationDialog isOpen={isAlcoholDialogOpen} onClose={() => dispatch(closeAlcoholDialog())} />
     </div>
   );
 }

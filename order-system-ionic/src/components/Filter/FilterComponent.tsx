@@ -110,7 +110,7 @@ const FilterComponent: React.FC<FilterProps> = ({
             <IonIcon slot="start" size="small" icon={nutritionOutline} />
             <IonText slot="end">${price}</IonText>
           </IonRange>
-          {localPrice && localPrice != 0 && (
+          {localPrice != null && (
             <IonItem lines="none" style={{ marginTop: "-10px" }}>
               <IonText style={{ fontSize: "small" }}>
                 Maximum: ${localPrice}
