@@ -8,8 +8,8 @@ export default function TextCard(props: TextCardProps) {
 
   return (
     <IonItem lines={lines as 'none' | 'full' | 'inset' | undefined} className={css.ionItem}>
-      <IonLabel>{props.label}</IonLabel>
-      <IonNote slot='end' style={{ color: color }}>
+      <IonLabel style={{fontWeight: props.fontWeight, fontSize: "1rem"}}>{props.label}</IonLabel>
+      <IonNote slot='end' style={{ color: color, fontWeight: props.fontWeight, fontSize: "1rem" }}>
         ${props.note}
       </IonNote>
     </IonItem>
@@ -21,4 +21,5 @@ interface TextCardProps {
   label: string;
   note: string;
   noteColor?: string;
+  fontWeight?: string;
 }

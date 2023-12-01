@@ -67,3 +67,30 @@
   margin-bottom: 10px;
   margin-right: 10px;
 }
+
+.iconContainer {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.iconContainer:hover > .bookmarkIcon {
+  animation: iconScale 0.4s ease;
+}
+
+@keyframes iconScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
