@@ -236,7 +236,7 @@ const HomePage: React.FC = () => {
                   style={{ maxWidth: "100%", height: "auto" }}
                 />
               </div>
-              <p>We Could Not Find Any Results That Match Your Search</p>
+              <p>Sorry! We could not find any results that match your search.</p>
               {lastNoResultsAction === LastNoResultsAction.SEARCH && (
                 <IonButton
                   onClick={handleClearSearch}
