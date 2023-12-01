@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Source Sans Pro');
+
+.box {
+    height: 812px;
+    width: 375px;
+}
+
+.BG-visor {
+    background-color: #00000d;
+    height: 812px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 375px;
+}
+
+.delfino {
+	color: #ff0000;
+	position: relative;
+	z-index: 500;
+    text-align: center;
+    margin: 20px;
+    font-family: 'Source Sans Pro';
+}
+
+.XButton {
+	position: relative;
+	z-index: 700;
+	--color: red;
+}

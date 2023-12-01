@@ -2,7 +2,7 @@ import Details from "./pages/Details/Details";
 import HomePage from "./pages/HomePage/HomePage";
 import Order from "./pages/Order";
 import Pay from "./pages/Pay";
-import Welcome from "./pages/Welcome";
+import Welcome from "./pages/Welcome/Welcome";
 
 // add new routes here 
 // routes will be mapped automatically in App.tsx
