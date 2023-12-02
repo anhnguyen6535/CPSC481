@@ -39,7 +39,7 @@ const Pay: React.FC = () => {
   }
 
   return (
-    <Layout pageTitle='Your Order' backButton={true}>
+    <Layout pageTitle='Payment' backButton={true}>
       {cartData.items.map((foodItem) => (
         <OrderFoodItemCard
           key={foodItem.item.id}
