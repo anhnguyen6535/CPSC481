@@ -21,7 +21,7 @@ export const cartReducer: Reducer<CartState> = (
   switch (action.type) {
     case CartActionTypes.ADD_TO_CART: {
       let existingItemIndex = state.items.findIndex(
-        (cartItem) => cartItem.item.id === action.payload.id
+        (cartItem) => cartItem.item.id === action.payload.item.id
       );
 
       var newItems = [...state.items];
