@@ -37,6 +37,7 @@ const Cart: React.FC = () => {
         <>
           {cartData.items.map((foodItem) => (
             <MenuFoodItemCard
+              key={foodItem.item.id}
               item={foodItem.item}
               amount={foodItem.quantity}
               type={CardTypeEnum.CART}
