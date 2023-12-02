@@ -1,7 +1,10 @@
+import Layout from "../../components/Layout"
+
 const SplitBill = () => { 
     return(
-        <>
-        </>
+        <Layout pageTitle="Split Bill" >
+            
+        </Layout>
     )
 }
 
