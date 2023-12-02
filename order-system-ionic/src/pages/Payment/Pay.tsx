@@ -6,35 +6,32 @@ import { getFoodImageUri } from "../../../data/menuItems/utils";
 import Layout from '../../components/Layout';
 import { useEffect, useState } from 'react';
 import TextCard from '../../components/FoodItemCards/TextCard';
+import DisplayCost from '../../components/PriceCards/DisplayCost';
+import { useTypedSelector } from "../../hooks/reduxHooks";
+import { selectCartData } from "../../redux/selectors/cartSelectors";
 
 const Pay: React.FC = () => {
   const [subtotal, setSubtotal] = useState(0.0);
-  // fake data
-  const taxRate = 0.05;
+  const cartData = useTypedSelector(selectCartData);
 
   useEffect(() => {
-    const calculatedSubtotal = foodData.reduce((acc, foodItem) => acc + foodItem.price, 0);
+    const calculatedSubtotal = cartData.items.reduce(
+        (acc, foodItem) => acc + foodItem.item.price * foodItem.quantity,
+        0
+    );
     setSubtotal(calculatedSubtotal);
-  }, [foodData]);
+  }, [cartData]);
+
 
   return (
     <Layout pageTitle='Your Order' backButton={true}>
-      {foodData.map((foodItem) => (
+      {cartData.items.map((foodItem) => (
         <OrderFoodItemCard
-          key={foodItem.id}
-          name={foodItem.name}
-          imagePath={getFoodImageUri(foodItem.imagePath)}
-          price={foodItem.price}
-          amount={1} />
+          item={foodItem.item}
+          amount={foodItem.quantity} />
       ))}
 
-      <IonCard>
-        <IonCardContent>
-          <TextCard lines='none' label='Subtotal' note={`${subtotal}`} />
-          <TextCard label='Tax' note={`${subtotal * taxRate}`} />
-          <TextCard lines='none' label='Total' note={`${subtotal * (1 + taxRate)}`} />
-        </IonCardContent>
-      </IonCard>
+      <DisplayCost subtotal={subtotal} />
 
       <div className="ion-text-center">
         <IonButton slot='start'>One Bill</IonButton>

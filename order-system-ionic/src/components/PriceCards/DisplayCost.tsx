@@ -9,7 +9,6 @@ const DisplayCost: React.FC<DisplayCostProps> = ({subtotal}) => {
     // fake data
     const taxRate = 0.05;
 
-
     return(
         <IonCard>
             <IonCardContent>
