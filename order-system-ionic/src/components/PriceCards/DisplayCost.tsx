@@ -1,3 +1,4 @@
+import { IonCard, IonCardContent } from "@ionic/react";
 import TextCard from "../FoodItemCards/TextCard";
 
 type DisplayCostProps = {
@@ -10,26 +11,28 @@ const DisplayCost: React.FC<DisplayCostProps> = ({subtotal}) => {
 
 
     return(
-        <>
-            <TextCard
-                lines="none"
-                label="Subtotal"
-                note={`${subtotal.toFixed(2)}`}
-                noteColor="black"
-            />
-            <TextCard
-                label="Tax"
-                note={`${(subtotal * taxRate).toFixed(2)}`}
-                noteColor="black"
-            />
-            <TextCard
-                lines="none"
-                label="Total"
-                note={`${(subtotal * (1 + taxRate)).toFixed(2)}`}
-                noteColor="black"
-                fontWeight="bold"
-            />
-        </>
+        <IonCard>
+            <IonCardContent>
+                <TextCard
+                    lines="none"
+                    label="Subtotal"
+                    note={`${subtotal.toFixed(2)}`}
+                    noteColor="black"
+                />
+                <TextCard
+                    label="Tax"
+                    note={`${(subtotal * taxRate).toFixed(2)}`}
+                    noteColor="black"
+                />
+                <TextCard
+                    lines="none"
+                    label="Total"
+                    note={`${(subtotal * (1 + taxRate)).toFixed(2)}`}
+                    noteColor="black"
+                    fontWeight="bold"
+                />
+            </IonCardContent>     
+        </IonCard>
     )
 }
 
