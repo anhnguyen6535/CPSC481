@@ -22,4 +22,5 @@ export interface MenuItem {
 export interface CartItem {
   item: MenuItem;
   quantity: number;
+  specialInstructions: string;
 }

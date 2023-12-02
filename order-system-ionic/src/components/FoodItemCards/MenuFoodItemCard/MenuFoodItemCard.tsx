@@ -5,7 +5,11 @@ import CounterButton from "../CounterButton/CounterButton";
 import DietIcons from "../DietIcons";
 import { useHistory } from "react-router-dom";
 import { useTypedDispatch, useTypedSelector } from "../../../hooks/reduxHooks";
-import { addToCart, deleteFromCart, removeFromCart } from "../../../redux/actions/cartActions";
+import {
+  addToCart,
+  deleteFromCart,
+  removeFromCart,
+} from "../../../redux/actions/cartActions";
 import { getFoodImageUri } from "../../../../data/menuItems/utils";
 import styles from "./MenuFoodItemCard.module.scss";
 import { MenuItem } from "../../../types";
@@ -21,6 +25,7 @@ interface MenuFoodCardProps {
   item: MenuItem;
   amount: number;
   type: CardTypeEnum;
+  note?: string;
 }
 
 const formatPrice = (price: number) => {
@@ -32,18 +37,21 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
   item,
   amount,
   type,
+  note,
 }) => {
+  const specialInstructionMaxLength = 14;
   const history = useHistory();
   const isAlcoholIdVerified = useTypedSelector(selectIsIdVerified);
   const dispatch = useTypedDispatch();
   const [pinned, setPinned] = useState(false);
+  const [showTooltipOnClick, setShowTooltipOnClick] = useState(false);
 
   const addFoodToCart = () => {
     if (item.alcoholic && amount == 0 && !isAlcoholIdVerified) {
       dispatch(openAlcoholDialog());
     }
 
-    dispatch(addToCart(item));
+    dispatch(addToCart(item, note || ""));
   };
 
   const removeFoodFromCart = () => {
@@ -54,17 +62,31 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
     history.push(`/details/${item.id}`);
   };
 
-  const handleIconClick = (event:
-    | React.MouseEvent<HTMLIonIconElement, MouseEvent>
-    | React.MouseEvent<HTMLElement, MouseEvent>) => {
-    if(type == CardTypeEnum.CART) {
+  const handleIconClick = (
+    event:
+      | React.MouseEvent<HTMLIonIconElement, MouseEvent>
+      | React.MouseEvent<HTMLElement, MouseEvent>
+  ) => {
+    if (type == CardTypeEnum.CART) {
       dispatch(deleteFromCart(item.id));
     } else {
       // handle pinning functionality
     }
 
     event.stopPropagation();
-  }
+  };
+
+  const handleNoteClick = (
+    event:
+      | React.MouseEvent<HTMLIonIconElement, MouseEvent>
+      | React.MouseEvent<HTMLElement, MouseEvent>
+  ) => {
+    setShowTooltipOnClick(true);
+    setTimeout(() => {
+      setShowTooltipOnClick(false);
+    }, 500);
+    event.stopPropagation();
+  };
 
   return (
     <>
@@ -86,9 +108,12 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
                 <IonCardSubtitle>{formatPrice(item.price)}</IonCardSubtitle>
                 <DietIcons diets={item.diets} />
               </div>
-              <span className={styles.iconContainer} onClick={(event) => event.stopPropagation()}>
+              <span
+                className={styles.iconContainer}
+                onClick={(event) => event.stopPropagation()}
+              >
                 <IonIcon
-                  icon={type == CardTypeEnum.MENU ? bookmark : trashOutline}
+                  icon={type === CardTypeEnum.MENU ? bookmark : trashOutline}
                   size="small"
                   color={pinned ? "primary" : "medium"}
                   className={styles.bookmarkIcon}
@@ -96,6 +121,21 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
                 />
               </span>
             </div>
+            {note && (
+              <div
+                className={styles.specialInstructionsContainer}
+                onClick={(event) => handleNoteClick(event)}
+              >
+                <p className={styles.specialInstructions}>
+                  {note.length <= specialInstructionMaxLength
+                    ? note
+                    : `${note.slice(0, specialInstructionMaxLength)}...`}
+                </p>
+                {showTooltipOnClick && (
+                  <div className={styles.tooltip}>{note}</div>
+                )}
+              </div>
+            )}
             <div className={styles.counterButton}>
               <CounterButton
                 amount={amount}

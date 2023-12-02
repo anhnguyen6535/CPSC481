@@ -10,6 +10,7 @@ import { CardTypeEnum } from "../../components/FoodItemCards/MenuFoodItemCard/Me
 import styles from "./Cart.module.scss";
 import { useHistory } from "react-router";
 import cartImage from "../../../assets/cart.png";
+import Divider from "../../components/Divider/Divider";
 
 const Cart: React.FC = () => {
   const history = useHistory();
@@ -27,7 +28,7 @@ const Cart: React.FC = () => {
   }, [cartData]);
 
   const handleRedirectToHomePage = () => {
-    history.push("/home");
+    history.replace("/home");
   };
 
   return (
@@ -39,6 +40,7 @@ const Cart: React.FC = () => {
               item={foodItem.item}
               amount={foodItem.quantity}
               type={CardTypeEnum.CART}
+              note={foodItem.specialInstructions}
             />
           ))}
 
@@ -48,7 +50,7 @@ const Cart: React.FC = () => {
             </IonButton>
           </div>
 
-          <IonItemDivider />
+          <Divider />
 
           {cartData.items.map((foodItem, index) => (
             <TextCard

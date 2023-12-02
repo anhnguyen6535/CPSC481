@@ -4,11 +4,17 @@ import { MenuItem } from "../../types";
 interface UpdateQuantityPayload {
   item: MenuItem;
   quantity: number;
+  note: string;
 }
 
-export const addToCart = (item: MenuItem) => ({
+interface AddToCartPayload {
+  item: MenuItem;
+  note: string;
+}
+
+export const addToCart = (item: MenuItem, note: string) => ({
   type: CartActionTypes.ADD_TO_CART,
-  payload: item,
+  payload: { item, note } as AddToCartPayload,
 });
 
 export const removeFromCart = (itemId: number) => ({
@@ -21,7 +27,11 @@ export const deleteFromCart = (itemId: number) => ({
   payload: itemId,
 });
 
-export const updateQuantity = (item: MenuItem, quantity: number) => ({
+export const updateQuantity = (
+  item: MenuItem,
+  quantity: number,
+  note: string
+) => ({
   type: CartActionTypes.UPDATE_QUANTITY,
-  payload: { item, quantity } as UpdateQuantityPayload,
+  payload: { item, quantity, note } as UpdateQuantityPayload,
 });
