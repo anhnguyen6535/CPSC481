@@ -44,9 +44,7 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
   const isAlcoholIdVerified = useTypedSelector(selectIsIdVerified);
   const dispatch = useTypedDispatch();
   const [pinned, setPinned] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(true);
-
-  console.log("HHHHHH: ", showTooltip);
+  const [showTooltipOnClick, setShowTooltipOnClick] = useState(false);
 
   const addFoodToCart = () => {
     if (item.alcoholic && amount == 0 && !isAlcoholIdVerified) {
@@ -78,12 +76,16 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
     event.stopPropagation();
   };
 
-  const handleMouseEnter = () => {
-    setShowTooltip(true);
-  };
-
-  const handleMouseLeave = () => {
-    setShowTooltip(false);
+  const handleNoteClick = (
+    event:
+      | React.MouseEvent<HTMLIonIconElement, MouseEvent>
+      | React.MouseEvent<HTMLElement, MouseEvent>
+  ) => {
+    setShowTooltipOnClick(true);
+    setTimeout(() => {
+      setShowTooltipOnClick(false);
+    }, 500);
+    event.stopPropagation();
   };
 
   return (
@@ -122,28 +124,16 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
             {note && (
               <div
                 className={styles.specialInstructionsContainer}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                onClick={(event) => handleNoteClick(event)}
               >
-                <p
-                  className={
-                    showTooltip ? styles.hide : styles.specialInstructions
-                  }
-                >
+                <p className={styles.specialInstructions}>
                   {note.length <= specialInstructionMaxLength
                     ? note
                     : `${note.slice(0, specialInstructionMaxLength)}...`}
                 </p>
-                <p
-                  className={
-                    showTooltip ? styles.specialInstructionsFull : styles.hide
-                  }
-                >
-                  {note.length <= specialInstructionMaxLength
-                    ? note
-                    : `${note.slice(0, specialInstructionMaxLength)}...`}
-                </p>
-                {showTooltip && <div className={styles.tooltip}>{note}</div>}
+                {showTooltipOnClick && (
+                  <div className={styles.tooltip}>{note}</div>
+                )}
               </div>
             )}
             <div className={styles.counterButton}>
