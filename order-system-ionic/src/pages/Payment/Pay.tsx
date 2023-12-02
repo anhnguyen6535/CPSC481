@@ -9,9 +9,13 @@ import TextCard from '../../components/FoodItemCards/TextCard';
 import DisplayCost from '../../components/PriceCards/DisplayCost';
 import { useTypedSelector } from "../../hooks/reduxHooks";
 import { selectCartData } from "../../redux/selectors/cartSelectors";
+import { useHistory } from 'react-router-dom';
+import BillOrdered from './BillOrdered';
 
 const Pay: React.FC = () => {
+  const history = useHistory();
   const [subtotal, setSubtotal] = useState(0.0);
+  const [orderedOneBill, setOrderedOneBill] = useState(false);
   const cartData = useTypedSelector(selectCartData);
 
   useEffect(() => {
@@ -22,11 +26,23 @@ const Pay: React.FC = () => {
     setSubtotal(calculatedSubtotal);
   }, [cartData]);
 
+  const handleSplitBill = () =>{
+    history.push('/pay/split-bill')
+  }
+
+  const handleOneBill = () =>{
+    setOrderedOneBill(true);
+  }
+
+  const handleUnclicked = () =>{
+    setOrderedOneBill(!orderedOneBill);
+  }
 
   return (
     <Layout pageTitle='Your Order' backButton={true}>
       {cartData.items.map((foodItem) => (
         <OrderFoodItemCard
+          key={foodItem.item.id}
           item={foodItem.item}
           amount={foodItem.quantity} />
       ))}
@@ -34,9 +50,11 @@ const Pay: React.FC = () => {
       <DisplayCost subtotal={subtotal} />
 
       <div className="ion-text-center">
-        <IonButton slot='start'>One Bill</IonButton>
-        <IonButton slot='end'>Split Bill</IonButton>
+        <IonButton slot='start' onClick={handleOneBill}>One Bill</IonButton>
+        <IonButton slot='end' onClick={handleSplitBill}>Split Bill</IonButton>
       </div>
+
+      {orderedOneBill ? <BillOrdered handleClicked={handleUnclicked}/> :null}
 
     </Layout>
   );
