@@ -23,6 +23,7 @@ import { selectCartData } from "../../redux/selectors/cartSelectors";
 
 import FilterComponent from "../../components/Filter/FilterComponent";
 import restaurantImage from "../../../assets/restaurant.png";
+import { CardTypeEnum } from "../../components/FoodItemCards/MenuFoodItemCard/MenuFoodItemCard";
 
 const categories = [
   "All",
@@ -223,6 +224,7 @@ const HomePage: React.FC = () => {
                 key={foodItem.item.id}
                 item={foodItem.item}
                 amount={foodItem.quantity}
+                type={CardTypeEnum.MENU}
               />
             ))
           ) : (
@@ -272,7 +274,7 @@ const HomePage: React.FC = () => {
                 <IonBadge color="light" className={styles.cartCount}>
                   {cartData.totalQuantity}
                 </IonBadge>
-                {`Total: $${cartData.totalPrice}`}
+                {`Total: $${cartData.totalPrice.toFixed(2)}`}
               </div>
               <div>VIEW CART</div>
             </div>

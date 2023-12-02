@@ -21,10 +21,10 @@ import { updateQuantity } from "../../redux/actions/cartActions";
 
 const Details: React.FC = () => {
   const history = useHistory();
+  const cartData = useTypedSelector(selectCartData);
   const dispatch = useTypedDispatch();
   const { itemid } = useParams<{ itemid: string }>();
   const itemIdNumber = parseInt(itemid, 10);
-  const cartData = useTypedSelector(selectCartData);
 
   const existingItem = cartData.items.find(
     (item) => item.item.id === itemIdNumber
@@ -33,6 +33,11 @@ const Details: React.FC = () => {
   const [amount, setAmount] = useState(
     existingItem ? existingItem.quantity : 1
   );
+
+  const [specialInstructions, setSpecialInstructions] = useState(
+    existingItem? existingItem.specialInstructions : ""
+  );
+
 
   const item = foodData.find((item) => item.id === itemIdNumber);
 
@@ -47,8 +52,12 @@ const Details: React.FC = () => {
   };
 
   const handleButtonClick = () => {
-    item && dispatch(updateQuantity(item, amount));
+    item && dispatch(updateQuantity(item, amount, specialInstructions));
     history.goBack();
+  };
+
+  const handleInputChange = (event: CustomEvent) => {
+    setSpecialInstructions(event.detail.value);
   };
 
   return (
@@ -97,6 +106,8 @@ const Details: React.FC = () => {
                     placeholder=" Enter instructions here..."
                     style={{ "--background": "#E7E7E7" }}
                     className={styles.myCustomTextarea}
+                    onIonChange={handleInputChange}
+                    value={specialInstructions}
                   />
                 </div>
               </div>

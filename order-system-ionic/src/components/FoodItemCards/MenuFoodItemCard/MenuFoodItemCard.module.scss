@@ -67,3 +67,74 @@
   margin-bottom: 10px;
   margin-right: 10px;
 }
+
+.iconContainer {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.iconContainer:hover > .bookmarkIcon {
+  animation: iconScale 0.4s ease;
+}
+
+@keyframes iconScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.specialInstructionsContainer {
+  position: relative;
+  height: 2rem;
+  margin-top: -12px;
+}
+
+.specialInstructions {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 100%;
+  width: 100%;
+}
+
+.specialInstructionsFull {
+  height: 100%;
+  width: 100%;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 1;
+  width: max-content;
+  max-width: 200px;
+  max-height: 60px;
+  bottom: 40%;
+  left: 0;
+  margin-bottom: 5px;
+  color: black;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hide {
+  display: none;
+}
+
+.specialInstructions:hover {
+  color: #007b7b;
+  text-decoration: underline;
+}
