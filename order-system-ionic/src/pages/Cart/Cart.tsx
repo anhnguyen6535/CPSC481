@@ -39,6 +39,7 @@ const Cart: React.FC = () => {
               item={foodItem.item}
               amount={foodItem.quantity}
               type={CardTypeEnum.CART}
+              note={foodItem.specialInstructions}
             />
           ))}
 

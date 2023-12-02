@@ -31,10 +31,14 @@ export const cartReducer: Reducer<CartState> = (
       if (existingItemIndex !== -1) {
         newItems[existingItemIndex].quantity += 1;
       } else {
-        newItems.push({ item: action.payload, quantity: 1 });
+        newItems.push({
+          item: action.payload.item,
+          quantity: 1,
+          specialInstructions: action.payload.note,
+        });
       }
 
-      newTotalPrice += action.payload.price;
+      newTotalPrice += action.payload.item.price;
       newTotalQuantity += 1;
 
       return {
@@ -111,6 +115,7 @@ export const cartReducer: Reducer<CartState> = (
         newItems[existingItemIndex] = {
           ...newItems[existingItemIndex],
           quantity: action.payload.quantity,
+          specialInstructions: action.payload.note
         };
 
         newTotalPrice +=
@@ -122,6 +127,7 @@ export const cartReducer: Reducer<CartState> = (
         const newItem = {
           item: action.payload.item,
           quantity: action.payload.quantity,
+          specialInstructions: action.payload.note,
         };
 
         newItems.push(newItem);
