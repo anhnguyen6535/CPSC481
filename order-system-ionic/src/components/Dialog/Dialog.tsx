@@ -12,9 +12,9 @@ export interface ButtonProps {
 export interface DialogProps {
   title: string;
   content: string;
-  buttons: ButtonProps[];
+  buttons?: ButtonProps[];
   isOpen: boolean;
-  onDismiss: () => void;
+  onDismiss?: () => void;
 }
 
 const Dialog: React.FC<DialogProps> = ({ title, content, buttons, isOpen, onDismiss }) => {
@@ -23,7 +23,7 @@ const Dialog: React.FC<DialogProps> = ({ title, content, buttons, isOpen, onDism
   }
 
   const handleClickOutside = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if ((event.target as HTMLDivElement).id === 'dialogOverlay') {
+    if ((event.target as HTMLDivElement).id === 'dialogOverlay' && onDismiss) {
       onDismiss();
     }
   };
@@ -34,7 +34,7 @@ const Dialog: React.FC<DialogProps> = ({ title, content, buttons, isOpen, onDism
         <h2 className={styles.dialogTitle}>{title}</h2>
         <p className={styles.dialogContent}>{content}</p>
         <div className={styles.buttonGroup}>
-        {buttons.map((button, index) =>
+        {buttons ?buttons.map((button, index) =>
             button.primary ? (
               <IonButton key={index} onClick={button.onClick} fill="solid" color="primary"  style={{ marginBottom: '3px' }}>
                 {button.text}
@@ -44,7 +44,7 @@ const Dialog: React.FC<DialogProps> = ({ title, content, buttons, isOpen, onDism
                 {button.text}
               </IonButton>
             )
-          )}
+          ) : null}
         </div>
       </div>
     </div>
