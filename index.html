@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Flavour of Calgary</title>
-    
+
     <base href="/" />
-    
+
     <meta name="color-scheme" content="light dark" />
     <meta
       name="viewport"
@@ -13,25 +13,29 @@
     />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
-    
-    <link rel="manifest" href="/CPSC481/manifest.json" />
-    
-    <link rel="shortcut icon" type="image/png" href="/CPSC481/restaurant.png" />
-    
+
+    <link rel="manifest" href="/manifest.json" />
+
+    <link rel="shortcut icon" type="image/png" href="/restaurant.png" />
+
     <!-- add to homescreen for ios -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Ionic App" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <script type="module" crossorigin src="/CPSC481/assets/index-cbd1b13d.js"></script>
-    <link rel="stylesheet" href="/CPSC481/assets/index-0b3cc346.css">
-    <script type="module">import.meta.url;import("_").catch(()=>1);async function* g(){};if(location.protocol!="file:"){window.__vite_is_modern_browser=true}</script>
-    <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
+    <script type="module" crossorigin src="/assets/main-5ecd185c.js"></script>
+    <link rel="stylesheet" href="/assets/index-e6acb106.css">
   </head>
   <body>
     <div id="root"></div>
     
-    <script nomodule>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
-    <script nomodule crossorigin id="vite-legacy-polyfill" src="/CPSC481/assets/polyfills-legacy-48e8d4ba.js"></script>
-    <script nomodule crossorigin id="vite-legacy-entry" data-src="/CPSC481/assets/index-legacy-aa13b0d1.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
+    <script>
+      (() => {
+        const redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
   </body>
 </html>
