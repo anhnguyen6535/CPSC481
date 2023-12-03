@@ -5,15 +5,17 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import HelpDeskIcon from "../../assets/HelpIcon.svg";
+import HelpDeskIcon from "../../../assets/HelpIcon.svg";
 import { useState } from "react";
-import Dialog, { ButtonProps } from "./Dialog/Dialog";
+import Dialog, { ButtonProps } from "../Dialog/Dialog";
 import { arrowBackCircle } from "ionicons/icons";
 import { useHistory } from "react-router-dom";
-import AlcoholConfirmationDialog from "./AlcoholConfirmationDialog/AlcoholConfirmationDialog";
-import { useTypedDispatch, useTypedSelector } from "../hooks/reduxHooks";
-import { selectIsAlcoholDialogOpen } from "../redux/selectors/alcoholDialogSelectors";
-import { closeAlcoholDialog } from "../redux/actions/alcoholDialogActions";
+import AlcoholConfirmationDialog from "../AlcoholConfirmationDialog/AlcoholConfirmationDialog";
+import { useTypedDispatch, useTypedSelector } from "../../hooks/reduxHooks";
+import { selectIsAlcoholDialogOpen } from "../../redux/selectors/alcoholDialogSelectors";
+import { closeAlcoholDialog } from "../../redux/actions/alcoholDialogActions";
+import CustomButton from "../Custom/CustomeButton/CustomButton";
+import styles from "./NavBar.module.scss";
 
 interface NavBarProps {
   pageTitle?: string;
@@ -62,30 +64,32 @@ export default function NavBar(props: NavBarProps) {
 
   return (
     <div>
-      <IonToolbar>
+      <div className={styles.customToolbar}>
+        <div className={styles.backButtonTitle}>
         {props.backButton && (
-          <IonButtons slot="start">
+          <div style={{marginLeft: "-30px"}}>
             <IonButton
-              shape="round"
-              size="large"
-              fill="clear"
               onClick={handleBackButtonClick}
+              fill="clear"
             >
               <IonIcon slot="icon-only" icon={arrowBackCircle}></IonIcon>
             </IonButton>
-          </IonButtons>
+          </div>
         )}
-        <IonTitle className="ion-text-left">{props.pageTitle}</IonTitle>
-        <IonButton
-          onClick={() => setShowWaiterCallAlert(true)}
-          fill="solid"
-          color="primary"
-          slot="end"
-          style={{ textTransform: "none" }}
-        >
-          Call Waiter <IonIcon style={{ marginLeft: 10 }} icon={HelpDeskIcon} />
-        </IonButton>
-      </IonToolbar>
+        <div className={styles.toolbarTitle}>{props.pageTitle}</div>
+        </div>
+        <div className={styles.toolbarEnd}>
+          <CustomButton
+            onClick={() => setShowWaiterCallAlert(true)}
+            fill="solid"
+            color="primary"
+            style={{ textTransform: "none", padding: 12 }}
+          >
+            Call Waiter{" "}
+            <IonIcon style={{ marginLeft: 10 }} icon={HelpDeskIcon} />
+          </CustomButton>
+        </div>
+      </div>
 
       <Dialog
         title="Are you sure you want to call a waiter?"
@@ -103,7 +107,10 @@ export default function NavBar(props: NavBarProps) {
         onDismiss={() => setShowConfirmationAlert(false)}
       />
 
-      <AlcoholConfirmationDialog isOpen={isAlcoholDialogOpen} onClose={() => dispatch(closeAlcoholDialog())} />
+      <AlcoholConfirmationDialog
+        isOpen={isAlcoholDialogOpen}
+        onClose={() => dispatch(closeAlcoholDialog())}
+      />
     </div>
   );
 }
