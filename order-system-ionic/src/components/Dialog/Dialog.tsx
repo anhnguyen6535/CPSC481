@@ -31,7 +31,7 @@ const Dialog: React.FC<DialogProps> = ({
   }, [isOpen]);
 
   const dialogContent = (
-    <div style={{ padding: "20px", textAlign: "center" }}>
+    <div style={{ padding: "30px", textAlign: "center" }}>
       <h2 className={styles.dialogTitle}>{title}</h2>
       <p className={styles.dialogContent}>{content}</p>
       <div className={styles.buttonGroup}>
@@ -66,7 +66,7 @@ const Dialog: React.FC<DialogProps> = ({
         <IonPopover
           isOpen={isOpen}
           onDidDismiss={onDismiss}
-          style={{ "--min-width": "300px" }}
+          style={{ "--min-width": "300px", "--max-width": "80vw", "--backdrop-opacity": "0.4" }}
         >
           {dialogContent}
         </IonPopover>
