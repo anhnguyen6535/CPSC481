@@ -26,6 +26,7 @@ import restaurantImage from "../../../assets/restaurant.png";
 import { CardTypeEnum } from "../../components/FoodItemCards/MenuFoodItemCard/MenuFoodItemCard";
 import { isPlatform } from "@ionic/react";
 import CustomButton from "../../components/Custom/CustomeButton/CustomButton";
+import { selectPinnedItems } from "../../redux/selectors/homepageSelector";
 
 const categories = [
   "All",
@@ -77,6 +78,7 @@ enum LastNoResultsAction {
 
 const HomePage: React.FC = () => {
   const cartData = useTypedSelector(selectCartData);
+  const pinnedItems = useTypedSelector(selectPinnedItems);
   const history = useHistory();
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -88,14 +90,17 @@ const HomePage: React.FC = () => {
     useState<LastNoResultsAction | null>(null);
 
   const getFoodItems = () => {
+    const cartItemMap = new Map(
+      cartData.items.map((cartItem) => [cartItem.item.id, cartItem])
+    );
+
     const newFoodData = foodData.map((foodItem) => {
-      const currentCartItem = cartData.items.find(
-        (cartItem) => cartItem.item.id === foodItem.id
-      );
+      const currentCartItem = cartItemMap.get(foodItem.id);
 
       return {
         item: foodItem,
         quantity: currentCartItem ? currentCartItem.quantity : 0,
+        pinned: pinnedItems.includes(foodItem.id),
       };
     });
 
@@ -156,6 +161,22 @@ const HomePage: React.FC = () => {
     setFilterPrice(null);
   };
 
+  // Sorting function to move pinned items to the top
+  const sortByPinned = (a: any, b: any) => {
+    const isAPinned = a.pinned;
+    const isBPinned = b.pinned;
+
+    if (isAPinned && !isBPinned) {
+      return -1;
+    } else if (!isAPinned && isBPinned) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
+
+  const sortedFoodData = filteredFoodData.sort(sortByPinned);
+
   useEffect(() => {
     setLastNoResultsAction(LastNoResultsAction.FILTERS);
   }, [filters]);
@@ -164,7 +185,10 @@ const HomePage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <NavBar pageTitle="Flavour of Calgary" />
-        <IonToolbar style={isPlatform('ios') ? {paddingTop: 10, marginLeft: -5} : {}} color="light">
+        <IonToolbar
+          style={isPlatform("ios") ? { paddingTop: 10, marginLeft: -5 } : {}}
+          color="light"
+        >
           <IonSearchbar
             style={{
               "--background": "#efeff0",
@@ -181,11 +205,15 @@ const HomePage: React.FC = () => {
             slot="end"
             color="secondary"
             onClick={openPopover}
-            style={ isPlatform('ios') ? {padding: 12, marginRight: 5} :{padding: 12, marginRight: 10}}
+            style={
+              isPlatform("ios")
+                ? { padding: 12, marginRight: 5 }
+                : { padding: 12, marginRight: 10 }
+            }
           >
             <div className={styles.filterContainer}>
-            <IonIcon icon={options} style={{marginRight: 5}} />
-            Filter
+              <IonIcon icon={options} style={{ marginRight: 5 }} />
+              Filter
             </div>
           </CustomButton>
           <IonPopover
@@ -223,13 +251,14 @@ const HomePage: React.FC = () => {
           </div>
         </IonToolbar>
         <div style={{ marginBottom: 70 }}>
-          {filteredFoodData.length > 0 ? (
-            filteredFoodData.map((foodItem) => (
+          {sortedFoodData.length > 0 ? (
+            sortedFoodData.map((foodItem) => (
               <MenuFoodItemCard
                 key={foodItem.item.id}
                 item={foodItem.item}
                 amount={foodItem.quantity}
                 type={CardTypeEnum.MENU}
+                pinned={foodItem.pinned}
               />
             ))
           ) : (
@@ -273,7 +302,7 @@ const HomePage: React.FC = () => {
           <IonButton
             onClick={() => history.push("/cart")}
             className={styles.viewCartButton}
-            size={isPlatform('ios') ? 'small' : 'default'}
+            size={isPlatform("ios") ? "small" : "default"}
           >
             <div className={styles.viewCartButtonInner}>
               <div style={{ display: "flex", alignItems: "center" }}>

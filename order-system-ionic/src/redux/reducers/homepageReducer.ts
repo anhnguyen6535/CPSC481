@@ -16,9 +16,10 @@ export const HomepageReducer: Reducer<HomepageState> = (
 ) => {
   switch (action.type) {
     case HomePageActionTypes.PIN_CARD: {
+
       const currentPinnedItem = [...state.pinnedItems];
-      if (currentPinnedItem.indexOf(action.payload.itemId) != -1) {
-        currentPinnedItem.push(action.payload.itemId);
+      if (currentPinnedItem.indexOf(action.payload) === -1) {
+        currentPinnedItem.push(action.payload);
       }
 
       return {
@@ -31,10 +32,10 @@ export const HomepageReducer: Reducer<HomepageState> = (
       const currentPinnedItem = [...state.pinnedItems];
 
       const existingItemIndex = currentPinnedItem.indexOf(
-        action.payload.itemId
+        action.payload
       );
 
-      if (existingItemIndex != -1) {
+      if (existingItemIndex !== -1) {
         currentPinnedItem.splice(existingItemIndex, 1);
       }
 

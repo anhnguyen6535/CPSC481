@@ -6,6 +6,6 @@ export const pinItem = (itemId: number) => ({
 });
 
 export const unpinItem = (itemId: number) => ({
-  type: HomePageActionTypes.PIN_CARD,
+  type: HomePageActionTypes.UNPIN_CARD,
   payload: itemId,
 });

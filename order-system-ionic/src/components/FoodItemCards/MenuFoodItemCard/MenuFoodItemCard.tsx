@@ -27,6 +27,7 @@ interface MenuFoodCardProps {
   amount: number;
   type: CardTypeEnum;
   note?: string;
+  pinned?: boolean;
 }
 
 const formatPrice = (price: number) => {
@@ -39,12 +40,12 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
   amount,
   type,
   note,
+  pinned,
 }) => {
   const specialInstructionMaxLength = 14;
   const history = useHistory();
   const isAlcoholIdVerified = useTypedSelector(selectIsIdVerified);
   const dispatch = useTypedDispatch();
-  const [pinned, setPinned] = useState(false);
   const [showTooltipOnClick, setShowTooltipOnClick] = useState(false);
 
   const addFoodToCart = () => {
@@ -72,6 +73,7 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
       dispatch(deleteFromCart(item.id));
     } else {
       // handle pinning functionality
+
       if(pinned) {
         dispatch(unpinItem(item.id));
       } else {
