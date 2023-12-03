@@ -115,7 +115,7 @@ export const cartReducer: Reducer<CartState> = (
         newItems[existingItemIndex] = {
           ...newItems[existingItemIndex],
           quantity: action.payload.quantity,
-          specialInstructions: action.payload.note
+          specialInstructions: action.payload.note,
         };
 
         newTotalPrice +=
@@ -141,6 +141,15 @@ export const cartReducer: Reducer<CartState> = (
         items: newItems,
         totalPrice: newTotalPrice,
         totalQuantity: newTotalQuantity,
+      };
+    }
+
+    case CartActionTypes.EMPTY_CART: {
+      return {
+        ...state,
+        items: [],
+        totalPrice: 0,
+        totalQuantity: 0,
       };
     }
 

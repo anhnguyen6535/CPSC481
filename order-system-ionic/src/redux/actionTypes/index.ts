@@ -3,6 +3,7 @@ export enum CartActionTypes {
   REMOVE_FROM_CART = "REMOVE_FROM_CART",
   DELETE_FROM_CART = "DELETE_FROM_CART",
   UPDATE_QUANTITY = "UPDATE_QUANTITY",
+  EMPTY_CART = "EMPTY_CART",
 }
 
 export enum AlcoholDialogActionTypes {
@@ -13,4 +14,8 @@ export enum AlcoholDialogActionTypes {
 export enum HomePageActionTypes {
   PIN_CARD = "PIN_CARD",
   UNPIN_CARD = "UNPIN_CARD",
+}
+
+export enum OrderActionTypes {
+  PLACE_ORDER = "PLACE_ORDER",
 }

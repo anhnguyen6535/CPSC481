@@ -4,9 +4,12 @@ import styles from "./OrderPlaced.module.scss";
 import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout";
 import { checkmarkOutline } from "ionicons/icons";
+import { useTypedDispatch } from "../../hooks/reduxHooks";
+import { emptyCart } from "../../redux/actions/cartActions";
 
 const OrderPlaced: React.FC = () => {
   const history = useHistory();
+  const dispatch = useTypedDispatch();
   const [processing, setProcessing] = useState(true);
 
   useEffect(() => {
