@@ -7,12 +7,12 @@ import Pay from "./pages/Payment/Pay";
 // add new routes here 
 // routes will be mapped automatically in App.tsx
 const routes = [
-    {path: '/', component: Welcome, exact: true},
-    {path: '/welcome', component: Welcome, exact: true},
-    {path: '/home', component: HomePage, exact: true},
-    {path: '/cart', component: Cart, exact: true},
-    {path: '/pay', component: Pay, exact: true},
-    {path: '/details/:itemid', component: Details, exact: true},
+    {path: './', component: Welcome, exact: true},
+    {path: './welcome', component: Welcome, exact: true},
+    {path: './home', component: HomePage, exact: true},
+    {path: './cart', component: Cart, exact: true},
+    {path: './pay', component: Pay, exact: true},
+    {path: './details/:itemid', component: Details, exact: true},
 ]
 
 export default routes;

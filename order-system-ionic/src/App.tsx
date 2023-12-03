@@ -53,15 +53,15 @@ const App: React.FC = () => (
                 ))}
               </IonRouterOutlet>
               <IonTabBar slot="bottom">
-                <IonTabButton tab="home" href="/home">
+                <IonTabButton tab="home" href="./home">
                   <IonIcon aria-hidden="true" icon={home} />
                   <IonLabel>Home</IonLabel>
                 </IonTabButton>
-                <IonTabButton tab="order" href="/cart">
+                <IonTabButton tab="order" href="./cart">
                   <IonIcon aria-hidden="true" icon={cartOutline} />
                   <IonLabel>Cart</IonLabel>
                 </IonTabButton>
-                <IonTabButton tab="pay" href="/pay">
+                <IonTabButton tab="pay" href="./pay">
                   <IonIcon aria-hidden="true" icon={cash} />
                   <IonLabel>Pay</IonLabel>
                 </IonTabButton>
