@@ -108,7 +108,7 @@ const FilterComponent: React.FC<FilterProps> = ({
             onIonChange={(e: CustomEvent) => setLocalPrice(e.detail.value)}
           >
             <IonText slot="start">$0</IonText>
-            <IonText slot="end">$100{price}</IonText>
+            <IonText slot="end">$100</IonText>
           </IonRange>
 
           {localPrice != null && (
