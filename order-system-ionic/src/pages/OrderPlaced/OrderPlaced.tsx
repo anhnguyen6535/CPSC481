@@ -10,7 +10,7 @@ const OrderPlaced: React.FC = () => {
   const [processing, setProcessing] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setProcessing(false), 4000);
+    setTimeout(() => setProcessing(false), 3000);
   }, []);
 
   return (
