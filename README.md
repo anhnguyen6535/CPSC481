@@ -11,6 +11,3 @@
 6. Make a clean install of the rest of the packages using `npm ci` (if this doesn't work, use `npm install`)
 7. Serve the webpage using `ionic serve`
 8. Visit it by going to http://localhost:8100
-
-## Deploy
-`npm run deploy`
