@@ -31,6 +31,10 @@ const Cart: React.FC = () => {
     history.replace("/home");
   };
 
+  const handleOrderPlaced = () => {
+    history.push("/order-placed");
+  }
+
   return (
     <Layout pageTitle="Your Order" backButton={true}>
       {cartData.items.length > 0 ? (
@@ -81,7 +85,7 @@ const Cart: React.FC = () => {
           />
 
           <div className="ion-text-center">
-            <IonButton className={styles.placeOrderButton}>
+            <IonButton onClick={handleOrderPlaced} className={styles.placeOrderButton}>
               Place Order
             </IonButton>
           </div>
