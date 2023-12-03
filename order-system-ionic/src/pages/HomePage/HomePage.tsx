@@ -17,13 +17,15 @@ import { MenuFoodItemCard } from "../../components/FoodItemCards";
 import foodData from "../../../data/menuItems/data.json";
 import { options } from "ionicons/icons";
 import styles from "./HomePage.module.scss";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/Navbar/NavBar";
 import { useTypedSelector } from "../../hooks/reduxHooks";
 import { selectCartData } from "../../redux/selectors/cartSelectors";
 
 import FilterComponent from "../../components/Filter/FilterComponent";
 import restaurantImage from "../../../assets/restaurant.png";
 import { CardTypeEnum } from "../../components/FoodItemCards/MenuFoodItemCard/MenuFoodItemCard";
+import { isPlatform } from "@ionic/react";
+import CustomButton from "../../components/Custom/CustomeButton/CustomButton";
 
 const categories = [
   "All",
@@ -162,7 +164,7 @@ const HomePage: React.FC = () => {
     <IonPage>
       <IonHeader>
         <NavBar pageTitle="Flavour of Calgary" />
-        <IonToolbar color="light">
+        <IonToolbar style={isPlatform('ios') ? {paddingTop: 10, marginLeft: -5} : {}} color="light">
           <IonSearchbar
             style={{
               "--background": "#efeff0",
@@ -173,16 +175,19 @@ const HomePage: React.FC = () => {
             onIonInput={(ev) => handleSearchChange(ev)}
             onIonChange={(e) => setSearchText(e.detail.value!)}
           />
-          <IonButton
+          <CustomButton
             id="filter-trigger"
             fill="solid"
             slot="end"
             color="secondary"
             onClick={openPopover}
+            style={ isPlatform('ios') ? {padding: 12, marginRight: 5} :{padding: 12, marginRight: 10}}
           >
-            <IonIcon slot="start" icon={options} />
+            <div className={styles.filterContainer}>
+            <IonIcon icon={options} style={{marginRight: 5}} />
             Filter
-          </IonButton>
+            </div>
+          </CustomButton>
           <IonPopover
             ref={popover}
             isOpen={popoverOpen}
@@ -268,6 +273,7 @@ const HomePage: React.FC = () => {
           <IonButton
             onClick={() => history.push("/cart")}
             className={styles.viewCartButton}
+            size={isPlatform('ios') ? 'small' : 'default'}
           >
             <div className={styles.viewCartButtonInner}>
               <div style={{ display: "flex", alignItems: "center" }}>

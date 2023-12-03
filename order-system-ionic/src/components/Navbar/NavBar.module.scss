@@ -1,0 +1,33 @@
+.customToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  width: 100%;
+  height: 56px;
+  background-color: var(--ion-color-light);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.toolbarStart,
+.toolbarEnd {
+  display: flex;
+  align-items: center;
+}
+
+.toolbarTitle {
+  font-size: 20px;
+  color: #424242;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.backButtonTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
