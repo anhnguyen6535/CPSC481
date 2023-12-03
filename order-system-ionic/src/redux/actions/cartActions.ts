@@ -35,3 +35,7 @@ export const updateQuantity = (
   type: CartActionTypes.UPDATE_QUANTITY,
   payload: { item, quantity, note } as UpdateQuantityPayload,
 });
+
+export const emptyCart = () => ({
+  type: CartActionTypes.EMPTY_CART,
+});

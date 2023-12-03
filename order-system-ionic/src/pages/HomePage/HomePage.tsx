@@ -31,8 +31,8 @@ import { selectPinnedItems } from "../../redux/selectors/homepageSelector";
 const categories = [
   "All",
   "Entrees",
-  "Desserts",
   "Main Courses",
+  "Desserts",
   "Beverages",
   "Alcoholic Beverages",
 ];
