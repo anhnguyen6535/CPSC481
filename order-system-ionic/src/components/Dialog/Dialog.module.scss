@@ -6,6 +6,7 @@
 .dialogContent {
   margin-bottom: 2em;
   font-size: 16px;
+  padding: 0px 20px;
 }
 
 .buttonGroup {
@@ -21,4 +22,11 @@
   }
 }
 
-
+ion-popover {
+  div.popover-content {
+    position: absolute;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}

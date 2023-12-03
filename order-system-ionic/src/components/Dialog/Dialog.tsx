@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IonButton, IonPopover } from "@ionic/react";
 import styles from "./Dialog.module.scss";
 
@@ -23,6 +23,13 @@ const Dialog: React.FC<DialogProps> = ({
   isOpen,
   onDismiss,
 }) => {
+  const [isRendered, setRendered] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) setRendered(true);
+    else setRendered(false);
+  }, [isOpen]);
+
   const dialogContent = (
     <div style={{ padding: "20px", textAlign: "center" }}>
       <h2 className={styles.dialogTitle}>{title}</h2>
@@ -53,11 +60,18 @@ const Dialog: React.FC<DialogProps> = ({
       </div>
     </div>
   );
-
   return (
-    <IonPopover isOpen={isOpen} onDidDismiss={onDismiss} style={{padding: 300}}>
-      {dialogContent}
-    </IonPopover>
+    <div>
+      {isRendered && (
+        <IonPopover
+          isOpen={isOpen}
+          onDidDismiss={onDismiss}
+          style={{ "--min-width": "300px" }}
+        >
+          {dialogContent}
+        </IonPopover>
+      )}
+    </div>
   );
 };
 
