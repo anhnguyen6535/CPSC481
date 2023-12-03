@@ -15,7 +15,7 @@ const OrderPlaced: React.FC = () => {
 
   return (
     <IonPage>
-      <Layout pageTitle="Order Placed" backButton={true}>
+      <Layout pageTitle={processing ? "Placing Order" : "Order Placed"} backButton={true}>
         <div style={{ height: "100%" }}>
           {processing ? (
             <div className={styles.spinnerContainer}>
