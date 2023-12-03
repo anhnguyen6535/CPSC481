@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [react(),legacy()],
-  base: '/CPSC481/', // Add this line
+  base: '/CPSC481/',
   test: {
     globals: true,
     environment: 'jsdom',
