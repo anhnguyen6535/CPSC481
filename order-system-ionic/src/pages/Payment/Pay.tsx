@@ -5,16 +5,14 @@ import Layout from '../../components/Layout';
 import { useEffect, useState } from 'react';
 import DisplayCost from '../../components/PriceCards/DisplayCost';
 import { useTypedSelector } from "../../hooks/reduxHooks";
-import { selectCartData } from "../../redux/selectors/cartSelectors";
 import { useHistory } from 'react-router-dom';
-import BillOrdered from './BillOrdered';
 import { selectOrders } from '../../redux/selectors/orderSelectors';
+import BillOrdered from './BillOrdered';
 
 const Pay: React.FC = () => {
   const history = useHistory();
   const [subtotal, setSubtotal] = useState(0.0);
   const [orderedOneBill, setOrderedOneBill] = useState(false);
-
   const orders = useTypedSelector(selectOrders);
 
   useEffect(() => {
