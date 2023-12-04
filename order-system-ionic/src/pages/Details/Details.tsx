@@ -21,10 +21,10 @@ import { updateQuantity } from "../../redux/actions/cartActions";
 
 const Details: React.FC = () => {
   const history = useHistory();
+  const cartData = useTypedSelector(selectCartData);
   const dispatch = useTypedDispatch();
   const { itemid } = useParams<{ itemid: string }>();
   const itemIdNumber = parseInt(itemid, 10);
-  const cartData = useTypedSelector(selectCartData);
 
   const existingItem = cartData.items.find(
     (item) => item.item.id === itemIdNumber
@@ -32,6 +32,10 @@ const Details: React.FC = () => {
 
   const [amount, setAmount] = useState(
     existingItem ? existingItem.quantity : 1
+  );
+
+  const [specialInstructions, setSpecialInstructions] = useState(
+    existingItem ? existingItem.specialInstructions : ""
   );
 
   const item = foodData.find((item) => item.id === itemIdNumber);
@@ -47,92 +51,96 @@ const Details: React.FC = () => {
   };
 
   const handleButtonClick = () => {
-    item && dispatch(updateQuantity(item, amount));
+    item && dispatch(updateQuantity(item, amount, specialInstructions));
     history.goBack();
   };
 
-  return (
-    <IonPage>
-      <Layout pageTitle="Detail" backButton={true}>
-        {item ? (
-          <div className={styles.foodItemContainer}>
-            <img
-              src={getFoodImageUri(item.imagePath)}
-              alt={item.name}
-              className={styles.foodItemImage}
-            />
-            <div className={styles.foodItemDetails}>
-              <div className={styles.itemNameAndPrice}>
-                <h2>{item.name}</h2>
-                <span className={styles.price}>{`$${item.price.toFixed(
-                  2
-                )}`}</span>
-              </div>
-              <div style={{ marginTop: -15 }}>
-                <DietIcons diets={item.diets} />
-              </div>
-              <div className={styles.section}>
-                <div className={styles.sectionTitle}>Description</div>
-                <div className={styles.sectionContent}>
-                  <ReadMore content={item.description} maxLength={100} />
-                </div>
-              </div>
-              <div className={styles.section}>
-                <div className={styles.sectionTitle}>Ingredients</div>
-                <div className={styles.sectionContent}>
-                  <ReadMore
-                    content={item.ingredients.join(", ")}
-                    maxLength={100}
-                  />
-                </div>
-              </div>
-              <div className={styles.section}>
-                <div className={styles.sectionTitle}>
-                  Special Instructions/Customizations
-                </div>
-                <div className={styles.specialInstructionsBox}>
-                  <IonTextarea
-                    rows={4}
-                    fill="solid"
-                    placeholder=" Enter instructions here..."
-                    style={{ "--background": "#E7E7E7" }}
-                    className={styles.myCustomTextarea}
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                margin: "20px 0px",
-              }}
-            >
-              <CounterButton
-                amount={amount}
-                showTrashIcon={false}
-                onAdd={addFoodToCart}
-                onRemove={removeFoodFromCart}
-                enableAdd={false}
-              />
-            </div>
+  const handleInputChange = (event: CustomEvent) => {
+    setSpecialInstructions(event.detail.value);
+  };
 
-            <IonButton onClick={handleButtonClick}>
-              Add {amount} to cart&nbsp;&nbsp;
-              <IonIcon
-                icon={ellipse}
-                style={{
-                  fontSize: "0.5rem",
-                  verticalAlign: "middle",
-                  margin: "0 0.1rem",
-                }}
-              />
-              &nbsp;&nbsp;${amount * item.price}
-            </IonButton>
+  return (
+    <Layout pageTitle="Detail" backButton={true}>
+      {item ? (
+        <div className={styles.foodItemContainer}>
+          <img
+            src={getFoodImageUri(item.imagePath)}
+            alt={item.name}
+            className={styles.foodItemImage}
+          />
+          <div className={styles.foodItemDetails}>
+            <div className={styles.itemNameAndPrice}>
+              <h2>{item.name}</h2>
+              <span className={styles.price}>{`$${item.price.toFixed(
+                2
+              )}`}</span>
+            </div>
+            <div style={{ marginTop: -15 }}>
+              <DietIcons diets={item.diets} />
+            </div>
+            <div className={styles.section}>
+              <div className={styles.sectionTitle}>Description</div>
+              <div className={styles.sectionContent}>
+                <ReadMore content={item.description} maxLength={100} />
+              </div>
+            </div>
+            <div className={styles.section}>
+              <div className={styles.sectionTitle}>Ingredients</div>
+              <div className={styles.sectionContent}>
+                <ReadMore
+                  content={item.ingredients.join(", ")}
+                  maxLength={100}
+                />
+              </div>
+            </div>
+            <div className={styles.section}>
+              <div className={styles.sectionTitle}>
+                Special Instructions/Customizations
+              </div>
+              <div className={styles.specialInstructionsBox}>
+                <IonTextarea
+                  rows={4}
+                  fill="solid"
+                  placeholder=" Enter instructions here..."
+                  style={{ "--background": "#E7E7E7" }}
+                  className={styles.myCustomTextarea}
+                  onIonChange={handleInputChange}
+                  value={specialInstructions}
+                />
+              </div>
+            </div>
           </div>
-        ) : null}
-      </Layout>
-    </IonPage>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "20px 0px",
+            }}
+          >
+            <CounterButton
+              amount={amount}
+              showTrashIcon={false}
+              onAdd={addFoodToCart}
+              onRemove={removeFoodFromCart}
+              enableAdd={false}
+            />
+          </div>
+
+          <IonButton onClick={handleButtonClick}>
+            Add {amount} to cart&nbsp;&nbsp;
+            <IonIcon
+              icon={ellipse}
+              style={{
+                fontSize: "0.5rem",
+                verticalAlign: "middle",
+                margin: "0 0.1rem",
+              }}
+            />
+            &nbsp;&nbsp;${amount * item.price}
+          </IonButton>
+        </div>
+      ) : null}
+    </Layout>
   );
 };
 

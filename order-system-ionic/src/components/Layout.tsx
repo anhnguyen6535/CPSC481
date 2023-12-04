@@ -1,5 +1,5 @@
 import { IonContent, IonHeader, IonPage } from "@ionic/react";
-import NavBar from "./NavBar";
+import NavBar from "./Navbar/NavBar";
 
 // use this component for each page instead of IonPage
 export default function Layout(props: LayoutProps) {

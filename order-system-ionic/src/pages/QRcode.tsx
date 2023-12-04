@@ -1,5 +1,4 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonIcon, IonImg } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
 import './QRcode.css';
 import { arrowBack, arrowBackCircle, backspace, close } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';

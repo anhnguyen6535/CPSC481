@@ -1,0 +1,22 @@
+.placeOrderButton {
+  width: 60%;
+  margin-top: 30px;
+}
+
+.noCartItems {
+  height: calc(100vh - 300px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.noCartItems img {
+  max-width: 100%;
+  height: auto;
+}
+
+.noCartItemsButton {
+    margin-top: 50px;
+}
