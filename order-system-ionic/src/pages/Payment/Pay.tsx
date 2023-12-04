@@ -1,30 +1,33 @@
-import { IonButton, IonCard, IonCardContent } from '@ionic/react';
+import { IonButton } from '@ionic/react';
 // import './Pay.css';
 import { OrderFoodItemCard } from '../../components/FoodItemCards';
-import foodData from "../../../data/cartItems/data.json";      // fake data for testing
-import { getFoodImageUri } from "../../../data/menuItems/utils";
 import Layout from '../../components/Layout';
 import { useEffect, useState } from 'react';
-import TextCard from '../../components/FoodItemCards/TextCard';
 import DisplayCost from '../../components/PriceCards/DisplayCost';
 import { useTypedSelector } from "../../hooks/reduxHooks";
 import { selectCartData } from "../../redux/selectors/cartSelectors";
 import { useHistory } from 'react-router-dom';
 import BillOrdered from './BillOrdered';
+import { selectOrders } from '../../redux/selectors/orderSelectors';
 
 const Pay: React.FC = () => {
   const history = useHistory();
   const [subtotal, setSubtotal] = useState(0.0);
   const [orderedOneBill, setOrderedOneBill] = useState(false);
-  const cartData = useTypedSelector(selectCartData);
+
+  const orders = useTypedSelector(selectOrders);
 
   useEffect(() => {
-    const calculatedSubtotal = cartData.items.reduce(
-        (acc, foodItem) => acc + foodItem.item.price * foodItem.quantity,
+    const calculatedTotal = orders.reduce((acc, order) => {
+      const orderTotal = order.items.reduce(
+        (orderAcc, foodItem) => orderAcc + foodItem.item.price * foodItem.quantity,
         0
-    );
-    setSubtotal(calculatedSubtotal);
-  }, [cartData]);
+      );
+      return acc + orderTotal;
+    }, 0);
+  
+    setSubtotal(calculatedTotal);
+  }, [orders]);  
 
   const handleSplitBill = () =>{
     history.push('/pay/split-bill')
@@ -40,11 +43,14 @@ const Pay: React.FC = () => {
 
   return (
     <Layout pageTitle='Payment' backButton={true}>
-      {cartData.items.map((foodItem) => (
-        <OrderFoodItemCard
-          key={foodItem.item.id}
-          item={foodItem.item}
-          amount={foodItem.quantity} />
+      {orders.map((order) => (
+        order.items.map((foodItem) => (
+          <OrderFoodItemCard
+            key={foodItem.item.id}
+            item={foodItem.item}
+            amount={foodItem.quantity}
+          />
+        ))
       ))}
 
       <DisplayCost subtotal={subtotal} />
