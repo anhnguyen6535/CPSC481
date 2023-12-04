@@ -15,6 +15,7 @@ const Pay: React.FC = () => {
   const [subtotal, setSubtotal] = useState(0.0);
   const [orderedOneBill, setOrderedOneBill] = useState(false);
   const orders = useTypedSelector(selectOrders);
+  const [disable, setDisable] = useState(true);
 
   useEffect(() => {
     const calculatedTotal = orders.reduce((acc, order) => {
@@ -26,6 +27,7 @@ const Pay: React.FC = () => {
     }, 0);
   
     setSubtotal(calculatedTotal);
+    calculatedTotal > 0 ? setDisable(false) : setDisable(true);
   }, [orders]);  
 
   const handleSplitBill = () =>{
@@ -53,12 +55,12 @@ const Pay: React.FC = () => {
               />
             ))
           ))}
-          
+
           <DisplayCost subtotal={subtotal} />
 
           <div className="ion-text-center">
-            <IonButton slot='start' onClick={handleOneBill}>One Bill</IonButton>
-            <IonButton slot='end' onClick={handleSplitBill}>Split Bill</IonButton>
+            <IonButton disabled={disable} slot='start' onClick={handleOneBill}>One Bill</IonButton>
+            <IonButton disabled={disable} slot='end' onClick={handleSplitBill}>Split Bill</IonButton>
           </div>
 
           {orderedOneBill ? <BillOrdered handleClicked={handleUnclicked}/> :null}
