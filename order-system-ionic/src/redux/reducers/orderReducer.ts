@@ -33,6 +33,13 @@ export const OrderReducer: Reducer<OrderState> = (
       };
     }
 
+    case OrderActionTypes.RESET_ORDER: {
+      return {
+        ...state,
+        orders: initialState.orders,
+      };
+    }
+
     default:
       return state;
   }
