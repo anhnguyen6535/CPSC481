@@ -34,7 +34,7 @@ const QRcode: React.FC = () => {
             <IonIcon slot="icon-only" icon={close}></IonIcon>
         </IonButton>
 		</div>
-		<video id="video" className = "tost" width="200" height="200" autoPlay onClick={() => {
+		<video id="video" className = "tost" width="150" height="150" autoPlay onClick={() => {
                 history.push("/home");
               }}></video>
 		{test()}

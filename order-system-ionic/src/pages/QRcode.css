@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Source Sans Pro');
 
 .box {
-    height: 200px;
     width: 375px;
 }
 
@@ -32,10 +31,11 @@
 .tost {
 	position: relative;
 	z-index: 800;
-	margin-top: 150px;
+	margin-top: 80px;
 	margin-right: 100px;
     align-items: center;
     justify-content: space-evenly;
 	display: flex;
     flex-direction: column;
+	width: 99%;
 }
