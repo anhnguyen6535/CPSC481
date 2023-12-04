@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   IonContent,
   IonHeader,
@@ -10,10 +10,17 @@ import {
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import styles from "./Welcome.module.scss";
+import { useDispatch } from "react-redux";
+import { resetBill } from "../../redux/actions/billActions";
 
 const Welcome: React.FC = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(resetBill());
+  }, [])
+  
   return (
     <IonPage>
       <IonHeader>
