@@ -14,6 +14,7 @@ export interface DialogProps {
   buttons?: ButtonProps[];
   isOpen: boolean;
   onDismiss?: () => void;
+  backdropDismiss?: boolean
 }
 
 const Dialog: React.FC<DialogProps> = ({
@@ -22,6 +23,7 @@ const Dialog: React.FC<DialogProps> = ({
   buttons,
   isOpen,
   onDismiss,
+  backdropDismiss = true
 }) => {
   const [isRendered, setRendered] = useState(false);
 
@@ -66,6 +68,7 @@ const Dialog: React.FC<DialogProps> = ({
         <IonPopover
           isOpen={isOpen}
           onDidDismiss={onDismiss}
+          backdrop-dismiss = {backdropDismiss}
           style={{ "--min-width": "300px", "--max-width": "80vw", "--backdrop-opacity": "0.4" }}
         >
           {dialogContent}
