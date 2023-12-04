@@ -8,6 +8,7 @@ import { useTypedSelector } from "../../hooks/reduxHooks";
 import { useHistory } from 'react-router-dom';
 import { selectOrders } from '../../redux/selectors/orderSelectors';
 import BillOrdered from './BillOrdered';
+import EmptyHandler from '../../components/Empty/EmptyHandler';
 
 const Pay: React.FC = () => {
   const history = useHistory();
@@ -41,25 +42,28 @@ const Pay: React.FC = () => {
 
   return (
     <Layout pageTitle='Payment' backButton={true}>
-      {orders.map((order) => (
-        order.items.map((foodItem) => (
-          <OrderFoodItemCard
-            key={foodItem.item.id}
-            item={foodItem.item}
-            amount={foodItem.quantity}
-          />
-        ))
-      ))}
+      {orders.length > 0 ?(
+        <>
+          {orders.map((order) => (
+            order.items.map((foodItem) => (
+              <OrderFoodItemCard
+                key={foodItem.item.id}
+                item={foodItem.item}
+                amount={foodItem.quantity}
+              />
+            ))
+          ))}
+          
+          <DisplayCost subtotal={subtotal} />
 
-      <DisplayCost subtotal={subtotal} />
+          <div className="ion-text-center">
+            <IonButton slot='start' onClick={handleOneBill}>One Bill</IonButton>
+            <IonButton slot='end' onClick={handleSplitBill}>Split Bill</IonButton>
+          </div>
 
-      <div className="ion-text-center">
-        <IonButton slot='start' onClick={handleOneBill}>One Bill</IonButton>
-        <IonButton slot='end' onClick={handleSplitBill}>Split Bill</IonButton>
-      </div>
-
-      {orderedOneBill ? <BillOrdered handleClicked={handleUnclicked}/> :null}
-
+          {orderedOneBill ? <BillOrdered handleClicked={handleUnclicked}/> :null}
+        </>
+      ) : <EmptyHandler content='order'/>}
     </Layout>
   );
 };

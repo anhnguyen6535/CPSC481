@@ -14,6 +14,7 @@ import Divider from "../../components/Divider/Divider";
 import DisplayCost from "../../components/PriceCards/DisplayCost";
 import { placeOrder } from "../../redux/actions/orderActions";
 import { emptyCart } from "../../redux/actions/cartActions";
+import EmptyHandler from "../../components/Empty/EmptyHandler";
 
 const Cart: React.FC = () => {
   const history = useHistory();
@@ -72,24 +73,7 @@ const Cart: React.FC = () => {
           </div>
         </>
       ) : (
-        <div className={styles.noCartItems}>
-          <div>
-            <div>
-              <img
-                src={cartImage}
-                alt="Cart is empty"
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-            </div>
-            <p>There are no items in your cart.</p>
-          </div>
-          <IonButton
-            onClick={handleRedirectToHomePage}
-            className={styles.noCartItemsButton}
-          >
-            Add Items Now
-          </IonButton>
-        </div>
+        <EmptyHandler content="cart"/>
       )}
     </Layout>
   );
