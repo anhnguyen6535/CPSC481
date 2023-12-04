@@ -19,6 +19,8 @@ const Waiter = () => {
             setResetAlert(false);
             dispatch(resetBill());
             dispatch(resetOrder());
+            localStorage.clear();
+
             history.push('/');
           },
         }
