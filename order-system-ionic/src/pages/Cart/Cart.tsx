@@ -4,7 +4,7 @@ import Layout from "../../components/Layout";
 import { useEffect, useState } from "react";
 import { MenuFoodItemCard } from "../../components/FoodItemCards";
 import TextCard from "../../components/FoodItemCards/TextCard";
-import { useTypedSelector } from "../../hooks/reduxHooks";
+import { useTypedDispatch, useTypedSelector } from "../../hooks/reduxHooks";
 import { selectCartData } from "../../redux/selectors/cartSelectors";
 import { CardTypeEnum } from "../../components/FoodItemCards/MenuFoodItemCard/MenuFoodItemCard";
 import styles from "./Cart.module.scss";
@@ -12,9 +12,12 @@ import { useHistory } from "react-router";
 import cartImage from "../../../assets/cart.png";
 import Divider from "../../components/Divider/Divider";
 import DisplayCost from "../../components/PriceCards/DisplayCost";
+import { placeOrder } from "../../redux/actions/orderActions";
+import { emptyCart } from "../../redux/actions/cartActions";
 
 const Cart: React.FC = () => {
   const history = useHistory();
+  const dispatch = useTypedDispatch();
   const [subtotal, setSubtotal] = useState(0.0);
 
   const cartData = useTypedSelector(selectCartData);
@@ -29,6 +32,12 @@ const Cart: React.FC = () => {
 
   const handleRedirectToHomePage = () => {
     history.replace("/home");
+  };
+
+  const handleOrderPlaced = () => {
+    dispatch(placeOrder(cartData.items));
+    history.push("/order-placed");
+    setTimeout(() => dispatch(emptyCart()), 1000);
   };
 
   return (
@@ -54,7 +63,10 @@ const Cart: React.FC = () => {
           <DisplayCost subtotal={subtotal} />
 
           <div className="ion-text-center">
-            <IonButton className={styles.placeOrderButton}>
+            <IonButton
+              onClick={handleOrderPlaced}
+              className={styles.placeOrderButton}
+            >
               Place Order
             </IonButton>
           </div>

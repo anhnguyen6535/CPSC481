@@ -78,8 +78,8 @@ const FilterComponent: React.FC<FilterProps> = ({
   return (
     <IonContent>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Filter</IonTitle>
+        <IonToolbar className="ion-text-center">
+          <h3 style={{color: "#424242"}}>Filter</h3>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
@@ -96,9 +96,7 @@ const FilterComponent: React.FC<FilterProps> = ({
               </IonCheckbox>
             </IonItem>
           ))}
-          {/* <IonText style={{marginBottom: -100}}> */}
           <h4 style={{ marginBottom: -30 }}>Price</h4>
-          {/* </IonText> */}
 
           <IonRange
             min={0}
@@ -107,9 +105,10 @@ const FilterComponent: React.FC<FilterProps> = ({
             pin={true}
             onIonChange={(e: CustomEvent) => setLocalPrice(e.detail.value)}
           >
-            <IonIcon slot="start" size="small" icon={nutritionOutline} />
-            <IonText slot="end">${price}</IonText>
+            <IonText slot="start">$0</IonText>
+            <IonText slot="end">$100</IonText>
           </IonRange>
+
           {localPrice != null && (
             <IonItem lines="none" style={{ marginTop: "-10px" }}>
               <IonText style={{ fontSize: "small" }}>
@@ -119,15 +118,6 @@ const FilterComponent: React.FC<FilterProps> = ({
           )}
         </IonList>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <IonButton
-            fill="solid"
-            size={"small"}
-            color="primary"
-            shape="round"
-            onClick={handleApply}
-          >
-            Apply
-          </IonButton>
 
           <IonButton
             fill="outline"
@@ -137,6 +127,15 @@ const FilterComponent: React.FC<FilterProps> = ({
             onClick={handleClearFilters}
           >
             Clear
+          </IonButton>
+          <IonButton
+            fill="solid"
+            size={"small"}
+            color="primary"
+            shape="round"
+            onClick={handleApply}
+          >
+            Apply
           </IonButton>
         </div>
       </IonContent>
