@@ -32,4 +32,10 @@
 .tost {
 	position: relative;
 	z-index: 800;
+	margin-top: 150px;
+	margin-right: 100px;
+    align-items: center;
+    justify-content: space-evenly;
+	display: flex;
+    flex-direction: column;
 }

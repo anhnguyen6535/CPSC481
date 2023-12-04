@@ -7,6 +7,7 @@ import React, { useEffect } from 'react';
 
 const QRcode: React.FC = () => {
   const history = useHistory();
+  // based on https://medium.com/js-now/creating-a-real-time-qr-code-scanner-with-vanilla-javascript-part-1-2-creating-the-scanner-a8934ee8f614
   function test(){
   	useEffect(() => {
 	    const video = document.querySelector('video')
@@ -29,26 +30,14 @@ const QRcode: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
         </IonHeader>
-		<h1 className="delfino">welcome to the sun-drenched tropical paradise of isle delfino!
-		<br />
-		we're so pleased to welcome you to our beautiful home!
-		<br />
-		genebenebenepoopoo
-		<br />
-		come and enjoy a natural wonderland, to which we've added the world's finnest resort facilities, a spectacular amusement park, and... succulent seafood!
-		<br />
-		all this and more await you on isle delfino!
-		<br />
-		come relax and let us refresh your body and spirit.
-		<br />
-		genebenebenepoopoo
-		</h1>
 		<div className="XButton">
         <IonButton shape='round' size='large' fill='clear' color='light' onClick={(event)=> {history.push("/welcome")}}>
             <IonIcon slot="icon-only" icon={close}></IonIcon>
         </IonButton>
 		</div>
-		<video id="video" className = "tost" width="100" height="100" autoPlay></video>
+		<video id="video" className = "tost" width="200" height="200" autoPlay onClick={() => {
+                history.push("/home");
+              }}></video>
 		{test()}
 		<div className="box">
 			<div className="BG-visor" />
