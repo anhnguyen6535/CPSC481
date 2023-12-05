@@ -71,7 +71,7 @@ const Cart: React.FC = () => {
           </div>
         </>
       ) : (
-        <EmptyHandler content="cart" image={cartImage}/>
+        <EmptyHandler content="cart" image={cartImage} buttonTitle="Add Items Now" buttonAction={handleRedirectToHomePage}/>
       )}
     </Layout>
   );

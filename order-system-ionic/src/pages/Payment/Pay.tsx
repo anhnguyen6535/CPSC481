@@ -13,6 +13,7 @@ import Divider from "../../components/Divider/Divider";
 import orderImage from "../../../assets/order.png";
 import styles from "./Pay.module.scss";
 import { CartItem } from "../../types";
+import { selectCartData } from "../../redux/selectors/cartSelectors";
 
 const consolidateItems = (items: CartItem[]) => {
   const consolidatedItems = items.reduce(
@@ -33,6 +34,7 @@ const consolidateItems = (items: CartItem[]) => {
 
 const Pay: React.FC = () => {
   const history = useHistory();
+  const cartData = useTypedSelector(selectCartData);
   const [subtotal, setSubtotal] = useState(0.0);
   const [orderedOneBill, setOrderedOneBill] = useState(false);
   const orders = useTypedSelector(selectOrders);
@@ -60,6 +62,14 @@ const Pay: React.FC = () => {
 
   const handleUnclicked = () => {
     setOrderedOneBill(!orderedOneBill);
+  };
+
+  const handleRedirectToHomePage = () => {
+    history.replace("/home");
+  };
+
+  const handleRedirectToCart = () => {
+    history.replace("/cart");
   };
 
   return (
@@ -104,7 +114,18 @@ const Pay: React.FC = () => {
           ) : null}
         </>
       ) : (
-        <EmptyHandler content="order" image={orderImage} />
+        <EmptyHandler
+          content="order"
+          image={orderImage}
+          buttonTitle={
+            cartData.items.length == 0 ? "Add Items Now" : "Place Order Now"
+          }
+          buttonAction={
+            cartData.items.length == 0
+              ? handleRedirectToHomePage
+              : handleRedirectToCart
+          }
+        />
       )}
     </Layout>
   );
