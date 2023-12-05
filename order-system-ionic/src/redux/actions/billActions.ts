@@ -1,4 +1,4 @@
-import { BillActionTypes } from "../actionTypes";
+import { BillActionTypes, SplitBillActionTypes } from "../actionTypes";
 
 export const orderBill = () => ({
   type: BillActionTypes.ORDER_BILL,
@@ -9,11 +9,21 @@ export const resetBill = () => ({
 });
 
 export const addDiner = (name: string) => ({
-  type: BillActionTypes.ADD_DINER,
+  type: SplitBillActionTypes.ADD_DINER,
   payload: name,
 });
 
 export const removeDiner = (name: string) => ({
-  type: BillActionTypes.REMOVE_DINER,
+  type: SplitBillActionTypes.REMOVE_DINER,
   payload: name,
+});
+
+export const selectPerson = (itemId: number, personName: string) => ({
+  type: SplitBillActionTypes.SELECT_PERSON,
+  payload: { itemId, personName },
+});
+
+export const deselectPerson = (personName: string) => ({
+  type: SplitBillActionTypes.DESELECT_PERSON,
+  payload: personName,
 });
