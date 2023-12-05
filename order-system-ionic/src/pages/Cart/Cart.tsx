@@ -1,4 +1,4 @@
-import { IonButton, IonItemDivider } from "@ionic/react";
+import { IonButton, IonCard, IonCardContent, IonItemDivider } from "@ionic/react";
 
 import Layout from "../../components/Layout";
 import { useEffect, useState } from "react";
@@ -61,7 +61,7 @@ const Cart: React.FC = () => {
             </IonButton>
           </div>
 
-          <DisplayCost subtotal={subtotal} />
+          <DisplayCost subtotal={subtotal} itemBreakdown/>
 
           <div className="ion-text-center">
             <IonButton

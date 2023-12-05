@@ -56,7 +56,7 @@ const Pay: React.FC = () => {
             ))
           ))}
 
-          <DisplayCost subtotal={subtotal} />
+          <DisplayCost subtotal={subtotal} itemBreakdown={false}/>
 
           <div className="ion-text-center">
             <IonButton disabled={disable} slot='start' onClick={handleOneBill}>One Bill</IonButton>
