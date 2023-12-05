@@ -21,9 +21,9 @@ export enum OrderActionTypes {
   RESET_ORDER = "RESET_ORDER",
 }
 
-export enum BillActionTypes{
+export enum BillActionTypes {
   ORDER_BILL = "ORDER_BILL",
-  RESET_BILL = "RESET_BILL"
-} 
-
-
+  RESET_BILL = "RESET_BILL",
+  ADD_DINER = "ADD_DINER",
+  REMOVE_DINER = "REMOVE_DINER",
+}
