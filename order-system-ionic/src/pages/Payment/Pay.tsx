@@ -66,9 +66,9 @@ const Pay: React.FC = () => {
 
           <div className={styles.buttonsContainer}>
               <div className={styles.buttonsInnerContainer}>
-                <IonButton disabled={disable} expand="block" onClick={handleOneBill}>One Bill</IonButton>
-            <IonButton disabled={disable} fill="outline"
-                  expand="block"onClick={handleSplitBill}>Split Bill</IonButton>
+                <IonButton style={{width: "100%"}} disabled={disable} onClick={handleOneBill}>One Bill</IonButton>
+            <IonButton style={{width: "100%"}} disabled={disable} fill="outline"
+                onClick={handleSplitBill}>Split Bill</IonButton>
               </div>
             </div>
 
