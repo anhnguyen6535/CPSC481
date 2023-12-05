@@ -3,14 +3,11 @@ import { IonButton, IonCard, IonCardContent, IonItemDivider } from "@ionic/react
 import Layout from "../../components/Layout";
 import { useEffect, useState } from "react";
 import { MenuFoodItemCard } from "../../components/FoodItemCards";
-import TextCard from "../../components/FoodItemCards/TextCard";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/reduxHooks";
 import { selectCartData } from "../../redux/selectors/cartSelectors";
 import { CardTypeEnum } from "../../components/FoodItemCards/MenuFoodItemCard/MenuFoodItemCard";
 import styles from "./Cart.module.scss";
 import { useHistory } from "react-router";
-import cartImage from "../../../assets/cart.png";
-import Divider from "../../components/Divider/Divider";
 import DisplayCost from "../../components/PriceCards/DisplayCost";
 import { placeOrder } from "../../redux/actions/orderActions";
 import { emptyCart } from "../../redux/actions/cartActions";
@@ -37,7 +34,7 @@ const Cart: React.FC = () => {
 
   const handleOrderPlaced = () => {
     dispatch(placeOrder(cartData.items));
-    history.push("/order-placed");
+    history.push("/cart/order-placed");
     setTimeout(() => dispatch(emptyCart()), 1000);
   };
 

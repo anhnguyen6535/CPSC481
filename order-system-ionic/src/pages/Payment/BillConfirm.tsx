@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import Dialog, { ButtonProps } from "../../components/Dialog/Dialog";
 import { orderBill } from "../../redux/actions/billActions";
 
-interface BillOrderedProps{
+interface BillConfirmProps{
     handleClicked: () => void;
 }
 
-const BillOrdered : React.FC<BillOrderedProps> = ({handleClicked}) => { 
+const BillConfirm : React.FC<BillConfirmProps> = ({handleClicked}) => { 
     const dispatch = useDispatch();
     
     const [confirmOrderBillAlert, setConfirmOrderBillAlert] = useState(true);
@@ -38,14 +38,8 @@ const BillOrdered : React.FC<BillOrderedProps> = ({handleClicked}) => {
                 isOpen={confirmOrderBillAlert}
                 onDismiss={() => handleClicked()}
             />
-
-            {/* <Dialog
-                title="Bill Ordered!"
-                content="A waiter has been notified and will bring the bill to you shortly."
-                isOpen={confirmed}
-            /> */}
         </>
     )
  }
 
- export default BillOrdered;
+ export default BillConfirm;

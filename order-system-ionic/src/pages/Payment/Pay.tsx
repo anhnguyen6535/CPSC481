@@ -7,8 +7,8 @@ import DisplayCost from '../../components/PriceCards/DisplayCost';
 import { useTypedSelector } from "../../hooks/reduxHooks";
 import { useHistory } from 'react-router-dom';
 import { selectOrders } from '../../redux/selectors/orderSelectors';
-import BillOrdered from './BillOrdered';
 import EmptyHandler from '../../components/Empty/EmptyHandler';
+import BillConfirm from './BillConfirm';
 
 const Pay: React.FC = () => {
   const history = useHistory();
@@ -63,7 +63,7 @@ const Pay: React.FC = () => {
             <IonButton disabled={disable} slot='end' onClick={handleSplitBill}>Split Bill</IonButton>
           </div>
 
-          {orderedOneBill ? <BillOrdered handleClicked={handleUnclicked}/> :null}
+          {orderedOneBill ? <BillConfirm handleClicked={handleUnclicked}/> :null}
         </>
       ) : <EmptyHandler content='order'/>}
     </Layout>

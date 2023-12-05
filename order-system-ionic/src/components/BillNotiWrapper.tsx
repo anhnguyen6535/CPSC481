@@ -1,7 +1,10 @@
+import { IonIcon } from '@ionic/react';
+import { checkmarkOutline } from 'ionicons/icons';
 import React from 'react';
 import { useTypedSelector } from '../hooks/reduxHooks';
 import { selectIsBillOrdered } from '../redux/selectors/billSelectors';
-import Dialog from './Dialog/Dialog';
+import Layout from './Layout';
+import styles from "../pages/OrderPlaced/OrderPlaced.module.scss";
 
 interface BillNotiWrapperProps {
   children: React.ReactNode;
@@ -12,14 +15,26 @@ const BillNotiWrapper: React.FC<BillNotiWrapperProps> = ({ children }) => {
 
   return (
     <>
-      {children}
-      {isBillOrdered && (
-        <Dialog
-          title="Bill Ordered!"
-          content="A waiter has been notified and will bring the bill to you shortly."
-          isOpen={isBillOrdered}
-          backdropDismiss={false}
-        />
+      {isBillOrdered ? (
+        <Layout pageTitle="Bill Requested" backButton={false} scroll={false} callWaiter={true}>
+          <div style={{ height: "100%" }}>
+            <div className={styles.container}>
+              <div className={styles.orderPlaced}>
+                <IonIcon
+                  className={styles.checkMark}
+                  icon={checkmarkOutline}
+                  style={{ color: "#fff" }}
+                />
+                <div className={styles.messageBox}>
+                  <h4>A waiter will be with you shortly with the bill</h4>
+                </div>
+              </div>
+              </div>
+          </div>
+        </Layout>
+
+      ): (
+        <>{children}</>
       )}
     </>
   );
