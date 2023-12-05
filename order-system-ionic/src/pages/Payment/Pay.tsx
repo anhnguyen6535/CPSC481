@@ -48,7 +48,7 @@ const Pay: React.FC = () => {
   return (
     <Layout pageTitle='Payment' backButton={true}>
       {orders.length > 0 ?(
-        <>
+          <>
           {orders.map((order) => (
             order.items.map((foodItem) => (
               <>
@@ -62,9 +62,10 @@ const Pay: React.FC = () => {
             ))
           ))}
 
+
           <DisplayCost subtotal={subtotal} itemBreakdown={false}/>
 
-          <div className={styles.buttonsContainer}>
+          <div className={`${styles.buttonsContainer} ion-text-center`}>
               <div className={styles.buttonsInnerContainer}>
                 <IonButton style={{width: "100%"}} disabled={disable} onClick={handleOneBill}>One Bill</IonButton>
             <IonButton style={{width: "100%"}} disabled={disable} fill="outline"

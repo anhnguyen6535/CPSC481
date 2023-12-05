@@ -1,40 +1,48 @@
 .ionCardContainer {
-    border-radius: 1rem;
-    background: 0%;
-    box-shadow: none;
+  border-radius: 1rem;
+  background: 0%;
+  box-shadow: none;
+  margin: 0 !important;
 }
 
 .divContent {
-    padding: 2px;
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  margin: 8px 0px;
 }
 
 .cardImage {
-    width: 7.5rem;
-    height: 7.5rem;
-    object-fit: cover;
-    padding: 1rem;
-    border-radius: 25%;
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+  padding: 0.3rem;
+  border-radius: 25%;
 }
 
 .foodName {
-    font-size: 1.2rem;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .price {
-    position: absolute;
-    top: 1;
-    right: 0;
-    padding: 1rem;
+  position: absolute;
+  top: 1;
+  right: 0;
+  font-size: 1rem;
+  padding: 00.3rem;
 }
 
 .contentContainer {
-    padding-top: 15px;
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    padding-left: 0;
-    margin-left: 0;
+  padding-top: 15px;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.titleContainer {
+  padding: 0 0.3rem;
 }
