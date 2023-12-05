@@ -11,9 +11,10 @@ export interface ButtonProps {
 export interface DialogProps {
   title: string;
   content: string;
-  buttons: ButtonProps[];
+  buttons?: ButtonProps[];
   isOpen: boolean;
-  onDismiss: () => void;
+  onDismiss?: () => void;
+  backdropDismiss?: boolean
 }
 
 const Dialog: React.FC<DialogProps> = ({
@@ -22,6 +23,7 @@ const Dialog: React.FC<DialogProps> = ({
   buttons,
   isOpen,
   onDismiss,
+  backdropDismiss = true
 }) => {
   const [isRendered, setRendered] = useState(false);
 
@@ -35,7 +37,7 @@ const Dialog: React.FC<DialogProps> = ({
       <h2 className={styles.dialogTitle}>{title}</h2>
       <p className={styles.dialogContent}>{content}</p>
       <div className={styles.buttonGroup}>
-        {buttons.map((button, index) =>
+        {buttons && buttons.map((button, index) =>
           button.primary ? (
             <IonButton
               key={index}
@@ -66,6 +68,7 @@ const Dialog: React.FC<DialogProps> = ({
         <IonPopover
           isOpen={isOpen}
           onDidDismiss={onDismiss}
+          backdrop-dismiss = {backdropDismiss}
           style={{ "--min-width": "300px", "--max-width": "80vw", "--backdrop-opacity": "0.4" }}
         >
           {dialogContent}

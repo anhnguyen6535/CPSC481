@@ -1,25 +1,23 @@
-import { IonButton, IonItemDivider } from "@ionic/react";
+import { IonButton, IonCard, IonCardContent, IonItemDivider } from "@ionic/react";
 
 import Layout from "../../components/Layout";
 import { useEffect, useState } from "react";
 import { MenuFoodItemCard } from "../../components/FoodItemCards";
-import TextCard from "../../components/FoodItemCards/TextCard";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/reduxHooks";
 import { selectCartData } from "../../redux/selectors/cartSelectors";
 import { CardTypeEnum } from "../../components/FoodItemCards/MenuFoodItemCard/MenuFoodItemCard";
 import styles from "./Cart.module.scss";
 import { useHistory } from "react-router";
-import cartImage from "../../../assets/cart.png";
-import Divider from "../../components/Divider/Divider";
+import DisplayCost from "../../components/PriceCards/DisplayCost";
 import { placeOrder } from "../../redux/actions/orderActions";
 import { emptyCart } from "../../redux/actions/cartActions";
+import EmptyHandler from "../../components/Empty/EmptyHandler";
 
 const Cart: React.FC = () => {
   const history = useHistory();
   const dispatch = useTypedDispatch();
   const [subtotal, setSubtotal] = useState(0.0);
-  // fake data
-  const taxRate = 0.05;
+
   const cartData = useTypedSelector(selectCartData);
 
   useEffect(() => {
@@ -36,7 +34,7 @@ const Cart: React.FC = () => {
 
   const handleOrderPlaced = () => {
     dispatch(placeOrder(cartData.items));
-    history.push("/order-placed");
+    history.push("/cart/order-placed");
     setTimeout(() => dispatch(emptyCart()), 1000);
   };
 
@@ -46,6 +44,7 @@ const Cart: React.FC = () => {
         <>
           {cartData.items.map((foodItem) => (
             <MenuFoodItemCard
+              key={foodItem.item.id}
               item={foodItem.item}
               amount={foodItem.quantity}
               type={CardTypeEnum.CART}
@@ -59,35 +58,7 @@ const Cart: React.FC = () => {
             </IonButton>
           </div>
 
-          <Divider />
-
-          {cartData.items.map((foodItem, index) => (
-            <TextCard
-              key={foodItem.item.id}
-              lines={index === cartData.items.length - 1 ? "" : "none"} // Line only for the last item
-              label={`${foodItem.quantity}x ${foodItem.item.name}`}
-              note={`${(foodItem.item.price * foodItem.quantity).toFixed(2)}`}
-              noteColor="black"
-            />
-          ))}
-          <TextCard
-            lines="none"
-            label="Subtotal"
-            note={`${subtotal.toFixed(2)}`}
-            noteColor="black"
-          />
-          <TextCard
-            label="Tax"
-            note={`${(subtotal * taxRate).toFixed(2)}`}
-            noteColor="black"
-          />
-          <TextCard
-            lines="none"
-            label="Total"
-            note={`${(subtotal * (1 + taxRate)).toFixed(2)}`}
-            noteColor="black"
-            fontWeight="bold"
-          />
+          <DisplayCost subtotal={subtotal} itemBreakdown/>
 
           <div className="ion-text-center">
             <IonButton
@@ -99,24 +70,7 @@ const Cart: React.FC = () => {
           </div>
         </>
       ) : (
-        <div className={styles.noCartItems}>
-          <div>
-            <div>
-              <img
-                src={cartImage}
-                alt="Cart is empty"
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-            </div>
-            <p>There are no items in your cart.</p>
-          </div>
-          <IonButton
-            onClick={handleRedirectToHomePage}
-            className={styles.noCartItemsButton}
-          >
-            Add Items Now
-          </IonButton>
-        </div>
+        <EmptyHandler content="cart"/>
       )}
     </Layout>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   IonContent,
   IonHeader,
@@ -13,7 +13,7 @@ import styles from "./Welcome.module.scss";
 
 const Welcome: React.FC = () => {
   const history = useHistory();
-
+  
   return (
     <IonPage>
       <IonHeader>

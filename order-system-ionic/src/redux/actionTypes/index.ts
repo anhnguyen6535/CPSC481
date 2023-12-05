@@ -18,4 +18,12 @@ export enum HomePageActionTypes {
 
 export enum OrderActionTypes {
   PLACE_ORDER = "PLACE_ORDER",
+  RESET_ORDER = "RESET_ORDER",
 }
+
+export enum BillActionTypes{
+  ORDER_BILL = "ORDER_BILL",
+  RESET_BILL = "RESET_BILL"
+} 
+
+

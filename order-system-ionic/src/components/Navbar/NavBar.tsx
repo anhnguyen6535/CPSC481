@@ -20,6 +20,7 @@ import styles from "./NavBar.module.scss";
 interface NavBarProps {
   pageTitle?: string;
   backButton?: boolean;
+  callWaiter?: boolean;
 }
 
 // includes page title & call waiter button
@@ -84,6 +85,7 @@ export default function NavBar(props: NavBarProps) {
             fill="solid"
             color="primary"
             style={{ textTransform: "none", padding: 12 }}
+            disabled={props.callWaiter}
           >
             Call Waiter{" "}
             <IonIcon style={{ marginLeft: 10 }} icon={HelpDeskIcon} />
