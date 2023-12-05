@@ -10,6 +10,7 @@ import {
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import styles from "./Welcome.module.scss";
+import orderTechLogo from "../../../assets/ordertechlogo.png";
 
 const Welcome: React.FC = () => {
   const history = useHistory();
@@ -37,8 +38,16 @@ const Welcome: React.FC = () => {
             >
               Scan QR Code
             </IonButton>
+
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <IonText className={styles.smallText} >Brought to you by:</IonText>
+            <img className={styles.logo} src={orderTechLogo} alt="logo" />
           </div>
         </div>
+        
       </IonContent>
     </IonPage>
   );
