@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 import { selectOrders } from '../../redux/selectors/orderSelectors';
 import EmptyHandler from '../../components/Empty/EmptyHandler';
 import BillConfirm from './BillConfirm';
+import Divider from '../../components/Divider/Divider';
 
 const Pay: React.FC = () => {
   const history = useHistory();
@@ -48,11 +49,14 @@ const Pay: React.FC = () => {
         <>
           {orders.map((order) => (
             order.items.map((foodItem) => (
-              <OrderFoodItemCard
-                key={foodItem.item.id}
-                item={foodItem.item}
-                amount={foodItem.quantity}
-              />
+              <>
+                <OrderFoodItemCard
+                  key={foodItem.item.id}
+                  item={foodItem.item}
+                  amount={foodItem.quantity}
+                />
+                <Divider />
+              </>
             ))
           ))}
 
