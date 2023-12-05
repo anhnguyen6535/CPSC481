@@ -10,6 +10,8 @@ import { selectOrders } from '../../redux/selectors/orderSelectors';
 import EmptyHandler from '../../components/Empty/EmptyHandler';
 import BillConfirm from './BillConfirm';
 import Divider from '../../components/Divider/Divider';
+import orderImage from "../../../assets/order.png";
+import styles from "./Pay.module.scss";
 
 const Pay: React.FC = () => {
   const history = useHistory();
@@ -62,14 +64,17 @@ const Pay: React.FC = () => {
 
           <DisplayCost subtotal={subtotal} itemBreakdown={false}/>
 
-          <div className="ion-text-center">
-            <IonButton disabled={disable} slot='start' onClick={handleOneBill}>One Bill</IonButton>
-            <IonButton disabled={disable} slot='end' onClick={handleSplitBill}>Split Bill</IonButton>
-          </div>
+          <div className={styles.buttonsContainer}>
+              <div className={styles.buttonsInnerContainer}>
+                <IonButton disabled={disable} expand="block" onClick={handleOneBill}>One Bill</IonButton>
+            <IonButton disabled={disable} fill="outline"
+                  expand="block"onClick={handleSplitBill}>Split Bill</IonButton>
+              </div>
+            </div>
 
           {orderedOneBill ? <BillConfirm handleClicked={handleUnclicked}/> :null}
         </>
-      ) : <EmptyHandler content='order'/>}
+      ) : <EmptyHandler content='order' image={orderImage}/>}
     </Layout>
   );
 };

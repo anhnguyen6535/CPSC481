@@ -1,13 +1,13 @@
 import styles from './Empty.module.scss';
-import cartImage from "../../../assets/cart.png";
 import { IonButton } from '@ionic/react';
 import { useHistory } from 'react-router';
 
 interface EmptyHandlerProps {
     content: string;
+    image: string;
 }
 
-const EmptyHandler:React.FC<EmptyHandlerProps> = ({content}) => { 
+const EmptyHandler:React.FC<EmptyHandlerProps> = ({content, image}) => { 
     const history = useHistory();
 
     const handleRedirectToHomePage = () => {
@@ -19,7 +19,7 @@ const EmptyHandler:React.FC<EmptyHandlerProps> = ({content}) => {
           <div>
             <div>
               <img
-                src={cartImage}
+                src={image}
                 alt="${content} is empty"
                 style={{ maxWidth: "100%", height: "auto" }}
               />
