@@ -13,9 +13,11 @@ const mapNamesToSelectOptions = (names: string[]) => {
 
 const SplitBillNameSelect: React.FC<NameSelectProps> = ({ names }) => {
     return (
-        <IonList inset={true} style={{ position: 'absolute', right: 0, background: '0%' }}>
+        // <IonList inset={true} style={{ position: 'absolute', right: 0, background: '0%' }}>
+        <IonList inset={true} style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <IonItem>
-                <IonSelect shape="round" justify="end" placeholder="Split" multiple={true} cancelText="Cancel" okText="Split" interface="popover" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                {/* <IonSelect shape="round" justify="end" placeholder="Split" multiple={true} cancelText="Cancel" okText="Split" interface="popover" style={{ display: 'flex', justifyContent: 'flex-end' }}> */}
+                <IonSelect shape="round" placeholder="Split" multiple={true} interface="popover">
                     {mapNamesToSelectOptions(names)}
                 </IonSelect>
             </IonItem>
