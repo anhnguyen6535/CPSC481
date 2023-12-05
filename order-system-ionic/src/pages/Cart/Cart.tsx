@@ -12,6 +12,7 @@ import DisplayCost from "../../components/PriceCards/DisplayCost";
 import { placeOrder } from "../../redux/actions/orderActions";
 import { emptyCart } from "../../redux/actions/cartActions";
 import EmptyHandler from "../../components/Empty/EmptyHandler";
+import cartImage from "../../../assets/cart.png";
 
 const Cart: React.FC = () => {
   const history = useHistory();
@@ -34,7 +35,7 @@ const Cart: React.FC = () => {
 
   const handleOrderPlaced = () => {
     dispatch(placeOrder(cartData.items));
-    history.push("/cart/order-placed");
+    history.push("/order-placed");
     setTimeout(() => dispatch(emptyCart()), 1000);
   };
 
@@ -70,7 +71,7 @@ const Cart: React.FC = () => {
           </div>
         </>
       ) : (
-        <EmptyHandler content="cart"/>
+        <EmptyHandler content="cart" image={cartImage} buttonTitle="Add Items Now" buttonAction={handleRedirectToHomePage}/>
       )}
     </Layout>
   );

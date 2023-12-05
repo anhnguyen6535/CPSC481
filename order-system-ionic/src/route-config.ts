@@ -17,7 +17,7 @@ const routes = [
     {path: '/pay', component: Pay, exact: true},
     {path: '/pay/split-bill', component: SplitBill},
     {path: '/details/:itemid', component: Details, exact: true},
-    {path: '/cart/order-placed', component: OrderPlaced},
+    {path: '/order-placed', component: OrderPlaced},
     {path: '/waiter', component: Waiter, exact: true},
 ]
 

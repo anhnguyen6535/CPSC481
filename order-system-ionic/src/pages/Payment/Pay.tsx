@@ -1,75 +1,132 @@
-import { IonButton } from '@ionic/react';
+import { IonButton } from "@ionic/react";
 // import './Pay.css';
-import { OrderFoodItemCard } from '../../components/FoodItemCards';
-import Layout from '../../components/Layout';
-import { useEffect, useState } from 'react';
-import DisplayCost from '../../components/PriceCards/DisplayCost';
+import { OrderFoodItemCard } from "../../components/FoodItemCards";
+import Layout from "../../components/Layout";
+import { useEffect, useState } from "react";
+import DisplayCost from "../../components/PriceCards/DisplayCost";
 import { useTypedSelector } from "../../hooks/reduxHooks";
-import { useHistory } from 'react-router-dom';
-import { selectOrders } from '../../redux/selectors/orderSelectors';
-import EmptyHandler from '../../components/Empty/EmptyHandler';
-import BillConfirm from './BillConfirm';
-import Divider from '../../components/Divider/Divider';
+import { useHistory } from "react-router-dom";
+import { selectOrders } from "../../redux/selectors/orderSelectors";
+import EmptyHandler from "../../components/Empty/EmptyHandler";
+import BillConfirm from "./BillConfirm";
+import Divider from "../../components/Divider/Divider";
+import orderImage from "../../../assets/order.png";
+import styles from "./Pay.module.scss";
+import { CartItem } from "../../types";
+import { selectCartData } from "../../redux/selectors/cartSelectors";
+
+const consolidateItems = (items: CartItem[]) => {
+  const consolidatedItems = items.reduce(
+    (acc: CartItem[], current: CartItem) => {
+      const foundItem = acc.find((item) => item.item.id === current.item.id);
+      if (foundItem) {
+        foundItem.quantity += current.quantity;
+      } else {
+        acc.push({ ...current });
+      }
+      return acc;
+    },
+    [] as CartItem[]
+  );
+
+  return consolidatedItems;
+};
 
 const Pay: React.FC = () => {
   const history = useHistory();
+  const cartData = useTypedSelector(selectCartData);
   const [subtotal, setSubtotal] = useState(0.0);
   const [orderedOneBill, setOrderedOneBill] = useState(false);
   const orders = useTypedSelector(selectOrders);
   const [disable, setDisable] = useState(true);
 
+  const foodItemList = orders.flatMap((order) => order.items);
+  const consolidatedItems = consolidateItems(foodItemList);
+
   useEffect(() => {
-    const calculatedTotal = orders.reduce((acc, order) => {
-      const orderTotal = order.items.reduce(
-        (orderAcc, foodItem) => orderAcc + foodItem.item.price * foodItem.quantity,
-        0
-      );
-      return acc + orderTotal;
+    const calculatedTotal = consolidatedItems.reduce((acc, foodItem) => {
+      return acc + foodItem.item.price * foodItem.quantity;
     }, 0);
-  
+
     setSubtotal(calculatedTotal);
     calculatedTotal > 0 ? setDisable(false) : setDisable(true);
-  }, [orders]);  
+  }, [orders]);
 
-  const handleSplitBill = () =>{
-    history.push('/pay/split-bill')
-  }
+  const handleSplitBill = () => {
+    history.push("/pay/split-bill");
+  };
 
-  const handleOneBill = () =>{
+  const handleOneBill = () => {
     setOrderedOneBill(true);
-  }
+  };
 
-  const handleUnclicked = () =>{
+  const handleUnclicked = () => {
     setOrderedOneBill(!orderedOneBill);
-  }
+  };
+
+  const handleRedirectToHomePage = () => {
+    history.replace("/home");
+  };
+
+  const handleRedirectToCart = () => {
+    history.replace("/cart");
+  };
 
   return (
-    <Layout pageTitle='Payment' backButton={true}>
-      {orders.length > 0 ?(
+    <Layout pageTitle="Payment" backButton={true}>
+      {orders.length > 0 ? (
         <>
-          {orders.map((order) => (
-            order.items.map((foodItem) => (
-              <>
-                <OrderFoodItemCard
-                  key={foodItem.item.id}
-                  item={foodItem.item}
-                  amount={foodItem.quantity}
-                />
-                <Divider />
-              </>
-            ))
+          {consolidatedItems.map((foodItem) => (
+            <>
+              <OrderFoodItemCard
+                key={foodItem.item.id}
+                item={foodItem.item}
+                amount={foodItem.quantity}
+              />
+              <Divider />
+            </>
           ))}
 
-          <DisplayCost subtotal={subtotal} itemBreakdown={false}/>
+          <DisplayCost subtotal={subtotal} itemBreakdown={false} />
 
-          <div className="ion-text-center">
-            <IonButton disabled={disable} slot='start' onClick={handleOneBill}>One Bill</IonButton>
-            <IonButton disabled={disable} slot='end' onClick={handleSplitBill}>Split Bill</IonButton>
+          <div className={`${styles.buttonsContainer} ion-text-center`}>
+            <div className={styles.buttonsInnerContainer}>
+              <IonButton
+                style={{ width: "100%" }}
+                disabled={disable}
+                onClick={handleOneBill}
+              >
+                One Bill
+              </IonButton>
+              <IonButton
+                style={{ width: "100%" }}
+                disabled={disable}
+                fill="outline"
+                onClick={handleSplitBill}
+              >
+                Split Bill
+              </IonButton>
+            </div>
           </div>
 
-          {orderedOneBill ? <BillConfirm handleClicked={handleUnclicked}/> :null}
+          {orderedOneBill ? (
+            <BillConfirm handleClicked={handleUnclicked} />
+          ) : null}
         </>
-      ) : <EmptyHandler content='order'/>}
+      ) : (
+        <EmptyHandler
+          content="order"
+          image={orderImage}
+          buttonTitle={
+            cartData.items.length == 0 ? "Add Items Now" : "Place Order Now"
+          }
+          buttonAction={
+            cartData.items.length == 0
+              ? handleRedirectToHomePage
+              : handleRedirectToCart
+          }
+        />
+      )}
     </Layout>
   );
 };

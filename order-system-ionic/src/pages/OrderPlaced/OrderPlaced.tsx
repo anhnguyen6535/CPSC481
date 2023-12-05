@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IonPage, IonButton, IonIcon } from "@ionic/react";
+import { IonButton, IonIcon } from "@ionic/react";
 import styles from "./OrderPlaced.module.scss";
 import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout";
@@ -11,6 +11,10 @@ const OrderPlaced: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => setProcessing(false), 3000);
+  }, []);
+
+  useEffect(() => {
+    setProcessing(true);
   }, []);
 
   return (
