@@ -35,7 +35,7 @@ const Cart: React.FC = () => {
 
   const handleOrderPlaced = () => {
     dispatch(placeOrder(cartData.items));
-    history.push("/cart/order-placed");
+    history.push("/order-placed");
     setTimeout(() => dispatch(emptyCart()), 1000);
   };
 
