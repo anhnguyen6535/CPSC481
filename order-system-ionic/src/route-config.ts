@@ -5,7 +5,7 @@ import Cart from "./pages/Cart/Cart";
 import Pay from "./pages/Payment/Pay";
 import SplitBill from "./pages/Payment/SplitBill";
 import OrderPlaced from "./pages/OrderPlaced/OrderPlaced";
-import Waiter from "./pages/Payment/Waiter";
+import Waiter from "./pages/Waiter/Waiter";
 
 // add new routes here 
 // routes will be mapped automatically in App.tsx
@@ -17,7 +17,7 @@ const routes = [
     {path: '/pay', component: Pay, exact: true},
     {path: '/pay/split-bill', component: SplitBill},
     {path: '/details/:itemid', component: Details, exact: true},
-    {path: '/order-placed', component: OrderPlaced, exact: true},
+    {path: '/cart/order-placed', component: OrderPlaced},
     {path: '/waiter', component: Waiter, exact: true},
 ]
 
