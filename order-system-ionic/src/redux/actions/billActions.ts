@@ -23,7 +23,7 @@ export const selectPerson = (itemId: number, personName: string) => ({
   payload: { itemId, personName },
 });
 
-export const deselectPerson = (personName: string) => ({
+export const deselectPerson = (itemId: number, personName: string) => ({
   type: SplitBillActionTypes.DESELECT_PERSON,
-  payload: personName,
+  payload: { itemId, personName },
 });
