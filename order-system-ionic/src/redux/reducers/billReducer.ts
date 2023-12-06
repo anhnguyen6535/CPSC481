@@ -62,13 +62,44 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
           : [...state.splitBillDiners, newDiner],
       };
 
-    case SplitBillActionTypes.REMOVE_DINER:
+    case SplitBillActionTypes.REMOVE_DINER: {
+      const removedDinerId = action.payload;
+
+      const updatedSplitBillDiners = state.splitBillDiners.filter(
+        (diner) => diner.index !== removedDinerId
+      );
+
+      const updatedSplitBillItems = state.splitBillItems.map((item) => ({
+        ...item,
+        selectedPeople: item.selectedPeople.filter(
+          (diner) => diner.index !== removedDinerId
+        ),
+      }));
+
+      const { [removedDinerId]: _, ...remainingSelectedItemsByIndex } =
+        state.selectedItemsByIndex;
+
+      const updatedSelectedItemsByIndex = Object.keys(
+        remainingSelectedItemsByIndex
+      ).reduce((currentSelectedItems, dinerIndex) => {
+        const updatedItems = remainingSelectedItemsByIndex[
+          Number(dinerIndex)
+        ].map((item) => ({
+          ...item,
+          selectedPeople: item.selectedPeople.filter(
+            (diner) => diner.index !== removedDinerId
+          ),
+        }));
+        return { ...currentSelectedItems, [dinerIndex]: updatedItems };
+      }, {});
+
       return {
         ...state,
-        splitBillDiners: state.splitBillDiners.filter(
-          (diner) => diner.index !== action.payload
-        ),
+        splitBillDiners: updatedSplitBillDiners,
+        splitBillItems: updatedSplitBillItems,
+        selectedItemsByIndex: updatedSelectedItemsByIndex,
       };
+    }
 
     case SplitBillActionTypes.SELECT_PERSON: {
       const { itemId, diner } = action.payload;
