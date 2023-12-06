@@ -41,11 +41,12 @@ const BillOrdered = () => {
             <div className={styles.buttonsContainer}>
                 <div className={styles.buttonsInnerContainer}>
                     <IonButton
-                    style={{ marginBottom: 20, width: "100%" }}
-                    expand="block"
-                    onClick={resetTableHandler}
+                        fill="outline"
+                        style={{ marginBottom: 20, width: "100%" }}
+                        expand="block"
+                        onClick={resetTableHandler}
                     >
-                    New Session
+                        New Session
                     </IonButton>
                 </div>
             </div>
