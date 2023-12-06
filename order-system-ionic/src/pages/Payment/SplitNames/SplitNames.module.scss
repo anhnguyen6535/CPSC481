@@ -1,0 +1,50 @@
+.emptyDinersScreen {
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+
+  img {
+    max-width: 40%;
+    height: auto;
+  }
+}
+
+.splitNamesContainer {
+  height: 100%;
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 0px;
+
+  .namesListContainer {
+    margin-top: 30px;
+  }
+
+  .dinerItem {
+    --background: #f0f0f0;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+    ion-input {
+      --background: #f0f0f0;
+      border-radius: 10px;
+    }
+
+    ion-icon {
+      font-size: 1.2rem;
+    }
+  }
+}

@@ -3,7 +3,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import Welcome from "./pages/Welcome/Welcome";
 import Cart from "./pages/Cart/Cart";
 import Pay from "./pages/Payment/Pay";
-import SplitNames from "./pages/Payment/SplitNames";
+import SplitNames from "./pages/Payment/SplitNames/SplitNames";
 import OrderPlaced from "./pages/OrderPlaced/OrderPlaced";
 import Waiter from "./pages/Waiter/Waiter";
 

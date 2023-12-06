@@ -1,6 +1,4 @@
 import { CartItem } from "../../types";
-import { PersonOrder } from "../reducers/billReducer";
-import { OrderState } from "../reducers/orderReducer";
 import { RootState } from "../store";
 
 export const selectIsBillOrdered = (state: RootState) => state.bill.billOrdered;
