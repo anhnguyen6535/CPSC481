@@ -4,7 +4,7 @@ import { IonButton } from '@ionic/react';
 import { SplitBillFoodItemCard } from '../../components/FoodItemCards';
 import { useEffect, useState } from 'react';
 import DisplayCost from '../../components/PriceCards/DisplayCost';
-import { useTypedSelector } from "../../hooks/reduxHooks";
+import { useTypedDispatch, useTypedSelector } from "../../hooks/reduxHooks";
 import { selectOrders } from '../../redux/selectors/orderSelectors';
 import EmptyHandler from '../../components/Empty/EmptyHandler';
 import BillConfirm from './BillConfirm';
@@ -15,9 +15,17 @@ const SplitBill = () => {
   const orders = useTypedSelector(selectOrders);
   const [disable, setDisable] = useState(true);
 
-  useEffect(() => {
+  const dispatch = useTypedDispatch();
+  // dispatch(addDiner(name)); // Add name
+  // dispatch(removeDiner(name)); // Remove name
+  // dispatch(selectPerson(itemId, personName)); // Select person
+  // dispatch(deselectPerson(itemId, personName)); // Deselect person
 
-  }, [orders]);
+  // useEffect(() => {
+
+  // }, [orders]);
+
+  
 
   return (
     <Layout pageTitle='Payment' backButton={true}>

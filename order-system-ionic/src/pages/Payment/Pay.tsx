@@ -32,7 +32,7 @@ const Pay: React.FC = () => {
   }, [orders]);  
 
   const handleSplitBill = () =>{
-    history.push('/pay/split-bill')
+    history.push('/pay/add-diners');
   }
 
   const handleOneBill = () =>{
