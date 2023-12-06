@@ -39,7 +39,7 @@ const SplitNames: FC = () => {
 
   const handleDinerNameAdd = (index: number, value: string) => {
     const isNameDuplicate = dinersList.some(
-      (diner) => diner.name.trim().toLowerCase() === value.trim().toLowerCase()
+      (diner) => diner.name.trim().toLowerCase() === value.trim().toLowerCase() && diner.index !== index
     );
 
     if (isNameDuplicate) {
