@@ -1,26 +1,23 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import Dialog, { ButtonProps } from "../../components/Dialog/Dialog";
-import { orderBill } from "../../redux/actions/billActions";
 
 interface BillConfirmProps{
     handleClicked: () => void;
 }
 
 const BillConfirm : React.FC<BillConfirmProps> = ({handleClicked}) => { 
-    const dispatch = useDispatch();
+    const history = useHistory();
     
     const [confirmOrderBillAlert, setConfirmOrderBillAlert] = useState(true);
-    const [confirmed, setConfirmed] = useState(false);
 
     const callWaiterDialogButtons: ButtonProps[] = [
         {
           text: "Call Waiter",
           primary: true,
           onClick: () => {
-            setConfirmed(true);
             setConfirmOrderBillAlert(false);
-            dispatch(orderBill());
+            history.replace('/bill-requested')
           },
         },
         {
