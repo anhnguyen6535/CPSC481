@@ -13,8 +13,8 @@
 }
 
 .cardImage {
-  width: 6rem;
-  height: 6rem;
+  width: 5.5rem;
+  height: 5.5rem;
   object-fit: cover;
   padding: 0.3rem;
   border-radius: 25%;
@@ -24,6 +24,7 @@
   font-size: 1rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: normal;
 }
 
 .price {
@@ -32,6 +33,7 @@
   right: 0;
   font-size: 1rem;
   padding: 00.3rem;
+  font-weight: normal;
 }
 
 .contentContainer {

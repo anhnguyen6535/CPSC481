@@ -14,28 +14,9 @@
   flex-direction: column;
 }
 
-// .slide-in {
-//   animation: slideIn 0.5s ease-out;
-// }
-
-// .slide-out {
-//   animation: slideOut 0.3s ease-out;
-// }
-
-// @keyframes slideIn {
-//   from {
-//     transform: translateY(100%);
-//   }
-//   to {
-//     transform: translateY(0);
-//   }
-// }
-
-// @keyframes slideOut {
-//   from {
-//     transform: translateY(0);
-//   }
-//   to {
-//     transform: translateY(100%);
-//   }
-// }
+.title {
+  font-size: 0.9rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: normal;
+}
