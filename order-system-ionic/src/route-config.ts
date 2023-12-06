@@ -3,7 +3,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import Welcome from "./pages/Welcome/Welcome";
 import Cart from "./pages/Cart/Cart";
 import Pay from "./pages/Payment/Pay";
-import SplitBill from "./pages/Payment/SplitFoodItems";
+import SplitNames from "./pages/Payment/SplitNames";
 import OrderPlaced from "./pages/OrderPlaced/OrderPlaced";
 import Waiter from "./pages/Waiter/Waiter";
 
@@ -15,7 +15,7 @@ const routes = [
     {path: '/home', component: HomePage, exact: true},
     {path: '/cart', component: Cart, exact: true},
     {path: '/pay', component: Pay, exact: true},
-    {path: '/pay/split-bill', component: SplitBill},
+    {path: '/pay/add-diners', component: SplitNames},
     {path: '/details/:itemid', component: Details, exact: true},
     {path: '/cart/order-placed', component: OrderPlaced},
     {path: '/waiter', component: Waiter, exact: true},
