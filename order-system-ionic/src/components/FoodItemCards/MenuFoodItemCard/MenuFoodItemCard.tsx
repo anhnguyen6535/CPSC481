@@ -28,6 +28,7 @@ interface MenuFoodCardProps {
   type: CardTypeEnum;
   note?: string;
   pinned?: boolean;
+  disabled?: boolean;
 }
 
 const formatPrice = (price: number) => {
@@ -41,6 +42,7 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
   type,
   note,
   pinned,
+  disabled = false,
 }) => {
   const specialInstructionMaxLength = 14;
   const history = useHistory();
@@ -98,7 +100,7 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
 
   return (
     <>
-      <IonCard className={styles.menuFoodCard} color="secondary">
+      <IonCard className={styles.menuFoodCard} color="secondary" disabled={disabled}>
         <div className={styles.cardContent} onClick={navigateToDetails}>
           <div className={styles.imageContainer}>
             <img
@@ -151,6 +153,7 @@ const MenuFoodItemCard: React.FC<MenuFoodCardProps> = ({
                 onAdd={addFoodToCart}
                 onRemove={removeFoodFromCart}
                 enableAdd
+                content={disabled ? "Out of Stock" : "Add"}
               />
             </div>
           </div>
