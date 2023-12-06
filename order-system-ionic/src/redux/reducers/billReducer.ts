@@ -63,14 +63,20 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
       };
 
     case SplitBillActionTypes.DESELECT_PERSON:
+      const { itemId: targetItemId, personName: targetPersonName } =
+        action.payload;
       return {
         ...state,
-        splitBillItems: state.splitBillItems.map((item) => ({
-          ...item,
-          selectedPeople: item.selectedPeople.filter(
-            (diner) => diner !== action.payload
-          ),
-        })),
+        splitBillItems: state.splitBillItems.map((item) =>
+          item.itemId === targetItemId
+            ? {
+                ...item,
+                selectedPeople: item.selectedPeople.filter(
+                  (diner) => diner !== targetPersonName
+                ),
+              }
+            : item
+        ),
       };
 
     default:
