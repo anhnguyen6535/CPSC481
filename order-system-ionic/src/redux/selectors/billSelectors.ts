@@ -41,9 +41,7 @@ export const selectSplitBillOrders = (state: RootState) => {
               item: selectedItemOrder ? selectedItemOrder.item : null,
               quantity: selectedItemOrder
                 ? selectedItemOrder.quantity /
-                  selectedItem.selectedPeople.filter(
-                    (selectedDiner) => selectedDiner.index === diner.index
-                  ).length
+                  selectedItem.selectedPeople.length
                 : 0,
               totalPrice: totalForSelectedItem,
             };

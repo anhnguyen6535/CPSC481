@@ -1,27 +1,28 @@
 import Layout from "../../../components/Layout";
 import { IonButton } from "@ionic/react";
 import { SplitBillFoodItemCard } from "../../../components/FoodItemCards";
-import { useState } from "react";
-import { useTypedDispatch, useTypedSelector } from "../../../hooks/reduxHooks";
+import { useTypedSelector } from "../../../hooks/reduxHooks";
 import { selectOrders } from "../../../redux/selectors/orderSelectors";
 import EmptyHandler from "../../../components/Empty/EmptyHandler";
 import Divider from "../../../components/Divider/Divider";
-import {
-  selectSplitBillItems,
-} from "../../../redux/selectors/billSelectors";
+import { selectSplitBillItems } from "../../../redux/selectors/billSelectors";
 import styles from "./SplitFoodItems.module.scss";
 import React from "react";
+import { useHistory } from "react-router";
 
 const SplitBill: React.FC = () => {
+  const history = useHistory();
   const orders = useTypedSelector(selectOrders);
   const splitBillItems = useTypedSelector(selectSplitBillItems);
-
-  const dispatch = useTypedDispatch();
 
   const getDinersForItemId = (itemId: number) => {
     const splitBillItem = splitBillItems.find((item) => item.itemId === itemId);
     return splitBillItem ? splitBillItem.selectedPeople : [];
   };
+
+  const handleContinueClick = () => {
+    history.push("/pay/split-bill-breakdown");
+  }
 
   return (
     <Layout pageTitle="Your Order" backButton={true}>
@@ -45,7 +46,7 @@ const SplitBill: React.FC = () => {
           </div>
 
           <div className="ion-text-center">
-            <IonButton style={{ width: "80vw" }}>Request Bills</IonButton>
+            <IonButton onClick={handleContinueClick} style={{ width: "80vw" }}>Continue</IonButton>
           </div>
         </div>
       ) : (

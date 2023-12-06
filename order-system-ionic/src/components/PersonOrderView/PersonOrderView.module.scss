@@ -1,0 +1,41 @@
+.personOrderCard {
+  margin: 10px;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  max-height: 50px;
+}
+
+.personOrderCard.opened {
+  max-height: 70vh;
+}
+
+.personOrderCardContent {
+  display: flex;
+  flex-direction: column;
+}
+
+// .slide-in {
+//   animation: slideIn 0.5s ease-out;
+// }
+
+// .slide-out {
+//   animation: slideOut 0.3s ease-out;
+// }
+
+// @keyframes slideIn {
+//   from {
+//     transform: translateY(100%);
+//   }
+//   to {
+//     transform: translateY(0);
+//   }
+// }
+
+// @keyframes slideOut {
+//   from {
+//     transform: translateY(0);
+//   }
+//   to {
+//     transform: translateY(100%);
+//   }
+// }
