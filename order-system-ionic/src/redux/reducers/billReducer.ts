@@ -70,7 +70,9 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
       };
 
     case SplitBillActionTypes.SELECT_PERSON: {
-      const { itemId, dinerIndex } = action.payload;
+      const { itemId, diner } = action.payload;
+
+      const dinerIndex: number = diner.index;
       const selectedDiner = state.splitBillDiners.find(
         (diner) => diner.index === dinerIndex
       );
@@ -82,32 +84,40 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
       const foundItem = state.splitBillItems.find(
         (item) => item.itemId === itemId
       );
+
       const existingItems = state.selectedItemsByIndex[dinerIndex]
         ? [...state.selectedItemsByIndex[dinerIndex]]
         : [];
 
+      const itemToBeAdded = foundItem
+        ? {
+            ...foundItem,
+            selectedPeople: [...foundItem.selectedPeople, selectedDiner],
+          }
+        : { itemId: itemId, selectedPeople: [selectedDiner] };
+
       return {
         ...state,
-        splitBillItems: state.splitBillItems.map((item) =>
-          item.itemId === itemId
-            ? {
-                ...item,
-                selectedPeople: [...item.selectedPeople, selectedDiner],
-              }
-            : item
-        ),
+        splitBillItems: state.splitBillItems.some(
+          (item) => item.itemId === itemId
+        )
+          ? state.splitBillItems.map((item) =>
+              item.itemId === itemId ? itemToBeAdded : item
+            )
+          : [...state.splitBillItems, itemToBeAdded],
         selectedItemsByIndex: {
           ...state.selectedItemsByIndex,
-          [dinerIndex]: foundItem
-            ? [...existingItems, foundItem]
-            : existingItems,
+          [dinerIndex]: existingItems.find((item) => item.itemId === itemId)
+            ? existingItems
+            : [...existingItems, itemToBeAdded],
         },
       };
     }
 
     case SplitBillActionTypes.DESELECT_PERSON: {
-      const { itemId: targetItemId, dinerIndex: targetDinerIndex } =
-        action.payload;
+      const { itemId: targetItemId, diner: targetDiner } = action.payload;
+
+      const targetDinerIndex = targetDiner.index;
 
       const existingItems = state.selectedItemsByIndex[targetDinerIndex]
         ? [...state.selectedItemsByIndex[targetDinerIndex]]

@@ -5,6 +5,9 @@ export const selectIsBillOrdered = (state: RootState) => state.bill.billOrdered;
 export const selectSplitBillDiners = (state: RootState) =>
   state.bill.splitBillDiners;
 
+export const selectSplitBillItems = (state: RootState) =>
+  state.bill.splitBillItems;
+
 export const selectOrderByIndex = (state: RootState) =>
   state.bill.selectedItemsByIndex;
 

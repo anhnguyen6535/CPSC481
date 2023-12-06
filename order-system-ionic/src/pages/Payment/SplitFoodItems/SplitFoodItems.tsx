@@ -6,18 +6,22 @@ import { useTypedDispatch, useTypedSelector } from "../../../hooks/reduxHooks";
 import { selectOrders } from "../../../redux/selectors/orderSelectors";
 import EmptyHandler from "../../../components/Empty/EmptyHandler";
 import Divider from "../../../components/Divider/Divider";
-import { selectSplitBillDiners } from "../../../redux/selectors/billSelectors";
+import {
+  selectSplitBillItems,
+} from "../../../redux/selectors/billSelectors";
 import styles from "./SplitFoodItems.module.scss";
+import React from "react";
 
 const SplitBill: React.FC = () => {
-  const dinersList = useTypedSelector(selectSplitBillDiners);
-  const [subtotal, setSubtotal] = useState(0.0);
   const orders = useTypedSelector(selectOrders);
-  const [disable, setDisable] = useState(true);
-
-  console.log("HHH: ", orders);
+  const splitBillItems = useTypedSelector(selectSplitBillItems);
 
   const dispatch = useTypedDispatch();
+
+  const getDinersForItemId = (itemId: number) => {
+    const splitBillItem = splitBillItems.find((item) => item.itemId === itemId);
+    return splitBillItem ? splitBillItem.selectedPeople : [];
+  };
 
   return (
     <Layout pageTitle="Your Order" backButton={true}>
@@ -25,26 +29,23 @@ const SplitBill: React.FC = () => {
         <div className={styles.splitFoodItemsContainer}>
           <div>
             {orders.map((order) =>
-              order.items.map((foodItem) => (
-                <>
-                  {Array.from({ length: foodItem.quantity }, (_, index) => (
-                    <>
-                      <SplitBillFoodItemCard
-                        key={`${foodItem.item.id}-${index}`}
-                        item={foodItem.item}
-                        amount={1}
-                        diners={dinersList}
-                      />
-                      <Divider />
-                    </>
-                  ))}
-                </>
-              ))
+              order.items.map((foodItem) =>
+                Array.from({ length: foodItem.quantity }, (_, index) => (
+                  <React.Fragment key={`${foodItem.item.id}-${index}`}>
+                    <SplitBillFoodItemCard
+                      item={foodItem.item}
+                      amount={1}
+                      diners={getDinersForItemId(foodItem.item.id)}
+                    />
+                    <Divider />
+                  </React.Fragment>
+                ))
+              )
             )}
           </div>
 
           <div className="ion-text-center">
-            <IonButton style={{width: "80vw"}}>Request Bills</IonButton>
+            <IonButton style={{ width: "80vw" }}>Request Bills</IonButton>
           </div>
         </div>
       ) : (

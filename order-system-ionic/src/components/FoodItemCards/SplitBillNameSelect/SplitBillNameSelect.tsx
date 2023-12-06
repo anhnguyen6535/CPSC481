@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import { IonItem, IonList, IonSelect, IonSelectOption } from "@ionic/react";
 import { Diner } from "../../../redux/reducers/billReducer";
 import styles from "./SplitBillNameSelect.module.scss";
+import { useTypedSelector, useTypedDispatch } from "../../../hooks/reduxHooks";
+import { selectSplitBillDiners } from "../../../redux/selectors/billSelectors";
+import {
+  selectPerson,
+  deselectPerson,
+} from "../../../redux/actions/billActions";
 
 interface NameSelectProps {
   diners: Diner[];
+  itemId: number;
 }
 
 function truncate(str: string, num: number) {
@@ -22,16 +29,37 @@ const mapNamesToSelectOptions = (diners: Diner[]) => {
   ));
 };
 
-const SplitBillNameSelect: React.FC<NameSelectProps> = ({ diners }) => {
-  const [selectedDiners, setSelectedDiners] = useState<number[]>([]);
+const SplitBillNameSelect: React.FC<NameSelectProps> = ({ diners, itemId }) => {
+  const dinersList = useTypedSelector(selectSplitBillDiners);
+  const dispatch = useTypedDispatch();
+
+  const [selectedDiners, setSelectedDiners] = useState<number[]>(
+    diners.map((diner) => diner.index)
+  );
 
   const handleSelectionChange = (event: CustomEvent) => {
     const selectedValues = event.detail.value as number[];
+
+    const deselectedPersons = selectedDiners.filter(
+      (index) => !selectedValues.includes(index)
+    );
+
+    deselectedPersons.forEach((index) => {
+      dispatch(deselectPerson(itemId, dinersList[index]));
+    });
+
+
+    const selectedPersons = selectedValues.filter((index) => !selectedDiners.includes(index));
+
+    selectedPersons.forEach((index) => {
+      dispatch(selectPerson(itemId, dinersList[index]));
+    });
+
     setSelectedDiners(selectedValues);
   };
 
   const selectedDinerNames = selectedDiners
-    .map((index) => diners[index].name)
+    .map((index) => dinersList[index].name)
     .join(", ");
 
   return (
@@ -49,7 +77,7 @@ const SplitBillNameSelect: React.FC<NameSelectProps> = ({ diners }) => {
           onIonChange={handleSelectionChange}
           value={selectedDiners}
         >
-          {mapNamesToSelectOptions(diners)}
+          {mapNamesToSelectOptions(dinersList)}
         </IonSelect>
       </IonItem>
     </IonList>

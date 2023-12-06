@@ -49,7 +49,7 @@ const SplitBillFoodItemCard: React.FC<SplitBillFoodCardProps> = ({
             </IonCardTitle>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <SplitBillNameSelect diners={diners} />
+            <SplitBillNameSelect diners={diners}  itemId={item.id}/>
           </div>
         </div>
       </div>
