@@ -1,6 +1,7 @@
 import Details from "./pages/Details/Details";
 import HomePage from "./pages/HomePage/HomePage";
 import Welcome from "./pages/Welcome/Welcome";
+import QR from "./pages/QRcode";
 import Cart from "./pages/Cart/Cart";
 import Pay from "./pages/Payment/Pay";
 import SplitNames from "./pages/Payment/SplitNames/SplitNames";
@@ -15,6 +16,7 @@ import BillOrdered from "./pages/Payment/BillOrdered/BillOrdered";
 const routes = [
     {path: '/', component: Welcome, exact: true},
     {path: '/welcome', component: Welcome, exact: true},
+	  {path: '/scan', component: QR, exact: true},
     {path: '/home', component: HomePage, exact: true},
     {path: '/cart', component: Cart, exact: true},
     {path: '/pay', component: Pay, exact: true},

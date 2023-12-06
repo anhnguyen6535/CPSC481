@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Source Sans Pro');
 
 .box {
-    height: 812px;
     width: 375px;
 }
 
@@ -11,7 +10,7 @@
     left: 0;
     position: fixed;
     top: 0;
-    width: 375px;
+    width: 4000px;
 }
 
 .delfino {
@@ -27,4 +26,16 @@
 	position: relative;
 	z-index: 700;
 	--color: red;
+}
+
+.tost {
+	position: relative;
+	z-index: 800;
+	margin-top: 80px;
+	margin-right: 100px;
+    align-items: center;
+    justify-content: space-evenly;
+	display: flex;
+    flex-direction: column;
+	width: 99%;
 }
