@@ -101,6 +101,7 @@ const HomePage: React.FC = () => {
         item: foodItem,
         quantity: currentCartItem ? currentCartItem.quantity : 0,
         pinned: pinnedItems.includes(foodItem.id),
+        outOfStock: foodItem.stock == 0
       };
     });
 
@@ -162,20 +163,28 @@ const HomePage: React.FC = () => {
   };
 
   // Sorting function to move pinned items to the top
-  const sortByPinned = (a: any, b: any) => {
+  const sortByPinnedAndOutOfStock = (a: any, b: any) => {
     const isAPinned = a.pinned;
     const isBPinned = b.pinned;
+    const isAOutOfStock = a.outOfStock;
+    const isBOutOfStock = b.outOfStock;
 
     if (isAPinned && !isBPinned) {
       return -1;
     } else if (!isAPinned && isBPinned) {
       return 1;
     } else {
-      return 0;
+      if (isAOutOfStock && !isBOutOfStock) {
+        return 1;
+      } else if (!isAOutOfStock && isBOutOfStock) {
+        return -1;
+      } else {
+        return 0;
+      }
     }
   };
 
-  const sortedFoodData = filteredFoodData.sort(sortByPinned);
+  const sortedFoodData = filteredFoodData.sort(sortByPinnedAndOutOfStock);
 
   useEffect(() => {
     setLastNoResultsAction(LastNoResultsAction.FILTERS);
