@@ -65,15 +65,21 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
     case SplitBillActionTypes.REMOVE_DINER: {
       const removedDinerId = action.payload;
 
-      const updatedSplitBillDiners = state.splitBillDiners.filter(
-        (diner) => diner.index !== removedDinerId
-      );
+      const updatedSplitBillDiners = state.splitBillDiners
+        .filter((diner) => diner.index !== removedDinerId)
+        .map((diner, index) => ({
+          ...diner,
+          index,
+        }));
 
       const updatedSplitBillItems = state.splitBillItems.map((item) => ({
         ...item,
-        selectedPeople: item.selectedPeople.filter(
-          (diner) => diner.index !== removedDinerId
-        ),
+        selectedPeople: item.selectedPeople
+          .filter((diner) => diner.index !== removedDinerId)
+          .map((diner, index) => ({
+            ...diner,
+            index,
+          })),
       }));
 
       const { [removedDinerId]: _, ...remainingSelectedItemsByIndex } =
@@ -81,16 +87,21 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
 
       const updatedSelectedItemsByIndex = Object.keys(
         remainingSelectedItemsByIndex
-      ).reduce((currentSelectedItems, dinerIndex) => {
-        const updatedItems = remainingSelectedItemsByIndex[
-          Number(dinerIndex)
-        ].map((item) => ({
-          ...item,
-          selectedPeople: item.selectedPeople.filter(
-            (diner) => diner.index !== removedDinerId
+      ).reduce((currentSelectedItems, oldIndex) => {
+        const oldIndexNumber = Number(oldIndex);
+        const newIndex =
+          oldIndexNumber > removedDinerId ? oldIndexNumber - 1 : oldIndexNumber;
+        return {
+          ...currentSelectedItems,
+          [newIndex]: remainingSelectedItemsByIndex[oldIndexNumber].map(
+            (item: any) => ({
+              ...item,
+              selectedPeople: item.selectedPeople
+                .filter((diner: Diner) => diner.index !== removedDinerId)
+                .map((diner: Diner, index: number) => ({ ...diner, index })),
+            })
           ),
-        }));
-        return { ...currentSelectedItems, [dinerIndex]: updatedItems };
+        };
       }, {});
 
       return {

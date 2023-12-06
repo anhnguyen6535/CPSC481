@@ -26,6 +26,9 @@ const SplitNames: FC = () => {
   const [tempDiners, setTempDiners] = useState<Diner[]>(dinersList ? dinersList : []);
   const [showErrorToast, setShowErrorToast] = useState(false);
 
+  console.log("redux diners list is: ", dinersList);
+  console.log("tempDiners is: ", tempDiners);
+
   const handleAddDiner = () => {
     setTempDiners([...tempDiners, { index: tempDiners.length, name: "" }]);
   };
