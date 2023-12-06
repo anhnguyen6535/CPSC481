@@ -26,8 +26,8 @@ const SplitBillBreakdown: React.FC = () => {
 
   return (
     <Layout pageTitle="Price Breakdown" backButton={true}>
-      <div className={styles.priceBreakdownContainer}>
-        <div>
+      <div>
+        <div className={styles.priceBreakdownContainer}>
           {personOrders.map((personOrder, index) => (
             <PersonOrderView
               key={personOrder.personName}
@@ -37,7 +37,7 @@ const SplitBillBreakdown: React.FC = () => {
             />
           ))}
         </div>
-        <div className="ion-text-center">
+        <div className={`ion-text-center ${styles.sticky}`}>
           <IonButton style={{ width: "80vw" }} onClick={handleBill}>
             Request Bills
           </IonButton>

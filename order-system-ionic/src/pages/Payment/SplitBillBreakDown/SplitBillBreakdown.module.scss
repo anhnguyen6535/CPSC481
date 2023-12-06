@@ -1,7 +1,16 @@
 .priceBreakdownContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 30px;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-bottom: 30px;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.sticky {
+  position: sticky;
+  bottom: -20px;
+  background-color: white;
+  padding: 10px;
+  z-index: 2;
 }

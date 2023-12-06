@@ -11,7 +11,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { consolidateItems } from "../../../utils/utils";
 
-
 const SplitBill: React.FC = () => {
   const history = useHistory();
   const orders = useTypedSelector(selectOrders);
@@ -26,9 +25,13 @@ const SplitBill: React.FC = () => {
   };
 
   const handleContinueClick = () => {
-    const hasEmptyDiners = splitBillItems.some((item) => item.selectedPeople.length === 0);
+    const hasEmptyDiners = splitBillItems.some(
+      (item) => item.selectedPeople.length === 0
+    );
     const allItemsExist = orders.every((order) =>
-      order.items.every((foodItem) => splitBillItems.some((item) => item.itemId === foodItem.item.id))
+      order.items.every((foodItem) =>
+        splitBillItems.some((item) => item.itemId === foodItem.item.id)
+      )
     );
 
     if (hasEmptyDiners || !allItemsExist) {
@@ -45,25 +48,32 @@ const SplitBill: React.FC = () => {
   return (
     <Layout pageTitle="Your Order" backButton={true}>
       {consolidatedItems.length > 0 ? (
-        <div className={styles.splitFoodItemsContainer}>
+        <>
           <div>
-            {consolidatedItems.map((item, index) => (
-                  <React.Fragment key={`${item.item.id}-${index}`}>
-                    <SplitBillFoodItemCard
-                      item={item.item}
-                      amount={item.quantity}
-                      diners={getDinersForItemId(item.item.id)}
-                    />
-                    <Divider />
-                  </React.Fragment>
-              ))
-            }
-          </div>
+            <div className={styles.splitFoodItemsContainer}>
+              {consolidatedItems.map((item, index) => (
+                <React.Fragment key={`${item.item.id}-${index}`}>
+                  <SplitBillFoodItemCard
+                    item={item.item}
+                    amount={item.quantity}
+                    diners={getDinersForItemId(item.item.id)}
+                  />
+                  <Divider />
+                </React.Fragment>
+              ))}
+            </div>
 
-          <div className="ion-text-center">
-            <IonButton onClick={handleContinueClick} style={{ width: "80vw" }}>
-              Continue
-            </IonButton>
+            <div
+              style={{ flexShrink: 0 }}
+              className={`ion-text-center ${styles.sticky}`}
+            >
+              <IonButton
+                onClick={handleContinueClick}
+                style={{ width: "80vw" }}
+              >
+                Continue
+              </IonButton>
+            </div>
           </div>
 
           <IonToast
@@ -74,7 +84,7 @@ const SplitBill: React.FC = () => {
             color="danger"
             position="top"
           />
-        </div>
+        </>
       ) : (
         <EmptyHandler
           content="order"

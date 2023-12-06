@@ -47,9 +47,7 @@ const PersonOrderView: React.FC<PersonOrderViewProps> = ({
       </IonItem>
 
       <IonCardContent
-        className={`${styles.personOrderCardContent} ${
-          isOpen ? styles.slideIn : styles.slideOut
-        }`}
+        className={`${isOpen ? styles.slideIn : styles.slideOut}`}
       >
         {personOrder.selectedItems.map((selectedItem) => (
           <React.Fragment key={selectedItem?.item?.id}>
