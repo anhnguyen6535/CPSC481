@@ -23,11 +23,11 @@ const SplitNames: FC = () => {
   const dinersList = useTypedSelector(selectSplitBillDiners);
   const dispatch = useTypedDispatch();
 
-  const [tempDiners, setTempDiners] = useState<Diner[]>(dinersList ? dinersList : []);
+  const [tempDiners, setTempDiners] = useState<Diner[]>(
+    dinersList ? dinersList : []
+  );
   const [showErrorToast, setShowErrorToast] = useState(false);
-
-  console.log("redux diners list is: ", dinersList);
-  console.log("tempDiners is: ", tempDiners);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleAddDiner = () => {
     setTempDiners([...tempDiners, { index: tempDiners.length, name: "" }]);
@@ -38,7 +38,21 @@ const SplitNames: FC = () => {
   };
 
   const handleDinerNameAdd = (index: number, value: string) => {
-    dispatch(addDiner(value, index));
+    const isNameDuplicate = dinersList.some(
+      (diner) => diner.name.trim().toLowerCase() === value.trim().toLowerCase()
+    );
+
+    if (isNameDuplicate) {
+      setErrorMessage(`Can not add duplicate diner name "${value}"`);
+      setShowErrorToast(true);
+      setTempDiners((prevDiners) =>
+        prevDiners.map((diner) =>
+          diner.index === index ? { ...diner, name: "" } : diner
+        )
+      );
+    } else {
+      dispatch(addDiner(value, index));
+    }
   };
 
   const handleDinerNameChange = (index: number, ev: Event) => {
@@ -55,6 +69,7 @@ const SplitNames: FC = () => {
     const hasEmptyName = tempDiners.some((diner) => diner.name.trim() === "");
 
     if (hasEmptyName) {
+      setErrorMessage("Please enter a name for all diners before continuing.");
       setShowErrorToast(true);
     } else {
       tempDiners.forEach((diner) => {
@@ -124,7 +139,7 @@ const SplitNames: FC = () => {
           <IonToast
             isOpen={showErrorToast}
             onDidDismiss={handleToastClose}
-            message="Please enter a name for all diners before continuing."
+            message={errorMessage}
             duration={3000}
             color="danger"
             position="top"
