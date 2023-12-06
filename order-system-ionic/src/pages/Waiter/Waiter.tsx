@@ -1,23 +1,14 @@
 import { IonButton, IonText } from "@ionic/react";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout";
-import { resetBill } from "../../redux/actions/billActions";
-import { resetOrder } from "../../redux/actions/orderActions";
 import styles from "./Waiter.module.scss";
-import { persistor, store } from "../../redux/store";
-import { PURGE } from "redux-persist";
+import { persistor } from "../../redux/store";
 
 const Waiter = () => {
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const resetTableHandler = () => {
-    store.dispatch({
-      type: PURGE,
-    });
-
-    history.push("/");
+  persistor.purge().then(() => history.push("/"));
   };
 
   return (
