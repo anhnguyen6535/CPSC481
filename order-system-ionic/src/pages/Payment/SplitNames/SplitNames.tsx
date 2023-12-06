@@ -23,7 +23,7 @@ const SplitNames: FC = () => {
   const dinersList = useTypedSelector(selectSplitBillDiners);
   const dispatch = useTypedDispatch();
 
-  const [tempDiners, setTempDiners] = useState<Diner[]>(dinersList);
+  const [tempDiners, setTempDiners] = useState<Diner[]>(dinersList ? dinersList : []);
   const [showErrorToast, setShowErrorToast] = useState(false);
 
   const handleAddDiner = () => {

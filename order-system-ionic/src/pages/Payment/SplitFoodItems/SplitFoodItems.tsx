@@ -9,10 +9,31 @@ import { selectSplitBillItems } from "../../../redux/selectors/billSelectors";
 import styles from "./SplitFoodItems.module.scss";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+import { CartItem } from "../../../types";
+
+
+const consolidateItems = (items: CartItem[]) => {
+  const consolidatedItems = items.reduce(
+    (acc: CartItem[], current: CartItem) => {
+      const foundItem = acc.find((item) => item.item.id === current.item.id);
+      if (foundItem) {
+        foundItem.quantity += current.quantity;
+      } else {
+        acc.push({ ...current });
+      }
+      return acc;
+    },
+    [] as CartItem[]
+  );
+
+  return consolidatedItems;
+};
 
 const SplitBill: React.FC = () => {
   const history = useHistory();
   const orders = useTypedSelector(selectOrders);
+  const foodItemList = orders.flatMap((order) => order.items);
+  const consolidatedItems = consolidateItems(foodItemList);
   const splitBillItems = useTypedSelector(selectSplitBillItems);
   const [showEmptyDinerToast, setShowEmptyDinerToast] = useState(false);
 
@@ -40,23 +61,20 @@ const SplitBill: React.FC = () => {
 
   return (
     <Layout pageTitle="Your Order" backButton={true}>
-      {orders.length > 0 ? (
+      {consolidatedItems.length > 0 ? (
         <div className={styles.splitFoodItemsContainer}>
           <div>
-            {orders.map((order) =>
-              order.items.map((foodItem) =>
-                Array.from({ length: foodItem.quantity }, (_, index) => (
-                  <React.Fragment key={`${foodItem.item.id}-${index}`}>
+            {consolidatedItems.map((item, index) => (
+                  <React.Fragment key={`${item.item.id}-${index}`}>
                     <SplitBillFoodItemCard
-                      item={foodItem.item}
-                      amount={1}
-                      diners={getDinersForItemId(foodItem.item.id)}
+                      item={item.item}
+                      amount={item.quantity}
+                      diners={getDinersForItemId(item.item.id)}
                     />
                     <Divider />
                   </React.Fragment>
-                ))
-              )
-            )}
+              ))
+            }
           </div>
 
           <div className="ion-text-center">
