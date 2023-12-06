@@ -10,6 +10,7 @@ interface BillState {
   billOrdered: boolean;
   splitBillItems: SplitBillItem[];
   splitBillDiners: string[];
+  selectedItemsByPerson: Record<string, SplitBillItem[]>;
 }
 
 interface SplitBillItem {
@@ -21,6 +22,7 @@ const initialState: BillState = {
   billOrdered: false,
   splitBillItems: [],
   splitBillDiners: [],
+  selectedItemsByPerson: {},
 };
 
 const billReducer: Reducer<BillState> = (state = initialState, action) => {
@@ -60,6 +62,13 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
             ? { ...item, selectedPeople: [...item.selectedPeople, personName] }
             : item
         ),
+        selectedItemsByPerson: {
+          ...state.selectedItemsByPerson,
+          [personName]: [
+            ...(state.selectedItemsByPerson[personName] || []),
+            state.splitBillItems.find((item) => item.itemId === itemId),
+          ],
+        },
       };
 
     case SplitBillActionTypes.DESELECT_PERSON:
@@ -77,6 +86,12 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
               }
             : item
         ),
+        selectedItemsByPerson: {
+          ...state.selectedItemsByPerson,
+          [targetPersonName]: state.selectedItemsByPerson[
+            targetPersonName
+          ].filter((item) => item.itemId !== targetItemId),
+        },
       };
 
     default:

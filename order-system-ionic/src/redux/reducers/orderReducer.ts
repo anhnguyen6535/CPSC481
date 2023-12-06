@@ -5,7 +5,8 @@ import { OrderActionTypes } from "../actionTypes";
 interface Order {
   items: CartItem[];
 }
-interface OrderState {
+
+export interface OrderState {
   orders: Order[];
 }
 
