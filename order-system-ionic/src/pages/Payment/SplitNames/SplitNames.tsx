@@ -39,7 +39,9 @@ const SplitNames: FC = () => {
 
   const handleDinerNameAdd = (index: number, value: string) => {
     const isNameDuplicate = dinersList.some(
-      (diner) => diner.name.trim().toLowerCase() === value.trim().toLowerCase() && diner.index !== index
+      (diner) =>
+        diner.name.trim().toLowerCase() === value.trim().toLowerCase() &&
+        diner.index !== index
     );
 
     if (isNameDuplicate) {
@@ -67,14 +69,32 @@ const SplitNames: FC = () => {
 
   const handleContinue = () => {
     const hasEmptyName = tempDiners.some((diner) => diner.name.trim() === "");
+    const hasDuplicateName = tempDiners.some(
+      (diner, index) =>
+        diner.name.trim() !== "" &&
+        tempDiners.findIndex(
+          (otherDiner) =>
+            otherDiner.name.trim().toLowerCase() ===
+              diner.name.trim().toLowerCase() && otherDiner.index !== index
+        ) !== -1
+    );
 
-    if (hasEmptyName) {
-      setErrorMessage("Please enter a name for all diners before continuing.");
+    if (hasEmptyName || hasDuplicateName) {
+      let errorMessage = "";
+      if (hasEmptyName) {
+        errorMessage = "Please enter a name for all diners before continuing.";
+      } else if (hasDuplicateName) {
+        errorMessage =
+          "Duplicate names are not allowed. Please enter unique names.";
+      }
+
+      setErrorMessage(errorMessage);
       setShowErrorToast(true);
     } else {
       tempDiners.forEach((diner) => {
-        if (diner.name.trim() !== "")
+        if (diner.name.trim() !== "") {
           dispatch(addDiner(diner.name, diner.index));
+        }
       });
       history.push("/pay/split-bill");
     }
