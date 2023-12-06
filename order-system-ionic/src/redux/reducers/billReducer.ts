@@ -10,12 +10,12 @@ interface BillState {
   billOrdered: boolean;
   splitBillItems: SplitBillItem[];
   splitBillDiners: Diner[];
-  selectedItemsByPerson: Record<string, SplitBillItem[]>;
+  selectedItemsByIndex: Record<number, SplitBillItem[]>;
 }
 
 interface SplitBillItem {
   itemId: number;
-  selectedPeople: string[];
+  selectedPeople: Diner[];
 }
 
 export interface Diner {
@@ -27,7 +27,7 @@ const initialState: BillState = {
   billOrdered: false,
   splitBillItems: [],
   splitBillDiners: [],
-  selectedItemsByPerson: {},
+  selectedItemsByIndex: {},
 };
 
 const billReducer: Reducer<BillState> = (state = initialState, action) => {
@@ -69,27 +69,50 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
         ),
       };
 
-    case SplitBillActionTypes.SELECT_PERSON:
-      const { itemId, personName } = action.payload;
+    case SplitBillActionTypes.SELECT_PERSON: {
+      const { itemId, dinerIndex } = action.payload;
+      const selectedDiner = state.splitBillDiners.find(
+        (diner) => diner.index === dinerIndex
+      );
+
+      if (!selectedDiner) {
+        return state;
+      }
+
+      const foundItem = state.splitBillItems.find(
+        (item) => item.itemId === itemId
+      );
+      const existingItems = state.selectedItemsByIndex[dinerIndex]
+        ? [...state.selectedItemsByIndex[dinerIndex]]
+        : [];
+
       return {
         ...state,
         splitBillItems: state.splitBillItems.map((item) =>
           item.itemId === itemId
-            ? { ...item, selectedPeople: [...item.selectedPeople, personName] }
+            ? {
+                ...item,
+                selectedPeople: [...item.selectedPeople, selectedDiner],
+              }
             : item
         ),
-        selectedItemsByPerson: {
-          ...state.selectedItemsByPerson,
-          [personName]: [
-            ...(state.selectedItemsByPerson[personName] || []),
-            state.splitBillItems.find((item) => item.itemId === itemId),
-          ],
+        selectedItemsByIndex: {
+          ...state.selectedItemsByIndex,
+          [dinerIndex]: foundItem
+            ? [...existingItems, foundItem]
+            : existingItems,
         },
       };
+    }
 
-    case SplitBillActionTypes.DESELECT_PERSON:
-      const { itemId: targetItemId, personName: targetPersonName } =
+    case SplitBillActionTypes.DESELECT_PERSON: {
+      const { itemId: targetItemId, dinerIndex: targetDinerIndex } =
         action.payload;
+
+      const existingItems = state.selectedItemsByIndex[targetDinerIndex]
+        ? [...state.selectedItemsByIndex[targetDinerIndex]]
+        : [];
+
       return {
         ...state,
         splitBillItems: state.splitBillItems.map((item) =>
@@ -97,18 +120,19 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
             ? {
                 ...item,
                 selectedPeople: item.selectedPeople.filter(
-                  (diner) => diner !== targetPersonName
+                  (diner) => diner.index !== targetDinerIndex
                 ),
               }
             : item
         ),
-        selectedItemsByPerson: {
-          ...state.selectedItemsByPerson,
-          [targetPersonName]: state.selectedItemsByPerson[
-            targetPersonName
-          ].filter((item) => item.itemId !== targetItemId),
+        selectedItemsByIndex: {
+          ...state.selectedItemsByIndex,
+          [targetDinerIndex]: existingItems.filter(
+            (item) => item.itemId !== targetItemId
+          ),
         },
       };
+    }
 
     default:
       return state;

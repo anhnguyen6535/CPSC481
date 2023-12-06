@@ -5,14 +5,14 @@ export const selectIsBillOrdered = (state: RootState) => state.bill.billOrdered;
 export const selectSplitBillDiners = (state: RootState) =>
   state.bill.splitBillDiners;
 
-export const selectOrderByPerson = (state: RootState) =>
-  state.bill.selectedItemsByPerson;
+export const selectOrderByIndex = (state: RootState) =>
+  state.bill.selectedItemsByIndex;
 
 export const selectSplitBillOrders = (state: RootState) => {
   const { bill, order } = state;
 
   return bill.splitBillDiners.map((diner) => {
-    const selectedItems = bill.selectedItemsByPerson[diner.name] || [];
+    const selectedItems = bill.selectedItemsByIndex[diner.index] || [];
 
     const personOrder = {
       personName: diner.name,
@@ -38,7 +38,9 @@ export const selectSplitBillOrders = (state: RootState) => {
               item: selectedItemOrder ? selectedItemOrder.item : null,
               quantity: selectedItemOrder
                 ? selectedItemOrder.quantity /
-                  selectedItem.selectedPeople.length
+                  selectedItem.selectedPeople.filter(
+                    (selectedDiner) => selectedDiner.index === diner.index
+                  ).length
                 : 0,
               totalPrice: totalForSelectedItem,
             };

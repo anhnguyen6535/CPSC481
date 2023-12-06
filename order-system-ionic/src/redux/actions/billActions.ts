@@ -1,4 +1,5 @@
 import { BillActionTypes, SplitBillActionTypes } from "../actionTypes";
+import { Diner } from "../reducers/billReducer";
 
 export const orderBill = () => ({
   type: BillActionTypes.ORDER_BILL,
@@ -18,12 +19,12 @@ export const removeDiner = (index: number) => ({
   payload: index,
 });
 
-export const selectPerson = (itemId: number, personName: string) => ({
+export const selectPerson = (itemId: number, diner: Diner) => ({
   type: SplitBillActionTypes.SELECT_PERSON,
-  payload: { itemId, personName },
+  payload: { itemId, diner },
 });
 
-export const deselectPerson = (itemId: number, personName: string) => ({
+export const deselectPerson = (itemId: number, diner: Diner) => ({
   type: SplitBillActionTypes.DESELECT_PERSON,
-  payload: { itemId, personName },
+  payload: { itemId, diner },
 });
