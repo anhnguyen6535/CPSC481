@@ -50,7 +50,7 @@ const SplitNames: FC = () => {
     tempDiners.forEach((diner) => {
       if (diner.name.trim() !== "") dispatch(addDiner(diner.name, diner.index));
     });
-    history.push("/payment/split-bill");
+    history.push("/pay/split-bill");
   };
 
   useEffect(() => {
@@ -98,8 +98,8 @@ const SplitNames: FC = () => {
               </IonButton>
             </div>
           </div>
-          <div>
-            <IonButton expand="full" onClick={handleContinue}>
+          <div className="ion-text-center">
+            <IonButton style={{width: "80vw"}} onClick={handleContinue}>
               Continue
             </IonButton>
           </div>

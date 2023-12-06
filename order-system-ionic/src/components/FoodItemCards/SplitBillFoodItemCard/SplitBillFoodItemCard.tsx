@@ -1,49 +1,60 @@
-import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonList, IonItem, IonSelect, IonSelectOption } from "@ionic/react";
-import DietIcons from "../DietIcons";
+import {
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+} from "@ionic/react";
 import { formatPrice } from "../Utils";
-import SplitBillNameSelect from "../NameSelect";
+import SplitBillNameSelect from "../SplitBillNameSelect/SplitBillNameSelect";
 import { MenuItem } from "../../../types";
-import styles from "./SplitBillFoodItemCard.module.scss";
 import { getFoodImageUri } from "../../../../data/menuItems/utils";
+import { Diner } from "../../../redux/reducers/billReducer";
+import styles from "./SplitBillFoodItemCard.module.scss";
 
 interface SplitBillFoodCardProps {
-    item: MenuItem;
-    amount: number;
-    names: string[];
-};
+  item: MenuItem;
+  amount: number;
+  diners: Diner[];
+}
 
-const SplitBillFoodItemCard: React.FC<SplitBillFoodCardProps> = ({ item, amount, names }) => {
-    // return (
-    //     <IonCard style={{ borderRadius: '1rem' }}>
-    //         <div style={{ display: 'flex', flexDirection: 'row' }}>
-    //             <img src={imagePath} alt={item.name} style={{ width: '7.5rem', height: '7.5rem', objectFit: 'cover', padding: '1rem', borderRadius: '25%' }} />
-    //             <IonCardHeader>
-    //                 <IonCardTitle>{name}</IonCardTitle>
-    //                 <IonCardSubtitle>{formatPrice(price)}</IonCardSubtitle>
-    //             </IonCardHeader>
-    //             <SplitBillNameSelect names={names} />
-    //         </div>
-    //     </IonCard>
-    // );
-    return (
-        <IonCard className={styles.ionCardContainer}>
-            <div className={styles.divContent} >
-                <img src={getFoodImageUri(item.imagePath)} alt={item.name} className={styles.cardImage} />
+const SplitBillFoodItemCard: React.FC<SplitBillFoodCardProps> = ({
+  item,
+  amount,
+  diners,
+}) => {
+  return (
+    <IonCard className={styles.ionCardContainer}>
+      <div className={styles.divContent}>
+        <img
+          src={getFoodImageUri(item.imagePath)}
+          alt={item.name}
+          className={styles.cardImage}
+        />
 
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
-                    {/* <IonCardHeader style={{ flexWrap: 'wrap' }}> */}
-                    <IonCardHeader style={{ flexWrap: 'wrap' }}>
-                        {/* <IonCardTitle className={styles.foodName}>{item.name}</IonCardTitle> */}
-                        <IonCardTitle className={styles.foodName}>{item.name}</IonCardTitle>
-                        <IonCardTitle>{formatPrice(item.price * amount)}</IonCardTitle>
-                    </IonCardHeader>
-                    <div style={{ display: 'flex', flexDirection: 'column'}}>
-                        <SplitBillNameSelect names={names}/>
-                    </div>
-                </div>
-            </div>
-        </IonCard>
-    );
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <div className={styles.titleContainer}>
+            <IonCardTitle className={styles.foodName}>{item.name}</IonCardTitle>
+            <IonCardTitle className={styles.foodName}>
+              Quantity: {amount}
+            </IonCardTitle>
+
+            <IonCardTitle className={styles.price}>
+              {formatPrice(amount*item.price)}
+            </IonCardTitle>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <SplitBillNameSelect diners={diners} />
+          </div>
+        </div>
+      </div>
+    </IonCard>
+  );
 };
 
 export default SplitBillFoodItemCard;

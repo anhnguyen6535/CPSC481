@@ -1,24 +1,25 @@
 import { IonItem, IonList, IonSelect, IonSelectOption } from "@ionic/react";
+import { Diner } from "../../../redux/reducers/billReducer";
+import styles from "./SplitBillNameSelect.module.scss"
 
 
 interface NameSelectProps {
-    names: string[];
+    diners: Diner[];
 };
 
-const mapNamesToSelectOptions = (names: string[]) => {
-    return names.map((name) => (
-        <IonSelectOption value={name}>{name}</IonSelectOption>
+const mapNamesToSelectOptions = (diners: Diner[]) => {
+    return diners.map((diner) => (
+        <IonSelectOption value={diner.index}>{diner.name}</IonSelectOption>
     ));
 };
 
-const SplitBillNameSelect: React.FC<NameSelectProps> = ({ names }) => {
+const SplitBillNameSelect: React.FC<NameSelectProps> = ({ diners }) => {
     return (
-        // <IonList inset={true} style={{ position: 'absolute', right: 0, background: '0%' }}>
         <IonList inset={true} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <IonItem>
+            <IonItem className={styles.select}>
                 {/* <IonSelect shape="round" justify="end" placeholder="Split" multiple={true} cancelText="Cancel" okText="Split" interface="popover" style={{ display: 'flex', justifyContent: 'flex-end' }}> */}
                 <IonSelect shape="round" placeholder="Split" multiple={true} interface="popover">
-                    {mapNamesToSelectOptions(names)}
+                    {mapNamesToSelectOptions(diners)}
                 </IonSelect>
             </IonItem>
         </IonList>
