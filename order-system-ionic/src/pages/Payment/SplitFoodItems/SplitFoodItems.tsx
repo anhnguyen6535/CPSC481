@@ -9,25 +9,8 @@ import { selectSplitBillItems } from "../../../redux/selectors/billSelectors";
 import styles from "./SplitFoodItems.module.scss";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { CartItem } from "../../../types";
+import { consolidateItems } from "../../../utils/utils";
 
-
-const consolidateItems = (items: CartItem[]) => {
-  const consolidatedItems = items.reduce(
-    (acc: CartItem[], current: CartItem) => {
-      const foundItem = acc.find((item) => item.item.id === current.item.id);
-      if (foundItem) {
-        foundItem.quantity += current.quantity;
-      } else {
-        acc.push({ ...current });
-      }
-      return acc;
-    },
-    [] as CartItem[]
-  );
-
-  return consolidatedItems;
-};
 
 const SplitBill: React.FC = () => {
   const history = useHistory();

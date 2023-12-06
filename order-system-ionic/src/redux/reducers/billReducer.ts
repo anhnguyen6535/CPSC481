@@ -73,7 +73,7 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
     case SplitBillActionTypes.SELECT_PERSON: {
       const { itemId, diner } = action.payload;
 
-      const dinerIndex: number = diner.index;
+      const dinerIndex = diner.index;
       const selectedDiner = state.splitBillDiners.find(
         (diner) => diner.index === dinerIndex
       );
@@ -97,6 +97,25 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
           }
         : { itemId: itemId, selectedPeople: [selectedDiner] };
 
+      let updatedSelectedItemsByIndex = { ...state.selectedItemsByIndex };
+
+      if (foundItem) {
+        foundItem.selectedPeople.forEach((person) => {
+          updatedSelectedItemsByIndex[person.index] =
+            updatedSelectedItemsByIndex[person.index].map((item) =>
+              item.itemId === itemId ? itemToBeAdded : item
+            );
+        });
+      }
+
+      updatedSelectedItemsByIndex[dinerIndex] = existingItems.some(
+        (item) => item.itemId === itemId
+      )
+        ? existingItems.map((item) =>
+            item.itemId === itemId ? itemToBeAdded : item
+          )
+        : [...existingItems, itemToBeAdded];
+
       return {
         ...state,
         splitBillItems: state.splitBillItems.some(
@@ -106,12 +125,7 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
               item.itemId === itemId ? itemToBeAdded : item
             )
           : [...state.splitBillItems, itemToBeAdded],
-        selectedItemsByIndex: {
-          ...state.selectedItemsByIndex,
-          [dinerIndex]: existingItems.find((item) => item.itemId === itemId)
-            ? existingItems
-            : [...existingItems, itemToBeAdded],
-        },
+        selectedItemsByIndex: updatedSelectedItemsByIndex,
       };
     }
 
@@ -124,24 +138,42 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
         ? [...state.selectedItemsByIndex[targetDinerIndex]]
         : [];
 
+      const filteredExistingItemsForTargetDiner = existingItems.filter(
+        (item) => item.itemId !== targetItemId
+      );
+
+      const foundItem = state.splitBillItems.find(
+        (item) => item.itemId === targetItemId
+      );
+
+      if (!foundItem) {
+        return state;
+      }
+
+      const updatedItem = {
+        ...foundItem,
+        selectedPeople: foundItem.selectedPeople.filter(
+          (diner) => diner.index !== targetDinerIndex
+        ),
+      };
+
+      let updatedSelectedItemsByIndex = { ...state.selectedItemsByIndex };
+
+      updatedItem.selectedPeople.forEach((person) => {
+        updatedSelectedItemsByIndex[person.index] = updatedSelectedItemsByIndex[
+          person.index
+        ].map((item) => (item.itemId === targetItemId ? updatedItem : item));
+      });
+
+      updatedSelectedItemsByIndex[targetDinerIndex] =
+        filteredExistingItemsForTargetDiner;
+
       return {
         ...state,
         splitBillItems: state.splitBillItems.map((item) =>
-          item.itemId === targetItemId
-            ? {
-                ...item,
-                selectedPeople: item.selectedPeople.filter(
-                  (diner) => diner.index !== targetDinerIndex
-                ),
-              }
-            : item
+          item.itemId === targetItemId ? updatedItem : item
         ),
-        selectedItemsByIndex: {
-          ...state.selectedItemsByIndex,
-          [targetDinerIndex]: existingItems.filter(
-            (item) => item.itemId !== targetItemId
-          ),
-        },
+        selectedItemsByIndex: updatedSelectedItemsByIndex,
       };
     }
 
