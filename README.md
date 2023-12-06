@@ -15,7 +15,7 @@
 * Once you reach the [Home menu](https://flavour-of-calgary.vercel.app/home), you can browse the Flavour of Calgary's menu items.
   * Press **Add** to add items to your order.
     * Press the **+ and -** buttons to change the quantity.
-    * If you try adding 
+    * If you try adding an alcoholic beverage, a waiter will be called over to confirm your age.
   * Press the **Bookmark Icon** in the top-right corner of a item to pin items to the top and compare them quicker.
   * Press the **Filter** button at the top-right to sort by dietary restrictions.
   * Use the **Search Bar** to find specific food items.
