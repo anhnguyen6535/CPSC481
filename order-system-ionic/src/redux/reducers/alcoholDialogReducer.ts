@@ -1,5 +1,6 @@
 import { Reducer } from "redux";
 import { AlcoholDialogActionTypes } from "../actionTypes";
+import { PURGE } from "redux-persist";
 
 interface AlcoholDialogState {
   isOpen: boolean;
@@ -30,6 +31,9 @@ export const alcoholDialogReducer: Reducer<AlcoholDialogState> = (
         idVerified: true, // add this to only get the dialog popup once per sitting
       };
     }
+
+    case PURGE:
+      return initialState;
 
     default:
       return state;

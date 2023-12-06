@@ -1,0 +1,24 @@
+.personOrderCard {
+  margin: 10px;
+  overflow-y: hidden;
+  transition: max-height 0.2s ease-out;
+  max-height: 45px;
+}
+
+.personOrderCard.opened {
+  max-height: none;
+  overflow-y: auto;
+}
+
+.personOrderCardContent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.title {
+  font-size: 0.9rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: normal;
+}

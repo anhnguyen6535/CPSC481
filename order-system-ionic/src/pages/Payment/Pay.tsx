@@ -14,6 +14,7 @@ import orderImage from "../../../assets/order.png";
 import styles from "./Pay.module.scss";
 import { CartItem } from "../../types";
 import { selectCartData } from "../../redux/selectors/cartSelectors";
+import React from "react";
 
 const consolidateItems = (items: CartItem[]) => {
   const consolidatedItems = items.reduce(
@@ -52,9 +53,9 @@ const Pay: React.FC = () => {
     calculatedTotal > 0 ? setDisable(false) : setDisable(true);
   }, [orders]);
 
-  const handleSplitBill = () => {
-    history.push("/pay/split-bill");
-  };
+  const handleSplitBill = () =>{
+    history.push('/pay/add-diners');
+  }
 
   const handleOneBill = () => {
     setOrderedOneBill(true);
@@ -77,14 +78,14 @@ const Pay: React.FC = () => {
       {orders.length > 0 ? (
         <>
           {consolidatedItems.map((foodItem) => (
-            <>
+            <React.Fragment key={foodItem.item.id}>
               <OrderFoodItemCard
                 key={foodItem.item.id}
                 item={foodItem.item}
                 amount={foodItem.quantity}
               />
               <Divider />
-            </>
+            </React.Fragment>
           ))}
 
           <DisplayCost subtotal={subtotal} itemBreakdown={false} />

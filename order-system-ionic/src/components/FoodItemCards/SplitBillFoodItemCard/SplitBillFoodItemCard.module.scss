@@ -21,18 +21,17 @@
 }
 
 .foodName {
-  font-size: 1rem;
+  font-size: 0.9rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: normal;
 }
 
 .price {
-  position: absolute;
-  top: 1;
-  right: 0;
-  font-size: 1rem;
-  padding: 00.3rem;
+  font-size: 0.9rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin-top: 12px;
   font-weight: normal;
 }
 
@@ -46,5 +45,6 @@
 }
 
 .titleContainer {
-  padding: 0 0.3rem;
+  padding: 0 0.7rem;
+  margin-top: 10px;
 }

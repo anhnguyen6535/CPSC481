@@ -1,11 +1,13 @@
 import { Reducer } from "redux";
 import { CartItem } from "../../types";
 import { OrderActionTypes } from "../actionTypes";
+import { PURGE } from "redux-persist";
 
 interface Order {
   items: CartItem[];
 }
-interface OrderState {
+
+export interface OrderState {
   orders: Order[];
 }
 
@@ -39,6 +41,9 @@ export const OrderReducer: Reducer<OrderState> = (
         orders: initialState.orders,
       };
     }
+
+    case PURGE:
+      return initialState;
 
     default:
       return state;

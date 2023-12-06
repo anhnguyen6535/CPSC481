@@ -1,6 +1,7 @@
 import { Reducer } from "redux";
 import { HomePageActionTypes } from "../actionTypes";
 import { MenuItem } from "../../types";
+import { PURGE } from "redux-persist";
 
 interface HomepageState {
   pinnedItems: number[];
@@ -16,7 +17,6 @@ export const HomepageReducer: Reducer<HomepageState> = (
 ) => {
   switch (action.type) {
     case HomePageActionTypes.PIN_CARD: {
-
       const currentPinnedItem = [...state.pinnedItems];
       if (currentPinnedItem.indexOf(action.payload) === -1) {
         currentPinnedItem.push(action.payload);
@@ -31,9 +31,7 @@ export const HomepageReducer: Reducer<HomepageState> = (
     case HomePageActionTypes.UNPIN_CARD: {
       const currentPinnedItem = [...state.pinnedItems];
 
-      const existingItemIndex = currentPinnedItem.indexOf(
-        action.payload
-      );
+      const existingItemIndex = currentPinnedItem.indexOf(action.payload);
 
       if (existingItemIndex !== -1) {
         currentPinnedItem.splice(existingItemIndex, 1);
@@ -44,6 +42,9 @@ export const HomepageReducer: Reducer<HomepageState> = (
         pinnedItems: currentPinnedItem,
       };
     }
+
+    case PURGE:
+      return initialState;
 
     default:
       return state;
