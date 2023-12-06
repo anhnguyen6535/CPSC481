@@ -15,7 +15,8 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 10
   },
   {
     "id": 2,
@@ -38,7 +39,8 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 10
   },
   {
     "id": 3,
@@ -56,7 +58,8 @@
       "pescatarian": false,
       "nutFree": false
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 0
   },
   {
     "id": 4,
@@ -74,7 +77,8 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 10
   },
   {
     "id": 5,
@@ -98,7 +102,8 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 10
   },
   {
     "id": 6,
@@ -116,7 +121,8 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 10
   },
   {
     "id": 7,
@@ -134,7 +140,8 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 10
   },
   {
     "id": 8,
@@ -152,7 +159,8 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 10
   },
   {
     "id": 9,
@@ -175,7 +183,8 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 10
   },
   {
     "id": 10,
@@ -201,7 +210,8 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 10
   },
   {
     "id": 11,
@@ -219,7 +229,8 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": true
+    "alcoholic": true,
+    "stock": 10
   },
   {
     "id": 12,
@@ -237,7 +248,8 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": true
+    "alcoholic": true,
+    "stock": 10
   },
   {
     "id": 13,
@@ -255,7 +267,8 @@
       "pescatarian": true,
       "nutFree": true
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 10
   },
   {
     "id": 14,
@@ -273,6 +286,7 @@
       "pescatarian": false,
       "nutFree": true
     },
-    "alcoholic": false
+    "alcoholic": false,
+    "stock": 10
   }
 ]
