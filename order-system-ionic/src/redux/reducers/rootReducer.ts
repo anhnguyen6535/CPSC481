@@ -10,7 +10,7 @@ export const rootReducer = combineReducers({
   alcoholDilaog: alcoholDialogReducer,
   home: HomepageReducer,
   order: OrderReducer,
-  bill: billReducer,
+  bill: billReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

@@ -40,52 +40,63 @@ import BillNotiWrapper from "./components/BillNotiWrapper";
 setupIonicReact();
 
 const App: React.FC = () => {
-  const billNotiWrapperRoutes = ['/home', '/cart', '/pay', '/pay/split-bill', '/details/:itemid', '/order-placed'];
+  const billNotiWrapperRoutes = [
+    "/home",
+    "/cart",
+    "/pay",
+    "/pay/split-bill",
+    "/details/:itemid",
+    "/order-placed",
+    "/pay/add-diners",
+    "/pay/split-bill",
+    "/pay/split-bill-breakdown",
+  ];
 
-  return(
+  return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-          <IonApp>
-            <IonReactRouter>
-              <QRScanRedirect>
-                <IonTabs>
-                  <IonRouterOutlet>
-                    {routes.map((route) => (
-                      <Route key={route.path} path={route.path} exact={route.exact}>
-                        {
-                          billNotiWrapperRoutes.includes(route.path) ? (
-                            <BillNotiWrapper>
-                              <route.component />
-                            </BillNotiWrapper>
-                          ) : (
-                            <route.component />        
-                          )
-                        }
-                      </Route>
-                    ))}
-                  </IonRouterOutlet>
-                  <IonTabBar slot="bottom">
-                    <IonTabButton tab="home" href="/home">
-                      <IonIcon aria-hidden="true" icon={home} />
-                      <IonLabel>Home</IonLabel>
-                    </IonTabButton>
-                    <IonTabButton tab="order" href="/cart">
-                      <IonIcon aria-hidden="true" icon={cartOutline} />
-                      <IonLabel>Cart</IonLabel>
-                    </IonTabButton>
-                    <IonTabButton tab="pay" href="/pay">
-                      <IonIcon aria-hidden="true" icon={cash} />
-                      <IonLabel>Pay</IonLabel>
-                    </IonTabButton>
-                  </IonTabBar>
-                </IonTabs>
-              </QRScanRedirect>
-            </IonReactRouter>
-          </IonApp>    
+        <IonApp>
+          <IonReactRouter>
+            <QRScanRedirect>
+              <IonTabs>
+                <IonRouterOutlet>
+                  {routes.map((route) => (
+                    <Route
+                      key={route.path}
+                      path={route.path}
+                      exact={route.exact}
+                    >
+                      {billNotiWrapperRoutes.includes(route.path) ? (
+                        <BillNotiWrapper>
+                          <route.component />
+                        </BillNotiWrapper>
+                      ) : (
+                        <route.component />
+                      )}
+                    </Route>
+                  ))}
+                </IonRouterOutlet>
+                <IonTabBar slot="bottom">
+                  <IonTabButton tab="home" href="/home">
+                    <IonIcon aria-hidden="true" icon={home} />
+                    <IonLabel>Home</IonLabel>
+                  </IonTabButton>
+                  <IonTabButton tab="order" href="/cart">
+                    <IonIcon aria-hidden="true" icon={cartOutline} />
+                    <IonLabel>Cart</IonLabel>
+                  </IonTabButton>
+                  <IonTabButton tab="pay" href="/pay">
+                    <IonIcon aria-hidden="true" icon={cash} />
+                    <IonLabel>Pay</IonLabel>
+                  </IonTabButton>
+                </IonTabBar>
+              </IonTabs>
+            </QRScanRedirect>
+          </IonReactRouter>
+        </IonApp>
       </PersistGate>
     </Provider>
   );
-
 };
 
 export default App;

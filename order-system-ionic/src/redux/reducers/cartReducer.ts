@@ -1,6 +1,7 @@
 import { Reducer } from "redux";
 import { CartActionTypes } from "../actionTypes";
 import { CartItem } from "../../types";
+import { PURGE } from "redux-persist";
 
 interface CartState {
   items: CartItem[];
@@ -152,6 +153,9 @@ export const cartReducer: Reducer<CartState> = (
         totalQuantity: 0,
       };
     }
+
+    case PURGE:
+      return initialState;
 
     default:
       return state;

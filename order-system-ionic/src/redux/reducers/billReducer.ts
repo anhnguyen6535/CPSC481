@@ -1,5 +1,6 @@
 import { Reducer } from "redux";
 import { BillActionTypes, SplitBillActionTypes } from "../actionTypes";
+import { PURGE } from "redux-persist";
 
 export interface PersonOrder {
   personName: string;
@@ -143,6 +144,9 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
         },
       };
     }
+
+    case PURGE:
+      return initialState;
 
     default:
       return state;
