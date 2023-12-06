@@ -9,13 +9,18 @@ export interface PersonOrder {
 interface BillState {
   billOrdered: boolean;
   splitBillItems: SplitBillItem[];
-  splitBillDiners: string[];
+  splitBillDiners: Diner[];
   selectedItemsByPerson: Record<string, SplitBillItem[]>;
 }
 
 interface SplitBillItem {
   itemId: number;
   selectedPeople: string[];
+}
+
+export interface Diner {
+  index: number;
+  name: string;
 }
 
 const initialState: BillState = {
@@ -40,16 +45,27 @@ const billReducer: Reducer<BillState> = (state = initialState, action) => {
       };
 
     case SplitBillActionTypes.ADD_DINER:
+      const newDiner = {
+        index: action.payload.index,
+        name: action.payload.name,
+      };
+
       return {
         ...state,
-        splitBillDiners: [...state.splitBillDiners, action.payload],
+        splitBillDiners: state.splitBillDiners.some(
+          (diner) => diner.index === action.payload.index
+        )
+          ? state.splitBillDiners.map((diner) =>
+              diner.index === action.payload.index ? newDiner : diner
+            )
+          : [...state.splitBillDiners, newDiner],
       };
 
     case SplitBillActionTypes.REMOVE_DINER:
       return {
         ...state,
         splitBillDiners: state.splitBillDiners.filter(
-          (diner) => diner !== action.payload
+          (diner) => diner.index !== action.payload
         ),
       };
 

@@ -8,14 +8,14 @@ export const resetBill = () => ({
   type: BillActionTypes.RESET_BILL,
 });
 
-export const addDiner = (name: string) => ({
+export const addDiner = (name: string, index: number) => ({
   type: SplitBillActionTypes.ADD_DINER,
-  payload: name,
+  payload: { name, index },
 });
 
-export const removeDiner = (name: string) => ({
+export const removeDiner = (index: number) => ({
   type: SplitBillActionTypes.REMOVE_DINER,
-  payload: name,
+  payload: index,
 });
 
 export const selectPerson = (itemId: number, personName: string) => ({

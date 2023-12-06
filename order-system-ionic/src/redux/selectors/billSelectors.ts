@@ -11,11 +11,11 @@ export const selectOrderByPerson = (state: RootState) =>
 export const selectSplitBillOrders = (state: RootState) => {
   const { bill, order } = state;
 
-  return bill.splitBillDiners.map((personName) => {
-    const selectedItems = bill.selectedItemsByPerson[personName] || [];
+  return bill.splitBillDiners.map((diner) => {
+    const selectedItems = bill.selectedItemsByPerson[diner.name] || [];
 
     const personOrder = {
-      personName,
+      personName: diner.name,
       selectedItems: selectedItems
         .map((selectedItem) => {
           const orders = order.orders.find((o) =>

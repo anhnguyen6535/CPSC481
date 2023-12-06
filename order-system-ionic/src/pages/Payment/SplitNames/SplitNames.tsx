@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useTypedDispatch, useTypedSelector } from "../../../hooks/reduxHooks";
 import styles from "./SplitNames.module.scss";
@@ -15,43 +15,53 @@ import { addCircleOutline, trashOutline } from "ionicons/icons";
 import Layout from "../../../components/Layout";
 import { selectSplitBillDiners } from "../../../redux/selectors/billSelectors";
 import noDiners from "../../../../assets/no-diners.png";
+import { Diner } from "../../../redux/reducers/billReducer";
 
 const SplitNames: FC = () => {
   const history = useHistory();
   const dinersList = useTypedSelector(selectSplitBillDiners);
   const dispatch = useTypedDispatch();
 
-  const [tempDiners, setTempDiners] = useState<string[]>(dinersList);
+  const [tempDiners, setTempDiners] = useState<Diner[]>(dinersList);
 
   const handleAddDiner = () => {
-    setTempDiners([...tempDiners, ""]);
+    setTempDiners([...tempDiners, { index: tempDiners.length, name: "" }]);
   };
 
   const handleRemoveDiner = (index: number) => {
-    const updatedDiners = [...tempDiners];
-    updatedDiners.splice(index, 1);
-    setTempDiners(updatedDiners);
+    dispatch(removeDiner(index));
   };
 
-  const handleDinerNameChange = (index: number, value: string) => {
-    const updatedDiners = [...tempDiners];
-    updatedDiners[index] = value;
-    setTempDiners(updatedDiners);
+  const handleDinerNameAdd = (index: number, value: string) => {
+    dispatch(addDiner(value, index));
+  };
+
+  const handleDinerNameChange = (index: number, ev: Event) => {
+    const value = (ev.target as HTMLIonInputElement).value as string;
+
+    setTempDiners(
+      tempDiners.map((diner) =>
+        diner.index === index ? { ...diner, name: value } : diner
+      )
+    );
   };
 
   const handleContinue = () => {
-    const validDiners = tempDiners.filter((diner) => diner.trim() !== "");
-    validDiners.forEach((diner) => {
-      dispatch(addDiner(diner));
+    tempDiners.forEach((diner) => {
+      if (diner.name.trim() !== "") dispatch(addDiner(diner.name, diner.index));
     });
     history.push("/payment/split-bill");
   };
 
+  useEffect(() => {
+    setTempDiners(dinersList);
+  }, [dinersList]);
+
   return (
-    <Layout pageTitle="Payment" backButton={true}>
+    <Layout pageTitle="Split Bill" backButton={true}>
       {tempDiners.length === 0 ? (
         <div className={styles.emptyDinersScreen}>
-          <h2 style={{ marginBottom: 50 }}>No diners added yet!</h2>
+          <h3 style={{ marginBottom: 50, fontSize: "2rem" }}>No diners added yet!</h3>
           <img src={noDiners} alt="No Diners Image" />
           <p>Click on the button below to add diners.</p>
           <IonButton onClick={handleAddDiner}>Add a Diner</IonButton>
@@ -63,23 +73,20 @@ const SplitNames: FC = () => {
               Please enter the names of diners splitting the bill.
             </IonText>
             <IonList className={styles.namesListContainer}>
-              {tempDiners.map((diner: string, index: number) => (
-                <IonItem key={index} className={styles.dinerItem}>
+              {tempDiners.map((diner: Diner) => (
+                <IonItem key={diner.index} className={styles.dinerItem}>
                   <IonInput
-                    value={diner}
+                    value={diner.name}
                     placeholder="Enter diner's name"
+                    onIonInput={(ev) => handleDinerNameChange(diner.index, ev)}
                     onIonChange={(e) =>
-                      handleDinerNameChange(index, e.target.value as string)
+                      handleDinerNameAdd(diner.index, e.detail.value!)
                     }
-                    onBlur={() =>
-                      handleDinerNameChange(index, tempDiners[index])
-                    }
-                    fill="solid"
                   />
                   <IonIcon
                     icon={trashOutline}
                     slot="end"
-                    onClick={() => handleRemoveDiner(index)}
+                    onClick={() => handleRemoveDiner(diner.index)}
                   />
                 </IonItem>
               ))}
