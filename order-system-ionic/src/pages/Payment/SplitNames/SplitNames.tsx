@@ -10,6 +10,7 @@ import {
   IonItem,
   IonList,
   IonText,
+  IonToast,
 } from "@ionic/react";
 import { addCircleOutline, trashOutline } from "ionicons/icons";
 import Layout from "../../../components/Layout";
@@ -23,6 +24,7 @@ const SplitNames: FC = () => {
   const dispatch = useTypedDispatch();
 
   const [tempDiners, setTempDiners] = useState<Diner[]>(dinersList);
+  const [showErrorToast, setShowErrorToast] = useState(false);
 
   const handleAddDiner = () => {
     setTempDiners([...tempDiners, { index: tempDiners.length, name: "" }]);
@@ -47,10 +49,21 @@ const SplitNames: FC = () => {
   };
 
   const handleContinue = () => {
-    tempDiners.forEach((diner) => {
-      if (diner.name.trim() !== "") dispatch(addDiner(diner.name, diner.index));
-    });
-    history.push("/pay/split-bill");
+    const hasEmptyName = tempDiners.some((diner) => diner.name.trim() === "");
+
+    if (hasEmptyName) {
+      setShowErrorToast(true);
+    } else {
+      tempDiners.forEach((diner) => {
+        if (diner.name.trim() !== "")
+          dispatch(addDiner(diner.name, diner.index));
+      });
+      history.push("/pay/split-bill");
+    }
+  };
+
+  const handleToastClose = () => {
+    setShowErrorToast(false);
   };
 
   useEffect(() => {
@@ -61,7 +74,9 @@ const SplitNames: FC = () => {
     <Layout pageTitle="Split Bill" backButton={true}>
       {tempDiners.length === 0 ? (
         <div className={styles.emptyDinersScreen}>
-          <h3 style={{ marginBottom: 50, fontSize: "2rem" }}>No diners added yet!</h3>
+          <h3 style={{ marginBottom: 50, fontSize: "2rem" }}>
+            No diners added yet!
+          </h3>
           <img src={noDiners} alt="No Diners Image" />
           <p>Click on the button below to add diners.</p>
           <IonButton onClick={handleAddDiner}>Add a Diner</IonButton>
@@ -99,10 +114,18 @@ const SplitNames: FC = () => {
             </div>
           </div>
           <div className="ion-text-center">
-            <IonButton style={{width: "80vw"}} onClick={handleContinue}>
+            <IonButton style={{ width: "80vw" }} onClick={handleContinue}>
               Continue
             </IonButton>
           </div>
+          <IonToast
+            isOpen={showErrorToast}
+            onDidDismiss={handleToastClose}
+            message="Please enter a name for all diners before continuing."
+            duration={3000}
+            color="danger"
+            position="top"
+          />
         </div>
       )}
     </Layout>
