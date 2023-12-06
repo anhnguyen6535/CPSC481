@@ -52,9 +52,9 @@ const Pay: React.FC = () => {
     calculatedTotal > 0 ? setDisable(false) : setDisable(true);
   }, [orders]);
 
-  const handleSplitBill = () => {
-    history.push("/pay/split-bill");
-  };
+  const handleSplitBill = () =>{
+    history.push('/pay/add-diners');
+  }
 
   const handleOneBill = () => {
     setOrderedOneBill(true);
