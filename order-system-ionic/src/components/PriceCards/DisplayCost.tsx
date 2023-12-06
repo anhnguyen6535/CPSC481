@@ -18,7 +18,7 @@ const DisplayCost: React.FC<DisplayCostProps> = ({
   const cartData = useTypedSelector(selectCartData);
 
   return (
-    <div style={{height: "100%"}}>
+    <div>
       {itemBreakdown && (
         <>
           {cartData.items.map((foodItem, index) => (
