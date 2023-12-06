@@ -259,6 +259,7 @@ const HomePage: React.FC = () => {
                 amount={foodItem.quantity}
                 type={CardTypeEnum.MENU}
                 pinned={foodItem.pinned}
+                disabled={foodItem.item.stock == 0}
               />
             ))
           ) : (

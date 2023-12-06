@@ -10,6 +10,7 @@ interface CounterButtonProps {
   onAdd?: () => void;
   onRemove?: () => void;
   enableAdd: boolean;
+  content? :string
 }
 
 const CounterButton: React.FC<CounterButtonProps> = ({
@@ -18,6 +19,7 @@ const CounterButton: React.FC<CounterButtonProps> = ({
   onAdd,
   onRemove,
   enableAdd,
+  content = "Add"
 }) => {
   const [count, setCount] = useState(amount);
   const [showTrash, setShowTrash] = useState(amount !== 0 && enableTrash);
@@ -85,7 +87,7 @@ const CounterButton: React.FC<CounterButtonProps> = ({
           showAdd ? styles.visible : styles.hidden
         }`}
       >
-        Add
+        {content}
       </IonButton>
       <div
         className={`${styles.counterDisplay} ${
