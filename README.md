@@ -47,6 +47,24 @@
 
 Once the dining session is complete, a Flavour of Calgary employee can visit the [Waiter screen](https://flavour-of-calgary.vercel.app/waiter) to reset a table's dining session.
 
+
+
+### Features Implemented
+
+* Adding food items to an order
+* Removing food items from an order
+* Search bar for finding specific items
+* [+] and [-] buttons to change item quantity
+* Calling a waiter
+* Alcohol age verification
+* Flitering by food type (entree, beverage, dessert, etc.)
+* Filtering by dietary restriction (halal, peanut-free, vegan, etc.)
+* Sending multiple orders before payment
+* Adding diner names
+* Splitting the bill between multiple diners
+* Price breakdown screens
+
+
 ## Local Setup
 
 ### Requirements
