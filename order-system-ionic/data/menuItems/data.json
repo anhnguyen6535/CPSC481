@@ -33,7 +33,7 @@
     "labels": ["Entree"],
     "diets": {
       "vegan": false,
-      "vegetarian": true,
+      "vegetarian": false,
       "glutenFree": false,
       "halal": false,
       "pescatarian": false,
@@ -83,10 +83,10 @@
   {
     "id": 5,
     "name": "Caprese Wrap",
-    "description": "A delicious wrap filled with fresh tomatoes, mozzarella cheese, basil, and balsamic glaze. A flavorful choice for a wholesome lunch.",
+    "description": "A delicious wrap filled with fresh tomatoes, almond-based cheese, basil, and balsamic glaze. A flavorful choice for a wholesome lunch.",
     "ingredients": [
       "Tomatoes",
-      "Mozzarella Cheese",
+      "Almond-based Cheese",
       "Basil",
       "Balsamic Glaze",
       "Wrap"
