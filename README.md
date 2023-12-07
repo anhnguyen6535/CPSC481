@@ -1,10 +1,54 @@
-# Flavour of Calgary - By OrderTech
+# Flavour of Calgary - By OrderTech (CPSC 481 - T03 - Group 2 )
 
 <a target="_blank" href="https://flavour-of-calgary.vercel.app/">
     <img src="https://flavour-of-calgary.vercel.app/assets/ordertechlogo-8c41d2f3.png" width="100" height="100" alt="OrderTech Logo" />
 </a>
 
 ### Come visit our **[live demo](https://flavour-of-calgary.vercel.app/)**!
+
+
+
+## Local Setup
+
+### Requirements
+
+1. Install nvm (Node Version Manager) for [Windows](https://github.com/coreybutler/nvm-windows) or [Linux/MacOS](https://github.com/nvm-sh/nvm)
+2. Install Node.JS using NVM (`nvm install 20.9.0` followed by `nvm use 20.9.0`)
+3. Clone the repo
+4. Change directory to the app (`cd CPSC481/order-system-ionic`)
+5. Install Ionic with `npm install -g @ionic/cli @capacitor/assets`
+6. Make a clean install of the rest of the packages using `npm ci` (if this doesn't work, use `npm install`)
+
+
+### Deployment
+1. Change directory to the app (`cd CPSC481/order-system-ionic`)
+2. Serve the webpage using `ionic serve`
+3. Visit it by going to http://localhost:8100
+
+## Implemented Cases/Features
+
+* Adding food items to cart
+* Removing food items from cart
+* Search bar for finding specific items
+* [+] and [-] buttons to change item quantity
+* Calling a waiter
+* Alcohol age verification
+* Flitering by food type (entree, beverage, dessert, etc.)
+* Filtering by dietary restriction (halal, peanut-free, vegan, etc.)
+* Filtering by price
+* Viewing dish details
+* Adding special instructions for dishes
+* Viewing cart
+* Deleting items from cart
+* Placing order from cart page
+* Sending multiple orders from cart page before payment
+* Viewing order breakdown and total price
+* Paying using single bill feature
+* Paying using split bill feature
+  * Adding diner names
+  * Splitting the bill between multiple diners
+  * Viewing price breakdown and total for each diner
+* Resetting dining session/ending visit
 
 ## Usage
 
@@ -46,42 +90,6 @@
   * After confirming your orders, press **Request Bills** one last time to complete your dining session.
 
 Once the dining session is complete, a Flavour of Calgary employee can visit the [Waiter screen](https://flavour-of-calgary.vercel.app/waiter) to reset a table's dining session.
-
-
-
-### Features Implemented
-
-* Adding food items to an order
-* Removing food items from an order
-* Search bar for finding specific items
-* [+] and [-] buttons to change item quantity
-* Calling a waiter
-* Alcohol age verification
-* Flitering by food type (entree, beverage, dessert, etc.)
-* Filtering by dietary restriction (halal, peanut-free, vegan, etc.)
-* Sending multiple orders before payment
-* Adding diner names
-* Splitting the bill between multiple diners
-* Price breakdown screens
-
-
-## Local Setup
-
-### Requirements
-
-1. Install nvm (Node Version Manager) for [Windows](https://github.com/coreybutler/nvm-windows) or [Linux/MacOS](https://github.com/nvm-sh/nvm)
-2. Install Node.JS using NVM (`nvm install 20.9.0` followed by `nvm use 20.9.0`)
-3. Clone the repo
-4. Change directory to the app (`cd CPSC481/order-system-ionic`)
-5. Install Ionic with `npm install -g @ionic/cli @capacitor/assets`
-6. Make a clean install of the rest of the packages using `npm ci` (if this doesn't work, use `npm install`)
-
-
-
-### Deployment
-1. Change directory to the app (`cd CPSC481/order-system-ionic`)
-2. Serve the webpage using `ionic serve`
-3. Visit it by going to http://localhost:8100
 
 
 
